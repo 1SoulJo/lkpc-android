@@ -12,10 +12,22 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.lkpc.android.app.glory.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        android:id="@+id/navigation_column"
+        android:name="com.lkpc.android.app.glory.ui.column.ColumnFragment"
+        android:label="@string/title_column"
+        tools:layout="@layout/fragment_column" />
+
+    <fragment
+        android:id="@+id/navigation_sermon"
+        android:name="com.lkpc.android.app.glory.ui.sermon.SermonFragment"
+        android:label="@string/title_sermon"
+        tools:layout="@layout/fragment_notifications" />
+
+    <fragment
+        android:id="@+id/navigation_meditation"
+        android:name="com.lkpc.android.app.glory.ui.meditation.MeditationFragment"
+        android:label="@string/title_meditation"
+        tools:layout="@layout/fragment_notifications" />
 
     <fragment
         android:id="@+id/navigation_notifications"

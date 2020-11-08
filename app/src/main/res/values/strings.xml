@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">Lkpc Glory</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_home">큰빛교회</string>
+    <string name="title_column">목회칼럼</string>
+    <string name="title_sermon">주일설교</string>
+    <string name="title_meditation">날마다빛으로</string>
+    <string name="title_notifications">큰빛소식</string>
+    <string name="lkpc_church">LKPC Church</string>
 </resources>

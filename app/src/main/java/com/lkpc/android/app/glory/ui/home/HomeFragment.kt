@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.lkpc.android.app.glory.MainActivity
 import com.lkpc.android.app.glory.R
 
 class HomeFragment : Fragment() {
@@ -26,6 +27,10 @@ class HomeFragment : Fragment() {
         homeViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
         })
+
+        val a = activity as MainActivity
+        a.setActionBarTitle(R.string.title_home)
+
         return root
     }
 }
