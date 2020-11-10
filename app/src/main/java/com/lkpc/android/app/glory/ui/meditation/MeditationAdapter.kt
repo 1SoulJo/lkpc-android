@@ -16,6 +16,10 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class MeditationAdapter(private val context: Context): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+    companion object {
+
+    }
+
     private val TYPE_ITEM: Int = 0
     private val TYPE_LOADING: Int = 1
 

@@ -10,4 +10,18 @@
     <string name="loading_image">Loading image</string>
     <string name="back_button">Back button</string>
     <string name="note">Note</string>
+    <string name="pre_registration">예배 사전 등록 안내</string>
+    <string name="see_detail">자세히 보기</string>
+    <string name="online_service_live">큰빛 온라인 예배 Live</string>
+    <string name="youtube_live_image">YouTube Live Image</string>
+    <string name="online_donate">온라인 헌금</string>
+    <string name="giving_icon">Giving icon</string>
+    <string name="homepage">홈페이지</string>
+    <string name="youtube_channel_guide">큰빛 YouTube 채널 안내</string>
+    <string name="lkpc">큰빛교회</string>
+    <string name="channel_image">Channel image</string>
+    <string name="edu">교육부</string>
+    <string name="pre_registration_banner">Pre-registration banner</string>
+    <string name="youtube_play_button">Youtube play button</string>
+    <string name="new_hope">뉴호프</string>
 </resources>

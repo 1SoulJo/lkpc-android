@@ -1,6 +1,5 @@
 package com.lkpc.android.app.glory.ui.detail
 
-
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -74,7 +73,7 @@ class DetailActivity : YouTubeBaseActivity() {
 
         // remove video and audio file
         val whitelist = Whitelist();
-        whitelist.addTags("b", "em", "div", "p", "h1", "h2", "strong", "ol", "li", "ul", "u")
+        whitelist.addTags("b", "em", "div", "p", "h1", "h2", "strong", "ol", "li", "ul", "u", "br")
         val newDoc = Jsoup.clean(doc.toString(), whitelist)
 
         // content body

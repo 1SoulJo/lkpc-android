@@ -17,6 +17,10 @@ import com.lkpc.android.app.glory.entity.BaseContent
 import kotlinx.android.synthetic.main.fragment_meditation.*
 
 class MeditationFragment : Fragment() {
+    companion object {
+        fun newInstance() = MeditationFragment()
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
