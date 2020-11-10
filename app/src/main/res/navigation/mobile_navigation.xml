@@ -21,17 +21,17 @@
         android:id="@+id/navigation_sermon"
         android:name="com.lkpc.android.app.glory.ui.sermon.SermonFragment"
         android:label="@string/title_sermon"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_news" />
 
     <fragment
         android:id="@+id/navigation_meditation"
         android:name="com.lkpc.android.app.glory.ui.meditation.MeditationFragment"
         android:label="@string/title_meditation"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_news" />
 
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="com.lkpc.android.app.glory.ui.notifications.NotificationsFragment"
+        android:name="com.lkpc.android.app.glory.ui.news.NewsFragment"
         android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_news" />
 </navigation>

@@ -1,36 +1,71 @@
 package com.lkpc.android.app.glory.ui.meditation
 
-import androidx.lifecycle.ViewModelProviders
+import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.lkpc.android.app.glory.MainActivity
 import com.lkpc.android.app.glory.R
+import com.lkpc.android.app.glory.entity.BaseContent
+import kotlinx.android.synthetic.main.fragment_meditation.*
 
 class MeditationFragment : Fragment() {
-
-    companion object {
-        fun newInstance() = MeditationFragment()
-    }
-
-    private lateinit var viewModel: MeditationViewModel
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val a = activity as MainActivity
-        a.setActionBarTitle(R.string.title_meditation)
-
         return inflater.inflate(R.layout.fragment_meditation, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(MeditationViewModel::class.java)
-        // TODO: Use the ViewModel
+
+        // page title
+        val a = activity as MainActivity
+        a.setActionBarTitle(R.string.title_meditation)
+
+        rv_meditation.layoutManager = LinearLayoutManager(activity)
+        rv_meditation.adapter = MeditationAdapter(activity as Context)
+
+        // data observation
+        val viewModel: MeditationViewModel by viewModels()
+        val observer = Observer<List<BaseContent?>> { data ->
+            if (rv_meditation != null) {
+                val adapter = rv_meditation.adapter as MeditationAdapter
+                if (adapter.isLoading) {
+                    (adapter.meditations as MutableList<BaseContent?>).removeAt(adapter.meditations.size - 1)
+                    adapter.isLoading = false
+                }
+                adapter.meditations = data
+                adapter.notifyDataSetChanged()
+            }
+        }
+        viewModel.getData().observe(activity as LifecycleOwner, observer)
+
+        // scroll listener
+        rv_meditation.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+
+                val adapter = rv_meditation.adapter as MeditationAdapter
+                if (!rv_meditation.canScrollVertically(1) && !adapter.isLoading) {
+                    (adapter.meditations as MutableList).add(null)
+                    adapter.notifyItemInserted(adapter.meditations.size - 1)
+                    rv_meditation.scrollToPosition(adapter.meditations.size - 1)
+
+                    viewModel.addData(adapter.itemCount - 1)
+
+                    adapter.isLoading = true
+                }
+            }
+        })
     }
 
 }

@@ -1,9 +1,13 @@
 <resources>
-    <string name="app_name">Lkpc Glory</string>
+    <string name="app_name">Light Church</string>
     <string name="title_home">큰빛교회</string>
     <string name="title_column">목회칼럼</string>
     <string name="title_sermon">주일설교</string>
     <string name="title_meditation">날마다빛으로</string>
     <string name="title_notifications">큰빛소식</string>
     <string name="lkpc_church">LKPC Church</string>
+    <string name="list_item_title">List item title</string>
+    <string name="loading_image">Loading image</string>
+    <string name="back_button">Back button</string>
+    <string name="note">Note</string>
 </resources>

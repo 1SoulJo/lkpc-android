@@ -3,22 +3,27 @@
 
     <item
         android:id="@+id/navigation_home"
-        android:icon="@drawable/ic_church" />
+        android:icon="@drawable/ic_church"
+        android:title="@string/title_home" />
 
     <item
         android:id="@+id/navigation_column"
-        android:icon="@drawable/ic_column" />
+        android:icon="@drawable/ic_column"
+        android:title="@string/title_column" />
 
     <item
         android:id="@+id/navigation_sermon"
-        android:icon="@drawable/ic_sermon" />
+        android:icon="@drawable/ic_sermon"
+        android:title="@string/title_sermon" />
 
     <item
         android:id="@+id/navigation_meditation"
-        android:icon="@drawable/ic_meditation" />
+        android:icon="@drawable/ic_meditation"
+        android:title="@string/title_meditation"/>
 
     <item
         android:id="@+id/navigation_notifications"
-        android:icon="@drawable/ic_notifications" />
+        android:icon="@drawable/ic_notifications"
+        android:title="@string/title_notifications"/>
 
 </menu>
