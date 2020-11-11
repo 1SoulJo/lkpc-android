@@ -13,7 +13,12 @@ import com.google.android.youtube.player.YouTubePlayerView
 import com.google.gson.Gson
 import com.lkpc.android.app.glory.BuildConfig
 import com.lkpc.android.app.glory.R
+import com.lkpc.android.app.glory.constants.ContentType
+import com.lkpc.android.app.glory.data.NoteDatabase
 import com.lkpc.android.app.glory.entity.BaseContent
+import com.lkpc.android.app.glory.entity.Note
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import org.jsoup.Jsoup
 import org.jsoup.safety.Whitelist
 import java.text.SimpleDateFormat
@@ -36,7 +41,14 @@ class DetailActivity : YouTubeBaseActivity() {
 
         // note button
         findViewById<ImageView>(R.id.btn_note).setOnClickListener {
-            TODO()
+            GlobalScope.launch {
+                val db = NoteDatabase.getDatabase(context = applicationContext)
+                db.noteDao().insertAll(
+                    Note(type = ContentType.COLUMN,
+                        contentId = "5fab0348377eb70ceb3a32bb",
+                        noteContent = "hi\nmy name is hansol\ngood to see you")
+                )
+            }
         }
     }
 

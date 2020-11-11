@@ -1,10 +1,8 @@
 package com.lkpc.android.app.glory.ui.news
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.lkpc.android.app.glory.entity.BaseContent
-import com.lkpc.android.app.glory.repository.MeditationRepository
 import com.lkpc.android.app.glory.repository.NewsRepository
 
 class NewsViewModel : ViewModel() {

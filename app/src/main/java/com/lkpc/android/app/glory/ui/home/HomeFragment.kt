@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment
 import com.lkpc.android.app.glory.MainActivity
 import com.lkpc.android.app.glory.R
 import com.lkpc.android.app.glory.constants.WebUrls
-import com.lkpc.android.app.glory.repository.YoutubeImgClient
+import com.lkpc.android.app.glory.api_client.YoutubeImgClient
 import kotlinx.android.synthetic.main.home_item_donate_homepage.*
 import kotlinx.android.synthetic.main.home_item_live_video.*
 import kotlinx.android.synthetic.main.home_item_pre_register.*
@@ -52,9 +52,16 @@ class HomeFragment : Fragment() {
                 if (response.isSuccessful) {
                     if (response.body() != null) {
                         val bmp = BitmapFactory.decodeStream(response.body()!!.byteStream())
-                        youtube_live_img.setImageBitmap(bmp)
-                        youtube_live_img.setOnClickListener {
-                            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(WebUrls.LKPC_LIVE)))
+                        if (youtube_live_img != null) {
+                            youtube_live_img.setImageBitmap(bmp)
+                            youtube_live_img.setOnClickListener {
+                                startActivity(
+                                    Intent(
+                                        Intent.ACTION_VIEW,
+                                        Uri.parse(WebUrls.LKPC_LIVE)
+                                    )
+                                )
+                            }
                         }
                     }
                 }
