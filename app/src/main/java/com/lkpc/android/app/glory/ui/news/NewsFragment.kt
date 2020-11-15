@@ -15,6 +15,7 @@ import com.lkpc.android.app.glory.MainActivity
 import com.lkpc.android.app.glory.R
 import com.lkpc.android.app.glory.entity.BaseContent
 import kotlinx.android.synthetic.main.fragment_news.*
+import kotlinx.android.synthetic.main.title_area.*
 
 class NewsFragment : Fragment() {
     override fun onCreateView(
@@ -32,7 +33,7 @@ class NewsFragment : Fragment() {
         a.setActionBarTitle(R.string.title_notifications)
 
         rv_news.layoutManager = LinearLayoutManager(activity)
-        rv_news.adapter = NewsAdapter(activity as Context)
+        rv_news.adapter = NewsAdapter()
 
         // data observation
         val viewModel: NewsViewModel by viewModels()

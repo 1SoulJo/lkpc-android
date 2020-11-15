@@ -1,9 +1,9 @@
 package com.lkpc.android.app.glory.ui.detail
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.text.HtmlCompat
 import com.google.android.youtube.player.YouTubeBaseActivity
@@ -13,12 +13,12 @@ import com.google.android.youtube.player.YouTubePlayerView
 import com.google.gson.Gson
 import com.lkpc.android.app.glory.BuildConfig
 import com.lkpc.android.app.glory.R
-import com.lkpc.android.app.glory.constants.ContentType
-import com.lkpc.android.app.glory.data.NoteDatabase
 import com.lkpc.android.app.glory.entity.BaseContent
-import com.lkpc.android.app.glory.entity.Note
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+import com.lkpc.android.app.glory.ui.note.NoteDetailActivity
+import com.lkpc.android.app.glory.ui.note.NoteEditActivity
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.title_area.*
+import kotlinx.android.synthetic.main.title_area.ta_action_bar_title
 import org.jsoup.Jsoup
 import org.jsoup.safety.Whitelist
 import java.text.SimpleDateFormat
@@ -35,27 +35,49 @@ class DetailActivity : YouTubeBaseActivity() {
         fillContent(content)
 
         // back button
-        findViewById<ImageView>(R.id.btn_back).setOnClickListener {
+        ta_btn_back.setOnClickListener {
             finish()
         }
 
         // note button
-        findViewById<ImageView>(R.id.btn_note).setOnClickListener {
-            GlobalScope.launch {
-                val db = NoteDatabase.getDatabase(context = applicationContext)
-                db.noteDao().insertAll(
-                    Note(type = ContentType.COLUMN,
-                        contentId = "5fab0348377eb70ceb3a32bb",
-                        noteContent = "hi\nmy name is hansol\ngood to see you")
-                )
+        if (intent.getBooleanExtra("noteBtn", true)) {
+            ta_btn_note.visibility = View.VISIBLE
+
+            val i: Intent
+            val noteId = intent.getIntExtra("noteId", -1)
+            if (noteId > -1) {
+                ta_text_title_note.text = "노트보기"
+                i = Intent(this, NoteDetailActivity::class.java)
+                i.putExtra("noteId", noteId)
+                ta_btn_note.setOnClickListener {
+                    startActivity(i)
+                }
+            } else {
+                i = Intent(this, NoteEditActivity::class.java)
+                i.putExtra("contentId", content.id)
+                ta_btn_note.setOnClickListener {
+                    startActivityForResult(i, 123)
+                }
+            }
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == 123) {
+            ta_text_title_note.text = "노트보기"
+            val i = Intent(this, NoteDetailActivity::class.java)
+            i.putExtra("noteId", resultCode)
+            ta_btn_note.setOnClickListener {
+                startActivity(i)
             }
         }
     }
 
     private fun fillContent(content: BaseContent) {
         // title
-        val actionBarTitle = findViewById<TextView>(R.id.action_bar_title)
-        actionBarTitle.text = content.title
+        ta_action_bar_title.text = content.title
 
         // content title
         val contentTitle = findViewById<TextView>(R.id.content_title)

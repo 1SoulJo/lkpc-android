@@ -56,10 +56,7 @@ class HomeFragment : Fragment() {
                             youtube_live_img.setImageBitmap(bmp)
                             youtube_live_img.setOnClickListener {
                                 startActivity(
-                                    Intent(
-                                        Intent.ACTION_VIEW,
-                                        Uri.parse(WebUrls.LKPC_LIVE)
-                                    )
+                                    Intent(Intent.ACTION_VIEW, Uri.parse(WebUrls.LKPC_LIVE))
                                 )
                             }
                         }
@@ -76,7 +73,6 @@ class HomeFragment : Fragment() {
         btn_donate.setOnClickListener {
             startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(WebUrls.ONLINE_DONATE)))
         }
-
         btn_homepage.setOnClickListener {
             startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(WebUrls.LKPC_HOMEPAGE)))
         }

@@ -7,13 +7,12 @@ import androidx.room.RoomDatabase
 import com.lkpc.android.app.glory.entity.Note
 
 
-@Database(entities = [Note::class], version = 1)
+@Database(entities = [Note::class], version = 4)
 abstract class NoteDatabase : RoomDatabase() {
     abstract fun noteDao(): NoteDao
 
     companion object {
-        // Singleton prevents multiple instances of database opening at the
-        // same time.
+        // Singleton prevents multiple instances of database opening at the same time.
         @Volatile
         private var INSTANCE: NoteDatabase? = null
 
@@ -23,7 +22,8 @@ abstract class NoteDatabase : RoomDatabase() {
                     context.applicationContext,
                     NoteDatabase::class.java,
                     "note_database"
-                ).build()
+                ).fallbackToDestructiveMigration()
+                    .build()
                 INSTANCE = instance
                 // return instance
                 instance

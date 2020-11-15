@@ -32,7 +32,7 @@ class SermonFragment : Fragment() {
         a.setActionBarTitle(R.string.title_sermon)
 
         rv_sermon.layoutManager = LinearLayoutManager(activity)
-        rv_sermon.adapter = SermonAdapter(activity as Context)
+        rv_sermon.adapter = SermonAdapter()
 
         // data observation
         val viewModel: SermonViewModel by viewModels()

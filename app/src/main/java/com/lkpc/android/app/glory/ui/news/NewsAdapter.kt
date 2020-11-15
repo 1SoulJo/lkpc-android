@@ -1,6 +1,5 @@
 package com.lkpc.android.app.glory.ui.news
 
-import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
@@ -15,7 +14,7 @@ import kotlinx.android.synthetic.main.list_item_news.view.*
 import java.text.SimpleDateFormat
 import java.util.*
 
-class NewsAdapter(private val context: Context): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class NewsAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private val TYPE_ITEM: Int = 0
     private val TYPE_LOADING: Int = 1
 
@@ -34,11 +33,11 @@ class NewsAdapter(private val context: Context): RecyclerView.Adapter<RecyclerVi
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         if (viewType == TYPE_ITEM) {
             return ItemViewHolder(
-                LayoutInflater.from(context).inflate(R.layout.list_item_news, parent, false)
+                LayoutInflater.from(parent.context).inflate(R.layout.list_item_news, parent, false)
             )
         }
         return LoadingViewHolder(
-            LayoutInflater.from(context).inflate(R.layout.loading_row, parent, false)
+            LayoutInflater.from(parent.context).inflate(R.layout.loading_row, parent, false)
         )
     }
 
@@ -55,6 +54,7 @@ class NewsAdapter(private val context: Context): RecyclerView.Adapter<RecyclerVi
             holder.itemView.setOnClickListener {
                 val i = Intent(holder.itemView.context, DetailActivity::class.java)
                 i.putExtra("data", Gson().toJson(newsList[position]))
+                i.putExtra("noteBtn", false)
                 holder.itemView.context.startActivity(i)
             }
         }

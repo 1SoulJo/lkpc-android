@@ -1,24 +1,22 @@
 package com.lkpc.android.app.glory.ui.sermon
 
-import android.content.Context
 import android.content.Intent
 import android.graphics.BitmapFactory
-import android.graphics.Color
-import android.graphics.ColorFilter
-import android.graphics.PorterDuff
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
 import androidx.transition.Fade
 import androidx.transition.TransitionManager
 import com.google.gson.Gson
 import com.lkpc.android.app.glory.R
-import com.lkpc.android.app.glory.entity.BaseContent
 import com.lkpc.android.app.glory.api_client.YoutubeImgClient
+import com.lkpc.android.app.glory.data.NoteDatabase
+import com.lkpc.android.app.glory.entity.BaseContent
 import com.lkpc.android.app.glory.ui.detail.DetailActivity
 import kotlinx.android.synthetic.main.list_item_sermon.view.*
 import okhttp3.ResponseBody
@@ -30,13 +28,12 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 
-class SermonAdapter(private val context: Context): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class SermonAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private val _typeItem: Int = 0
     private val _typeLoading: Int = 1
     private val _imageTag = "image_view"
 
     var isLoading: Boolean = false
-
     var sermons: List<BaseContent?> = mutableListOf()
 
     class ItemViewHolder(view: View): RecyclerView.ViewHolder(view) {
@@ -45,19 +42,19 @@ class SermonAdapter(private val context: Context): RecyclerView.Adapter<Recycler
         var tvSermonTitle: TextView = view.sermon_title
         var tvSermonName: TextView = view.sermon_name
         var tvSermonDate: TextView = view.sermon_date
+        var ivNote: ImageView = view.sermon_note
     }
 
-    class LoadingViewHolder(view: View): RecyclerView.ViewHolder(view) {
-    }
+    class LoadingViewHolder(view: View): RecyclerView.ViewHolder(view) {}
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         if (viewType == _typeItem) {
             return ItemViewHolder(
-                LayoutInflater.from(context).inflate(R.layout.list_item_sermon, parent, false)
+                LayoutInflater.from(parent.context).inflate(R.layout.list_item_sermon, parent, false)
             )
         }
         return LoadingViewHolder(
-            LayoutInflater.from(context).inflate(R.layout.loading_row, parent, false)
+            LayoutInflater.from(parent.context).inflate(R.layout.loading_row, parent, false)
         )
     }
 
@@ -94,11 +91,25 @@ class SermonAdapter(private val context: Context): RecyclerView.Adapter<Recycler
                 })
             }
 
-            holder.itemView.setOnClickListener {
-                val i = Intent(holder.itemView.context, DetailActivity::class.java)
-                i.putExtra("data", Gson().toJson(sermons[position]))
-                holder.itemView.context.startActivity(i)
-            }
+            val db = NoteDatabase.getDatabase(context = holder.itemView.context)
+            db.noteDao().loadByContentId(sermon.id!!).observe(
+                holder.itemView.context as LifecycleOwner,
+                { note ->
+                    val i = Intent(holder.itemView.context, DetailActivity::class.java)
+                    i.putExtra("data", Gson().toJson(sermons[position]))
+
+                    if (note != null) {
+                        holder.ivNote.visibility = View.VISIBLE
+                        i.putExtra("noteId", note.id)
+                    } else {
+                        holder.ivNote.visibility = View.GONE
+                    }
+
+                    holder.itemView.setOnClickListener {
+                        holder.itemView.context.startActivity(i)
+                    }
+                }
+            )
         }
     }
 

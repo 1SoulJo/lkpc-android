@@ -1,27 +1,25 @@
 package com.lkpc.android.app.glory.ui.meditation
 
-import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
+import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
 import com.lkpc.android.app.glory.R
+import com.lkpc.android.app.glory.data.NoteDatabase
 import com.lkpc.android.app.glory.entity.BaseContent
 import com.lkpc.android.app.glory.ui.detail.DetailActivity
 import kotlinx.android.synthetic.main.list_item_meditation.view.*
 import java.text.SimpleDateFormat
 import java.util.*
 
-class MeditationAdapter(private val context: Context): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    companion object {
-
-    }
-
-    private val TYPE_ITEM: Int = 0
-    private val TYPE_LOADING: Int = 1
+class MeditationAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+    private val _typeItem: Int = 0
+    private val _typeLoading: Int = 1
 
     var isLoading: Boolean = false
 
@@ -30,19 +28,20 @@ class MeditationAdapter(private val context: Context): RecyclerView.Adapter<Recy
     class ItemViewHolder(view: View): RecyclerView.ViewHolder(view) {
         var tvMeditationTitle: TextView = view.meditation_title
         var tvMeditationDate: TextView = view.meditation_date
+        var ivNote: ImageView = view.meditation_note
     }
 
     class LoadingViewHolder(view: View): RecyclerView.ViewHolder(view) {
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        if (viewType == TYPE_ITEM) {
+        if (viewType == _typeItem) {
             return ItemViewHolder(
-                LayoutInflater.from(context).inflate(R.layout.list_item_meditation, parent, false)
+                LayoutInflater.from(parent.context).inflate(R.layout.list_item_meditation, parent, false)
             )
         }
         return LoadingViewHolder(
-            LayoutInflater.from(context).inflate(R.layout.loading_row, parent, false)
+            LayoutInflater.from(parent.context).inflate(R.layout.loading_row, parent, false)
         )
     }
 
@@ -56,11 +55,25 @@ class MeditationAdapter(private val context: Context): RecyclerView.Adapter<Recy
             val newFormat = SimpleDateFormat("yyyy-MM-dd", Locale.CANADA)
             holder.tvMeditationDate.text = newFormat.format(dateFormat.parse(meditation.dateCreated!!)!!)
 
-            holder.itemView.setOnClickListener {
-                val i = Intent(holder.itemView.context, DetailActivity::class.java)
-                i.putExtra("data", Gson().toJson(meditations[position]))
-                holder.itemView.context.startActivity(i)
-            }
+            val db = NoteDatabase.getDatabase(context = holder.itemView.context)
+            db.noteDao().loadByContentId(meditation.id!!).observe(
+                holder.itemView.context as LifecycleOwner,
+                { note ->
+                    val i = Intent(holder.itemView.context, DetailActivity::class.java)
+                    i.putExtra("data", Gson().toJson(meditations[position]))
+
+                    if (note != null) {
+                        holder.ivNote.visibility = View.VISIBLE
+                        i.putExtra("noteId", note.id)
+                    } else {
+                        holder.ivNote.visibility = View.GONE
+                    }
+
+                    holder.itemView.setOnClickListener {
+                        holder.itemView.context.startActivity(i)
+                    }
+                }
+            )
         }
     }
 
@@ -69,6 +82,6 @@ class MeditationAdapter(private val context: Context): RecyclerView.Adapter<Recy
     }
 
     override fun getItemViewType(position: Int): Int {
-        return if (meditations[position] == null) TYPE_LOADING else TYPE_ITEM
+        return if (meditations[position] == null) _typeLoading else _typeItem
     }
 }

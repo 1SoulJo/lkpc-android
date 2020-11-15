@@ -17,10 +17,6 @@ import com.lkpc.android.app.glory.entity.BaseContent
 import kotlinx.android.synthetic.main.fragment_meditation.*
 
 class MeditationFragment : Fragment() {
-    companion object {
-        fun newInstance() = MeditationFragment()
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -36,7 +32,7 @@ class MeditationFragment : Fragment() {
         a.setActionBarTitle(R.string.title_meditation)
 
         rv_meditation.layoutManager = LinearLayoutManager(activity)
-        rv_meditation.adapter = MeditationAdapter(activity as Context)
+        rv_meditation.adapter = MeditationAdapter()
 
         // data observation
         val viewModel: MeditationViewModel by viewModels()

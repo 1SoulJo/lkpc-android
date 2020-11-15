@@ -32,7 +32,7 @@ class ColumnFragment : Fragment() {
         a.setActionBarTitle(R.string.title_column)
 
         rv_column.layoutManager = LinearLayoutManager(activity)
-        rv_column.adapter = ColumnAdapter(activity as Context)
+        rv_column.adapter = ColumnAdapter()
 
         // data observation
         val viewModel: ColumnViewModel by viewModels()

@@ -2,9 +2,9 @@ package com.lkpc.android.app.glory.constants
 
 class ContentType {
     companion object {
-        const val COLUMN = 0
-        const val SERMON = 1
-        const val MEDITATION = 2
-        const val NEWS = 3
+        const val COLUMN = "column"
+        const val SERMON = "sermon"
+        const val MEDITATION = "meditation"
+        const val NEWS = "news"
     }
 }
