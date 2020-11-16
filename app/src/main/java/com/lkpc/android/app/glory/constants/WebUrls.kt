@@ -3,7 +3,7 @@ package com.lkpc.android.app.glory.constants
 class WebUrls {
     companion object {
         // youtube links
-        const val LKPC_LIVE = "https://youtu.be/11d9FBX9t-I"
+        const val LKPC_LIVE_ID = "kgoMr1fEMQs"
         const val LKPC_CHANNEL = "https://www.youtube.com/channel/UCe5baq_bVJrXTIhyjXw5HtA"
         const val EC_CHANNEL = "https://www.youtube.com/channel/UCMEZLf7qIDm-9C5bJ_pE1HQ"
         const val NHF_CHANNEL = "https://www.youtube.com/channel/UCr1uydfKVRVUqVKkJG9H4dQ"

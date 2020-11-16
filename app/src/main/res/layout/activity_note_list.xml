@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".ui.note.NoteListActivity">
 
-    <include layout="@layout/title_area" android:id="@+id/title_area"/>
+    <include layout="@layout/title_area" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/empty_text_area"

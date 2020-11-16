@@ -1,30 +1,25 @@
 package com.lkpc.android.app.glory.ui.home
 
 import android.content.Intent
-import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.google.android.youtube.player.YouTubeInitializationResult
+import com.google.android.youtube.player.YouTubePlayer
+import com.google.android.youtube.player.YouTubePlayerSupportFragmentX
+import com.lkpc.android.app.glory.BuildConfig
 import com.lkpc.android.app.glory.MainActivity
 import com.lkpc.android.app.glory.R
 import com.lkpc.android.app.glory.constants.WebUrls
-import com.lkpc.android.app.glory.api_client.YoutubeImgClient
 import kotlinx.android.synthetic.main.home_item_donate_homepage.*
-import kotlinx.android.synthetic.main.home_item_live_video.*
 import kotlinx.android.synthetic.main.home_item_pre_register.*
 import kotlinx.android.synthetic.main.home_item_youtube_channels.*
-import okhttp3.ResponseBody
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 
 class HomeFragment : Fragment() {
-    private val _youtubeLiveId = "11d9FBX9t-I"
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -46,28 +41,25 @@ class HomeFragment : Fragment() {
         }
 
         // setup youtube live area
-        val client = YoutubeImgClient()
-        client.getThumbnail(videoId = _youtubeLiveId, cb = object : Callback<ResponseBody> {
-            override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
-                if (response.isSuccessful) {
-                    if (response.body() != null) {
-                        val bmp = BitmapFactory.decodeStream(response.body()!!.byteStream())
-                        if (youtube_live_img != null) {
-                            youtube_live_img.setImageBitmap(bmp)
-                            youtube_live_img.setOnClickListener {
-                                startActivity(
-                                    Intent(Intent.ACTION_VIEW, Uri.parse(WebUrls.LKPC_LIVE))
-                                )
-                            }
-                        }
-                    }
+        val yf = childFragmentManager.findFragmentById(R.id.youtube_fragment) as YouTubePlayerSupportFragmentX
+        yf.initialize(
+            BuildConfig.YOUTUBE_API,
+            object : YouTubePlayer.OnInitializedListener {
+                override fun onInitializationSuccess(
+                    provider: YouTubePlayer.Provider,
+                    youTubePlayer: YouTubePlayer, b: Boolean) {
+
+                    // do any work here to cue video, play video, etc.
+                    youTubePlayer.cueVideo(WebUrls.LKPC_LIVE_ID)
+                }
+
+                override fun onInitializationFailure(
+                    provider: YouTubePlayer.Provider,
+                    youTubeInitializationResult: YouTubeInitializationResult
+                ) {
                 }
             }
-
-            override fun onFailure(call: Call<ResponseBody>?, t: Throwable?) {
-                t?.printStackTrace()
-            }
-        })
+        )
 
         // donate / homepage buttons
         btn_donate.setOnClickListener {
@@ -79,7 +71,6 @@ class HomeFragment : Fragment() {
 
         // setup youtube channel links
         setupYoutubeChannelLinks()
-
     }
 
     private fun setupYoutubeChannelLinks() {

@@ -54,6 +54,7 @@ class DetailActivity : YouTubeBaseActivity() {
                 }
             } else {
                 i = Intent(this, NoteEditActivity::class.java)
+                i.putExtra("type", content.category)
                 i.putExtra("contentId", content.id)
                 ta_btn_note.setOnClickListener {
                     startActivityForResult(i, 123)

@@ -31,5 +31,6 @@ class NoteListActivity : AppCompatActivity() {
             }
             (rv_note_list.adapter as NoteAdapter).swapData(notes)
         })
+        
     }
 }

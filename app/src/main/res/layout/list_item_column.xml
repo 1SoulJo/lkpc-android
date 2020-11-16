@@ -3,9 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="60dp"
-    android:layout_margin="3dp"
-    android:elevation="2dp"
+    android:layout_height="80dp"
     android:foreground="?attr/selectableItemBackground"
     android:background="@color/listRowBackground"
     android:clickable="true"
@@ -16,17 +14,20 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginStart="8dp"
+        android:padding="8dp"
         android:contentDescription="@string/list_item_title"
+        android:src="@drawable/ic_column"
+        android:background="@drawable/ic_round_back"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/lpc_logo_symbol" />
+        app:tint="@android:color/white" />
 
     <TextView
         android:id="@+id/column_title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="12dp"
         android:layout_marginBottom="20dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textSize="16sp"
@@ -39,8 +40,7 @@
         android:id="@+id/column_date"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="2dp"
+        android:layout_marginStart="12dp"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imageView"
@@ -56,7 +56,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:tint="@android:color/black"
+        app:tint="#777777"
         android:contentDescription="@string/note_icon" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,6 +2,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.lkpc.android.app.glory">
 
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
+
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -12,14 +20,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.note.NoteDetailActivity"></activity>
-        <activity android:name=".ui.note.NoteEditActivity" />
+        <activity android:name=".ui.qr_code.QrCodeGeneratorActivity" android:windowSoftInputMode="adjustPan" />
+        <activity android:name=".ui.qr_code.QrCodeScanActivity" />
+        <activity android:name=".ui.note.NoteDetailActivity" />
+        <activity android:name=".ui.note.NoteEditActivity" android:windowSoftInputMode="adjustPan" />
         <activity android:name=".ui.note.NoteListActivity" />
         <activity
             android:name=".ui.detail.DetailActivity"
             android:configChanges="keyboardHidden|orientation|screenSize" />
         <activity
             android:name=".MainActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
             android:hardwareAccelerated="true"
             android:label="@string/app_name">
             <intent-filter>

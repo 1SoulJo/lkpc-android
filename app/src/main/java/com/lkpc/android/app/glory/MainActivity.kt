@@ -8,7 +8,9 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.bottomnavigation.LabelVisibilityMode
+import com.lkpc.android.app.glory.ui.qr_code.QrCodeScanActivity
 import com.lkpc.android.app.glory.ui.note.NoteListActivity
+import com.lkpc.android.app.glory.ui.qr_code.QrCodeGeneratorActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -23,6 +25,11 @@ class MainActivity : AppCompatActivity() {
 
         val navController = findNavController(R.id.nav_host_fragment)
         navView.setupWithNavController(navController)
+
+        btn_title_qr.setOnClickListener {
+            val i = Intent(this, QrCodeGeneratorActivity::class.java)
+            startActivity(i)
+        }
 
         btn_title_note.setOnClickListener {
             val i = Intent(this, NoteListActivity::class.java)
