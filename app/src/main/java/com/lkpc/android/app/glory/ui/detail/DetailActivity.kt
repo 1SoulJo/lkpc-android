@@ -5,58 +5,62 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.text.HtmlCompat
-import com.google.android.youtube.player.YouTubeBaseActivity
 import com.google.android.youtube.player.YouTubeInitializationResult
 import com.google.android.youtube.player.YouTubePlayer
-import com.google.android.youtube.player.YouTubePlayerView
+import com.google.android.youtube.player.YouTubePlayerSupportFragmentX
 import com.google.gson.Gson
 import com.lkpc.android.app.glory.BuildConfig
 import com.lkpc.android.app.glory.R
 import com.lkpc.android.app.glory.entity.BaseContent
 import com.lkpc.android.app.glory.ui.note.NoteDetailActivity
 import com.lkpc.android.app.glory.ui.note.NoteEditActivity
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.title_area.*
-import kotlinx.android.synthetic.main.title_area.ta_action_bar_title
+import kotlinx.android.synthetic.main.action_bar.*
+import kotlinx.android.synthetic.main.activity_detail.*
 import org.jsoup.Jsoup
 import org.jsoup.safety.Whitelist
 import java.text.SimpleDateFormat
 import java.util.*
 
 
-class DetailActivity : YouTubeBaseActivity() {
+class DetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
+
+        supportActionBar!!.setDisplayShowCustomEnabled(true)
+        supportActionBar!!.setCustomView(R.layout.action_bar)
+
+        ab_btn_qr.visibility = View.GONE
 
         val data = intent.getStringExtra("data")
         val content = Gson().fromJson(data, BaseContent::class.java)
         fillContent(content)
 
         // back button
-        ta_btn_back.setOnClickListener {
-            finish()
-        }
+        ab_btn_back.visibility = View.VISIBLE
+        ab_btn_back.setOnClickListener { finish() }
 
         // note button
         if (intent.getBooleanExtra("noteBtn", true)) {
-            ta_btn_note.visibility = View.VISIBLE
+            ab_btn_new_note.visibility = View.VISIBLE
 
             val i: Intent
             val noteId = intent.getIntExtra("noteId", -1)
             if (noteId > -1) {
-                ta_text_title_note.text = "노트보기"
+                ab_btn_new_note_text.text = "노트보기"
                 i = Intent(this, NoteDetailActivity::class.java)
                 i.putExtra("noteId", noteId)
-                ta_btn_note.setOnClickListener {
+                ab_btn_new_note.setOnClickListener {
                     startActivity(i)
                 }
             } else {
                 i = Intent(this, NoteEditActivity::class.java)
                 i.putExtra("type", content.category)
+                i.putExtra("title", content.title)
                 i.putExtra("contentId", content.id)
-                ta_btn_note.setOnClickListener {
+                ab_btn_new_note.setOnClickListener {
                     startActivityForResult(i, 123)
                 }
             }
@@ -67,10 +71,10 @@ class DetailActivity : YouTubeBaseActivity() {
         super.onActivityResult(requestCode, resultCode, data)
 
         if (requestCode == 123) {
-            ta_text_title_note.text = "노트보기"
+            ab_btn_new_note_text.text = "노트보기"
             val i = Intent(this, NoteDetailActivity::class.java)
             i.putExtra("noteId", resultCode)
-            ta_btn_note.setOnClickListener {
+            ab_btn_new_note.setOnClickListener {
                 startActivity(i)
             }
         }
@@ -78,7 +82,7 @@ class DetailActivity : YouTubeBaseActivity() {
 
     private fun fillContent(content: BaseContent) {
         // title
-        ta_action_bar_title.text = content.title
+        ab_title.text = content.title
 
         // content title
         val contentTitle = findViewById<TextView>(R.id.content_title)
@@ -117,10 +121,11 @@ class DetailActivity : YouTubeBaseActivity() {
     }
 
     private fun setupYoutubeView(id: String) {
-        val youTubePlayerView = findViewById<View>(R.id.youtube_player) as YouTubePlayerView
-        youTubePlayerView.visibility = View.VISIBLE
+        detail_youtube_layout.visibility = View.VISIBLE
 
-        youTubePlayerView.initialize(BuildConfig.YOUTUBE_API,
+        val yf = supportFragmentManager.findFragmentById(R.id.detail_youtube_fragment) as YouTubePlayerSupportFragmentX
+        yf.initialize(
+            BuildConfig.YOUTUBE_API,
             object : YouTubePlayer.OnInitializedListener {
                 override fun onInitializationSuccess(
                     provider: YouTubePlayer.Provider,
@@ -132,8 +137,10 @@ class DetailActivity : YouTubeBaseActivity() {
 
                 override fun onInitializationFailure(
                     provider: YouTubePlayer.Provider,
-                    youTubeInitializationResult: YouTubeInitializationResult) {
+                    youTubeInitializationResult: YouTubeInitializationResult
+                ) {
                 }
-            })
+            }
+        )
     }
 }

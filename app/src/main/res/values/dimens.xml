@@ -7,6 +7,7 @@
     <dimen name="design_bottom_navigation_margin" tools:override="true">4dp</dimen>
     <dimen name="design_bottom_navigation_text_size" tools:override="true">6dp</dimen>
     <dimen name="design_bottom_navigation_active_text_size" tools:override="true">6dp</dimen>
+    <dimen name="mtrl_toolbar_default_height" tools:override="true">46dp</dimen>
 
     <dimen name="youtube_channel_width">150dp</dimen>
     <dimen name="youtube_channel_height">70dp</dimen>

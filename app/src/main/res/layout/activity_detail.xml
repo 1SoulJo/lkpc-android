@@ -6,12 +6,9 @@
     android:layout_height="match_parent"
     tools:context=".ui.detail.DetailActivity">
 
-    <include layout="@layout/title_area" />
-
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/design_bottom_navigation_height">
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -41,12 +38,20 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:theme="?attr/subtitleTextStyle" />
 
-            <com.google.android.youtube.player.YouTubePlayerView
-                android:id="@+id/youtube_player"
+            <LinearLayout
+                android:id="@+id/detail_youtube_layout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:visibility="gone" />
+                android:layout_height="match_parent"
+                android:visibility="gone" >
+
+                <fragment
+                    android:id="@+id/detail_youtube_fragment"
+                    android:name="com.google.android.youtube.player.YouTubePlayerSupportFragmentX"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:minHeight="100dp" />
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/content_body"

@@ -6,7 +6,7 @@ import com.lkpc.android.app.glory.entity.Note
 
 @Dao
 interface NoteDao {
-    @Query("SELECT * FROM note_table")
+    @Query("SELECT * FROM note_table ORDER BY last_modified DESC")
     fun getAll(): LiveData<List<Note>>
 
     @Query("SELECT * FROM note_table WHERE id==(:id) LIMIT 1")
@@ -20,4 +20,7 @@ interface NoteDao {
 
     @Delete
     suspend fun delete(note: Note)
+
+    @Query("DELETE from note_table where id in (:idList)")
+    suspend fun deleteAll(idList: List<Int>)
 }

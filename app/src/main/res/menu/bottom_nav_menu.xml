@@ -2,12 +2,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/navigation_home"
+        android:id="@+id/action_mode_note_list_menu_share"
         android:icon="@drawable/ic_church"
         android:title="@string/title_home" />
 
     <item
-        android:id="@+id/navigation_column"
+        android:id="@+id/action_mode_note_list_menu_delete"
         android:icon="@drawable/ic_column"
         android:title="@string/title_column" />
 

@@ -4,11 +4,10 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.lkpc.android.app.glory.R
-import com.lkpc.android.app.glory.constants.ContentType
 import com.lkpc.android.app.glory.data.NoteDatabase
 import com.lkpc.android.app.glory.entity.Note
+import kotlinx.android.synthetic.main.action_bar.*
 import kotlinx.android.synthetic.main.activity_note_edit.*
-import kotlinx.android.synthetic.main.title_area.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.util.*
@@ -18,22 +17,26 @@ class NoteEditActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_note_edit)
 
+        supportActionBar!!.setDisplayShowCustomEnabled(true)
+        supportActionBar!!.setCustomView(R.layout.action_bar)
+
         // title
-        ta_action_bar_title.text = getString(R.string.my_notes)
+        ab_title.text = getString(R.string.my_notes)
 
         // content
         note_title.setText(intent.getStringExtra("title"))
         note_content.setText(intent.getStringExtra("content"))
 
         // back button
-        ta_btn_back.setOnClickListener {
+        ab_btn_back.visibility = View.VISIBLE
+        ab_btn_back.setOnClickListener {
             finish()
         }
 
         // save button
         val id = intent.getIntExtra("id", -1)
-        ta_btn_save.visibility = View.VISIBLE
-        ta_btn_save.setOnClickListener {
+        ab_btn_save.visibility = View.VISIBLE
+        ab_btn_save.setOnClickListener {
             GlobalScope.launch {
                 val note = Note(
                     type = intent.getStringExtra("type"),

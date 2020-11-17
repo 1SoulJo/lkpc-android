@@ -3,20 +3,35 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="?attr/selectableItemBackground"
+    android:id="@+id/note_list_item_layout"
+    android:animateLayoutChanges="true"
     android:layout_width="match_parent"
     android:layout_height="80dp">
 
+    <CheckBox
+        android:id="@+id/note_checkbox"
+        android:layout_width="32dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:gravity="center"
+        android:text="@null"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/note_icon"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/note_icon"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_marginStart="8dp"
-        android:padding="8dp"
-        android:contentDescription="@string/list_item_title"
-        android:src="@drawable/ic_notifications"
+        android:layout_marginStart="16dp"
         android:background="@drawable/ic_round_back"
+        android:contentDescription="@string/list_item_title"
+        android:padding="8dp"
+        android:src="@drawable/ic_notifications"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@id/note_checkbox"
         app:layout_constraintTop_toTopOf="parent"
         app:tint="@android:color/white" />
 
@@ -25,12 +40,15 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
+        android:layout_marginEnd="16dp"
         android:layout_marginBottom="20dp"
-        android:layout_marginEnd="5dp"
+        android:maxLines="1"
+        android:ellipsize="end"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/note_icon"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -38,8 +56,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintStart_toEndOf="@+id/note_icon"
         app:layout_constraintTop_toBottomOf="@id/note_title" />
 </androidx.constraintlayout.widget.ConstraintLayout>

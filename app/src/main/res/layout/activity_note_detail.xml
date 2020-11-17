@@ -6,12 +6,9 @@
     android:layout_height="match_parent"
     tools:context=".ui.note.NoteDetailActivity">
 
-    <include layout="@layout/title_area" />
-
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-            android:layout_marginTop="@dimen/design_bottom_navigation_height">
+        android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
