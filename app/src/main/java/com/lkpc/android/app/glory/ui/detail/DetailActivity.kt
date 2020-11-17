@@ -37,7 +37,7 @@ import java.util.*
 
 
 class DetailActivity : AppCompatActivity() {
-    private val _editNodeActivityResultCode = 100232
+    private val _editNodeActivityResultCode = 1
     private lateinit var playerNotificationManager: PlayerNotificationManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
