@@ -53,6 +53,13 @@
                     android:minHeight="100dp" />
             </LinearLayout>
 
+            <com.google.android.exoplayer2.ui.StyledPlayerControlView
+                android:id="@+id/detail_audio"
+                android:layout_height="80dp"
+                android:layout_width="wrap_content"
+                android:layout_marginTop="10dp"
+                android:visibility="gone"/>
+
             <TextView
                 android:id="@+id/content_body"
                 android:layout_width="match_parent"

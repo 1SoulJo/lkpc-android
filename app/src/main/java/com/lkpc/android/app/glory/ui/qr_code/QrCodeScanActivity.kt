@@ -5,6 +5,7 @@ import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
 import android.view.SurfaceHolder
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -14,6 +15,7 @@ import com.google.android.gms.vision.Detector.Detections
 import com.google.android.gms.vision.barcode.Barcode
 import com.google.android.gms.vision.barcode.BarcodeDetector
 import com.lkpc.android.app.glory.R
+import kotlinx.android.synthetic.main.action_bar.*
 import kotlinx.android.synthetic.main.activity_qr_code.*
 import java.io.IOException
 
@@ -27,6 +29,14 @@ class QrCodeScanActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_qr_code)
+        supportActionBar!!.setDisplayShowCustomEnabled(true)
+        supportActionBar!!.setCustomView(R.layout.action_bar)
+
+        ab_title.text = getString(R.string.qr_code_scan_title)
+        ab_btn_back.visibility = View.VISIBLE
+        ab_btn_back.setOnClickListener {
+            finish()
+        }
     }
 
     override fun onResume() {
@@ -43,7 +53,7 @@ class QrCodeScanActivity : AppCompatActivity() {
         barcodeDetector =
             BarcodeDetector.Builder(this).setBarcodeFormats(Barcode.ALL_FORMATS).build()
         cameraSource = CameraSource.Builder(this, barcodeDetector)
-            .setRequestedPreviewSize(1920, 1080).setAutoFocusEnabled(true).build()
+            .setRequestedPreviewSize(300, 300).setAutoFocusEnabled(true).build()
 
         surface_view.holder.addCallback(object : SurfaceHolder.Callback {
             override fun surfaceCreated(holder: SurfaceHolder) {

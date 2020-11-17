@@ -15,8 +15,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.lkpc.android.app.glory.BuildConfig
 import com.lkpc.android.app.glory.R
 import com.lkpc.android.app.glory.constants.SharedPreference
+import kotlinx.android.synthetic.main.action_bar.*
 import kotlinx.android.synthetic.main.activity_qr_code_generator.*
-import kotlinx.android.synthetic.main.title_area.*
 import net.glxn.qrgen.android.QRCode
 import java.io.ByteArrayOutputStream
 
@@ -25,6 +25,8 @@ class QrCodeGeneratorActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_qr_code_generator)
+        supportActionBar!!.setDisplayShowCustomEnabled(true)
+        supportActionBar!!.setCustomView(R.layout.action_bar)
 
         // get data from shared preference
         val sp = getSharedPreferences(SharedPreference.QR_PREFERENCE, Context.MODE_PRIVATE)
@@ -39,13 +41,14 @@ class QrCodeGeneratorActivity : AppCompatActivity() {
                 BitmapFactory.decodeByteArray(imageAsBytes, 0, imageAsBytes.size))
         }
 
-        ta_action_bar_title.text = getString(R.string.qr_code_gen_title)
-        ta_btn_back.setOnClickListener {
+        ab_title.text = getString(R.string.qr_code_gen_title)
+        ab_btn_back.visibility = View.VISIBLE
+        ab_btn_back.setOnClickListener {
             finish()
         }
 
-        qr_scanner.visibility = View.VISIBLE
-        qr_scanner.setOnClickListener {
+        ab_qr_scanner.visibility = View.VISIBLE
+        ab_qr_scanner.setOnClickListener {
             showPasswordAlert()
         }
 

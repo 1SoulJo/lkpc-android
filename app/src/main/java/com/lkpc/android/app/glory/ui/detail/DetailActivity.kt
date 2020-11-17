@@ -1,18 +1,30 @@
 package com.lkpc.android.app.glory.ui.detail
 
+import android.app.PendingIntent
 import android.content.Intent
+import android.graphics.Bitmap
+import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.TextView
+import androidx.annotation.Nullable
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.text.HtmlCompat
+import com.google.android.exoplayer2.MediaItem
+import com.google.android.exoplayer2.Player
+import com.google.android.exoplayer2.SimpleExoPlayer
+import com.google.android.exoplayer2.ui.PlayerNotificationManager
+import com.google.android.exoplayer2.ui.PlayerNotificationManager.BitmapCallback
 import com.google.android.youtube.player.YouTubeInitializationResult
 import com.google.android.youtube.player.YouTubePlayer
 import com.google.android.youtube.player.YouTubePlayerSupportFragmentX
 import com.google.gson.Gson
 import com.lkpc.android.app.glory.BuildConfig
 import com.lkpc.android.app.glory.R
+import com.lkpc.android.app.glory.constants.ContentType
+import com.lkpc.android.app.glory.constants.Notification.Companion.CHANNEL_ID
+import com.lkpc.android.app.glory.constants.Notification.Companion.SERMON_AUDIO_ID
+import com.lkpc.android.app.glory.constants.WebUrls.Companion.LKPC_HOMEPAGE
 import com.lkpc.android.app.glory.entity.BaseContent
 import com.lkpc.android.app.glory.ui.note.NoteDetailActivity
 import com.lkpc.android.app.glory.ui.note.NoteEditActivity
@@ -25,10 +37,12 @@ import java.util.*
 
 
 class DetailActivity : AppCompatActivity() {
+    private val _editNodeActivityResultCode = 100232
+    private lateinit var playerNotificationManager: PlayerNotificationManager
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
-
         supportActionBar!!.setDisplayShowCustomEnabled(true)
         supportActionBar!!.setCustomView(R.layout.action_bar)
 
@@ -36,6 +50,14 @@ class DetailActivity : AppCompatActivity() {
 
         val data = intent.getStringExtra("data")
         val content = Gson().fromJson(data, BaseContent::class.java)
+
+        playerNotificationManager = PlayerNotificationManager(
+            this,
+            CHANNEL_ID,
+            SERMON_AUDIO_ID,
+            DescriptionAdapter(content.title!!)
+        )
+
         fillContent(content)
 
         // back button
@@ -61,7 +83,7 @@ class DetailActivity : AppCompatActivity() {
                 i.putExtra("title", content.title)
                 i.putExtra("contentId", content.id)
                 ab_btn_new_note.setOnClickListener {
-                    startActivityForResult(i, 123)
+                    startActivityForResult(i, _editNodeActivityResultCode)
                 }
             }
         }
@@ -70,13 +92,23 @@ class DetailActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (requestCode == 123) {
-            ab_btn_new_note_text.text = "노트보기"
+        if (requestCode == _editNodeActivityResultCode) {
+            ab_btn_new_note_text.text = getString(R.string.open_note)
             val i = Intent(this, NoteDetailActivity::class.java)
             i.putExtra("noteId", resultCode)
             ab_btn_new_note.setOnClickListener {
                 startActivity(i)
             }
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+
+        if (detail_audio.player != null) {
+            playerNotificationManager.setPlayer(null)
+            detail_audio.player!!.release()
+            detail_audio.player = null
         }
     }
 
@@ -106,16 +138,30 @@ class DetailActivity : AppCompatActivity() {
         val audios = doc.getElementsByTag("audio")
         for (audio in audios) {
             val src = audio.getElementsByTag("source")
-            for (s in src)
-                Log.d("Detail", s.attr("src"))
+            if (src[0] != null) {
+                detail_audio.visibility = View.VISIBLE
+                val audioPlayer = SimpleExoPlayer.Builder(this).build()
+                val url = "$LKPC_HOMEPAGE${src[0].attr("src")}"
+                val mediaItem: MediaItem = MediaItem.fromUri(Uri.parse(url))
+                audioPlayer.setMediaItem(mediaItem)
+                audioPlayer.prepare()
+                detail_audio.showTimeoutMs = -1
+
+                detail_audio.player = audioPlayer
+
+                playerNotificationManager.setPlayer(audioPlayer)
+            }
         }
 
         // remove video and audio file
-        val whitelist = Whitelist();
+        val whitelist = Whitelist()
         whitelist.addTags("b", "em", "div", "p", "h1", "h2", "strong", "ol", "li", "ul", "u", "br")
         val newDoc = Jsoup.clean(doc.toString(), whitelist)
 
         // content body
+        if (content.category == ContentType.SERMON) {
+            return
+        }
         val contentBody = findViewById<TextView>(R.id.content_body)
         contentBody.text = HtmlCompat.fromHtml(newDoc, HtmlCompat.FROM_HTML_MODE_LEGACY).toString()
     }
@@ -129,7 +175,8 @@ class DetailActivity : AppCompatActivity() {
             object : YouTubePlayer.OnInitializedListener {
                 override fun onInitializationSuccess(
                     provider: YouTubePlayer.Provider,
-                    youTubePlayer: YouTubePlayer, b: Boolean) {
+                    youTubePlayer: YouTubePlayer, b: Boolean
+                ) {
 
                     // do any work here to cue video, play video, etc.
                     youTubePlayer.cueVideo(id)
@@ -142,5 +189,30 @@ class DetailActivity : AppCompatActivity() {
                 }
             }
         )
+    }
+
+    private class DescriptionAdapter(val contentText: String) : PlayerNotificationManager.MediaDescriptionAdapter {
+
+        override fun getCurrentContentTitle(player: Player): String {
+            return "주일 설교"
+        }
+
+        @Nullable
+        override fun getCurrentContentText(player: Player): String? {
+            return contentText
+        }
+
+        @Nullable
+        override fun getCurrentLargeIcon(
+            player: Player,
+            callback: BitmapCallback
+        ): Bitmap? {
+            return null
+        }
+
+        @Nullable
+        override fun createCurrentContentIntent(player: Player): PendingIntent? {
+            return null
+        }
     }
 }

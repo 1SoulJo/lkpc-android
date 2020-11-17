@@ -2,7 +2,10 @@ package com.lkpc.android.app.glory
 
 import android.annotation.SuppressLint
 import android.app.ActionBar
+import android.app.NotificationChannel
+import android.app.NotificationManager
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -10,6 +13,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.bottomnavigation.LabelVisibilityMode
+import com.lkpc.android.app.glory.constants.Notification.Companion.CHANNEL_ID
 import com.lkpc.android.app.glory.ui.note.NoteListActivity
 import com.lkpc.android.app.glory.ui.qr_code.QrCodeGeneratorActivity
 import kotlinx.android.synthetic.main.action_bar.*
@@ -44,9 +48,26 @@ class MainActivity : AppCompatActivity() {
             val i = Intent(this, NoteListActivity::class.java)
             startActivity(i)
         }
+
+        setupNotification()
     }
 
     fun setActionBarTitle(id: Int) {
         ab_title.text = getString(id)
+    }
+
+    private fun setupNotification() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            // Create the NotificationChannel
+            val name = getString(R.string.channel_name)
+            val descriptionText = getString(R.string.channel_description)
+            val importance = NotificationManager.IMPORTANCE_DEFAULT
+            val mChannel = NotificationChannel(CHANNEL_ID, name, importance)
+            mChannel.description = descriptionText
+            // Register the channel with the system; you can't change the importance
+            // or other notification behaviors after this
+            val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
+            notificationManager.createNotificationChannel(mChannel)
+        }
     }
 }
