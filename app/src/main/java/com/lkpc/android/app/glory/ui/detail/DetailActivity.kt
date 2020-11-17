@@ -145,11 +145,17 @@ class DetailActivity : AppCompatActivity() {
                 val mediaItem: MediaItem = MediaItem.fromUri(Uri.parse(url))
                 audioPlayer.setMediaItem(mediaItem)
                 audioPlayer.prepare()
+                audioPlayer.addListener(object: Player.EventListener {
+                    override fun onIsPlayingChanged(isPlaying: Boolean) {
+                        super.onIsPlayingChanged(isPlaying)
+                        if (isPlaying) {
+                            playerNotificationManager.setPlayer(audioPlayer)
+                        }
+                    }
+                })
                 detail_audio.showTimeoutMs = -1
 
                 detail_audio.player = audioPlayer
-
-                playerNotificationManager.setPlayer(audioPlayer)
             }
         }
 
