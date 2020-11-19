@@ -14,6 +14,7 @@ import com.lkpc.android.app.glory.BuildConfig
 import com.lkpc.android.app.glory.MainActivity
 import com.lkpc.android.app.glory.R
 import com.lkpc.android.app.glory.constants.WebUrls
+import kotlinx.android.synthetic.main.action_bar.*
 import kotlinx.android.synthetic.main.home_item_donate_homepage.*
 import kotlinx.android.synthetic.main.home_item_pre_register.*
 import kotlinx.android.synthetic.main.home_item_youtube_channels.*

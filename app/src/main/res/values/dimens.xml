@@ -5,6 +5,9 @@
 
     <dimen name="design_bottom_navigation_height" tools:override="true">46dp</dimen>
     <dimen name="design_bottom_navigation_margin" tools:override="true">4dp</dimen>
+    <dimen name="design_bottom_navigation_item_min_width" tools:override="true">20dp</dimen>
+    <dimen name="design_bottom_navigation_item_max_width" tools:override="true">20dp</dimen>
+    <dimen name="design_bottom_navigation_icon_size" tools:override="true">20dp</dimen>
     <dimen name="design_bottom_navigation_text_size" tools:override="true">6dp</dimen>
     <dimen name="design_bottom_navigation_active_text_size" tools:override="true">6dp</dimen>
     <dimen name="mtrl_toolbar_default_height" tools:override="true">46dp</dimen>
@@ -12,6 +15,8 @@
     <dimen name="youtube_channel_width">150dp</dimen>
     <dimen name="youtube_channel_height">70dp</dimen>
     <dimen name="detail_view_title_width">240dp</dimen>
+
+    <dimen name="more_menu_width">180dp</dimen>
     <!--
     Because the window insets on round devices are larger than 15dp, this padding only applies
     to square screens.
@@ -24,4 +29,5 @@
     inner_frame_layout_padding (below variable) on round screens.
     -->
     <dimen name="inner_frame_layout_padding">5dp</dimen>
+    <dimen name="more_menu_margin_end">10dp</dimen>
 </resources>

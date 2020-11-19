@@ -2,12 +2,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/action_mode_note_list_menu_share"
+        android:id="@+id/navigation_home"
         android:icon="@drawable/ic_menu_share"
         android:title="@null" />
 
     <item
-        android:id="@+id/action_mode_note_list_menu_delete"
+        android:id="@+id/navigation_column"
         android:icon="@drawable/ic_menu_delete"
         android:title="@null" />
 </menu>

@@ -16,6 +16,7 @@
         android:background="?android:attr/windowBackground"
         android:padding="0dp"
         app:itemIconSize="25dp"
+        app:labelVisibilityMode="labeled"
         app:itemTextAppearanceActive="@style/BottomNavigationView.Active"
         app:itemTextAppearanceInactive="@style/BottomNavigationView"
         app:layout_constraintBottom_toBottomOf="parent"

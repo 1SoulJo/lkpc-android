@@ -3,16 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/action_mode_note_list_menu_share">
+    app:startDestination="@+id/navigation_home">
 
     <fragment
-        android:id="@+id/action_mode_note_list_menu_share"
+        android:id="@+id/navigation_home"
         android:name="com.lkpc.android.app.glory.ui.home.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/action_mode_note_list_menu_delete"
+        android:id="@+id/navigation_column"
         android:name="com.lkpc.android.app.glory.ui.column.ColumnFragment"
         android:label="@string/title_column"
         tools:layout="@layout/fragment_column" />
@@ -21,17 +21,12 @@
         android:id="@+id/navigation_sermon"
         android:name="com.lkpc.android.app.glory.ui.sermon.SermonFragment"
         android:label="@string/title_sermon"
-        tools:layout="@layout/fragment_news" />
+        tools:layout="@layout/fragment_sermon" />
 
     <fragment
         android:id="@+id/navigation_meditation"
         android:name="com.lkpc.android.app.glory.ui.meditation.MeditationFragment"
         android:label="@string/title_meditation"
-        tools:layout="@layout/fragment_news" />
+        tools:layout="@layout/fragment_meditation" />
 
-    <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.lkpc.android.app.glory.ui.news.NewsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_news" />
 </navigation>
