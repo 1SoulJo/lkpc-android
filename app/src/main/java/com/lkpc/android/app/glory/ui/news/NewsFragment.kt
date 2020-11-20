@@ -1,6 +1,5 @@
-package com.lkpc.android.app.glory.ui.sermon
+package com.lkpc.android.app.glory.ui.news
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,53 +10,55 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.lkpc.android.app.glory.MainActivity
 import com.lkpc.android.app.glory.R
 import com.lkpc.android.app.glory.entity.BaseContent
 import kotlinx.android.synthetic.main.app_bar_main.*
-import kotlinx.android.synthetic.main.fragment_sermon.*
+import kotlinx.android.synthetic.main.fragment_news.*
 
-class SermonFragment : Fragment() {
+
+class NewsFragment : Fragment() {
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_sermon, container, false)
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_news, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        requireActivity().toolbar_title.setText(R.string.title_sermon)
+        requireActivity().toolbar_title.setText(R.string.title_notifications)
 
-        rv_sermon.layoutManager = LinearLayoutManager(activity)
-        rv_sermon.adapter = SermonAdapter()
+        rv_news.layoutManager = LinearLayoutManager(activity)
+        rv_news.adapter = NewsAdapter()
 
         // data observation
-        val viewModel: SermonViewModel by viewModels()
+        val viewModel: NewsViewModel by viewModels()
         val observer = Observer<List<BaseContent?>> { data ->
-            if (rv_sermon != null) {
-                val adapter = rv_sermon.adapter as SermonAdapter
+            if (rv_news != null) {
+                val adapter = rv_news.adapter as NewsAdapter
                 if (adapter.isLoading) {
-                    (adapter.sermons as MutableList<BaseContent?>).removeAt(adapter.sermons.size - 1)
+                    (adapter.newsList as MutableList<BaseContent?>).removeAt(adapter.newsList.size - 1)
                     adapter.isLoading = false
                 }
-                adapter.sermons = data
+                adapter.newsList = data
                 adapter.notifyDataSetChanged()
             }
         }
         viewModel.getData().observe(activity as LifecycleOwner, observer)
 
         // scroll listener
-        rv_sermon.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+        rv_news.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
 
-                val adapter = rv_sermon.adapter as SermonAdapter
-                if (!rv_sermon.canScrollVertically(1) && !adapter.isLoading) {
-                    (adapter.sermons as MutableList).add(null)
-                    adapter.notifyItemInserted(adapter.sermons.size - 1)
-                    rv_sermon.scrollToPosition(adapter.sermons.size - 1)
+                val adapter = rv_news.adapter as NewsAdapter
+                if (!rv_news.canScrollVertically(1) && !adapter.isLoading) {
+                    (adapter.newsList as MutableList).add(null)
+                    adapter.notifyItemInserted(adapter.newsList.size - 1)
+                    rv_news.scrollToPosition(adapter.newsList.size - 1)
 
                     viewModel.addData(adapter.itemCount - 1)
 
@@ -66,5 +67,4 @@ class SermonFragment : Fragment() {
             }
         })
     }
-
 }

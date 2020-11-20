@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.lkpc.android.app.glory.MainActivity
 import com.lkpc.android.app.glory.R
 import com.lkpc.android.app.glory.entity.BaseContent
+import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.fragment_column.*
 
 class ColumnFragment : Fragment() {
@@ -27,9 +28,7 @@ class ColumnFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        // page title
-        val a = activity as MainActivity
-        a.setActionBarTitle(R.string.title_column)
+        requireActivity().toolbar_title.setText(R.string.title_column)
 
         rv_column.layoutManager = LinearLayoutManager(activity)
         rv_column.adapter = ColumnAdapter()

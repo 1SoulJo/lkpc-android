@@ -15,6 +15,7 @@ import com.lkpc.android.app.glory.MainActivity
 import com.lkpc.android.app.glory.R
 import com.lkpc.android.app.glory.constants.WebUrls
 import kotlinx.android.synthetic.main.action_bar.*
+import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.home_item_donate_homepage.*
 import kotlinx.android.synthetic.main.home_item_pre_register.*
 import kotlinx.android.synthetic.main.home_item_youtube_channels.*
@@ -32,9 +33,7 @@ class HomeFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        // page title
-        val a = activity as MainActivity
-        a.setActionBarTitle(R.string.title_home)
+        requireActivity().toolbar_title.setText(R.string.title_home)
 
         // setup visit registration button
         visit_reg.setOnClickListener {

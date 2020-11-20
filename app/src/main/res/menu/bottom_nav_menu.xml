@@ -22,9 +22,9 @@
         android:title="@string/title_meditation"/>
 
     <item
-        android:id="@+id/navigation_more"
-        android:icon="@drawable/ic_more_menu"
+        android:id="@+id/navigation_notifications"
+        android:icon="@drawable/ic_notifications"
         android:checkable="false"
-        android:title="@string/more" />
+        android:title="@string/title_notifications" />
 
 </menu>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group
+        android:id="@+id/draw_menu_group_1"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/drawer_menu1"
+            android:icon="@drawable/ic_sermon"
+            android:title="@string/online_service" />
+        <item
+            android:id="@+id/drawer_menu2"
+            android:icon="@drawable/ic_note_foreground"
+            android:title="@string/my_notes" />
+        <item
+            android:id="@+id/drawer_menu3"
+            android:icon="@drawable/qr_code"
+            android:title="@string/qr_code" />
+    </group>
+
+    <group
+        android:id="@+id/draw_menu_group_2"
+        android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/drawer_menu4"
+            android:icon="@drawable/give"
+            android:title="@string/online_donate" />
+
+        <item
+            android:id="@+id/drawer_menu5"
+            android:icon="@drawable/ic_globe"
+            android:title="@string/homepage" />
+    </group>
+</menu>
