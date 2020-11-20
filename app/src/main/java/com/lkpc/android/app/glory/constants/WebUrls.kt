@@ -4,6 +4,7 @@ class WebUrls {
     companion object {
         // youtube links
         const val LKPC_LIVE_ID = "kgoMr1fEMQs"
+        const val LKPC_LIVE_VIDEO = "https://www.youtube.com/watch?v=kgoMr1fEMQs"
         const val LKPC_CHANNEL = "https://www.youtube.com/channel/UCe5baq_bVJrXTIhyjXw5HtA"
         const val EC_CHANNEL = "https://www.youtube.com/channel/UCMEZLf7qIDm-9C5bJ_pE1HQ"
         const val NHF_CHANNEL = "https://www.youtube.com/channel/UCr1uydfKVRVUqVKkJG9H4dQ"
@@ -19,5 +20,8 @@ class WebUrls {
 
         // LKPC home
         const val LKPC_HOMEPAGE = "https://www.lkpc.org/"
+
+        // youtube img url
+        const val YOUTUBE_IMG_BASE = "https://img.youtube.com/vi/"
     }
 }

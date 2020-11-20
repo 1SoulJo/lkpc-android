@@ -4,4 +4,5 @@
     <color name="colorPrimaryDark">#2186C9</color>
     <color name="colorAccent">#03DAC5</color>
     <color name="listRowBackground">#FFFFFF</color>
+    <color name="selectedDot">#FC5252</color>
 </resources>

@@ -7,15 +7,15 @@
         android:id="@+id/draw_menu_group_1"
         android:checkableBehavior="single">
         <item
-            android:id="@+id/drawer_menu1"
+            android:id="@+id/nav_menu_online_service"
             android:icon="@drawable/ic_sermon"
             android:title="@string/online_service" />
         <item
-            android:id="@+id/drawer_menu2"
+            android:id="@+id/nav_menu_my_note"
             android:icon="@drawable/ic_note_foreground"
             android:title="@string/my_notes" />
         <item
-            android:id="@+id/drawer_menu3"
+            android:id="@+id/nav_menu_qr_code"
             android:icon="@drawable/qr_code"
             android:title="@string/qr_code" />
     </group>
@@ -25,12 +25,12 @@
         android:checkableBehavior="single">
 
         <item
-            android:id="@+id/drawer_menu4"
+            android:id="@+id/nav_menu_online_giving"
             android:icon="@drawable/give"
             android:title="@string/online_donate" />
 
         <item
-            android:id="@+id/drawer_menu5"
+            android:id="@+id/nav_menu_homepage"
             android:icon="@drawable/ic_globe"
             android:title="@string/homepage" />
     </group>

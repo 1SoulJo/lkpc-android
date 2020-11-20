@@ -6,6 +6,7 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.lkpc.android.app.glory.R
 import com.lkpc.android.app.glory.data.NoteDatabase
 import com.lkpc.android.app.glory.entity.Note
@@ -22,6 +23,11 @@ class NoteViewModel(application: Application): AndroidViewModel(application) {
             inflater.inflate(R.menu.action_mode_note_list, menu)
 
             adapter.setSelectionMode(true)
+            adapter.setItemSelectListener(object: NoteAdapter.OnItemSelectListener {
+                override fun onItemSelected(count: Int) {
+                    mode.title = "$count ${context.getString(R.string.selected)}"
+                }
+            })
             return true
         }
 
@@ -32,13 +38,13 @@ class NoteViewModel(application: Application): AndroidViewModel(application) {
 
         override fun onActionItemClicked(mode: ActionMode?, item: MenuItem?): Boolean {
             when(item!!.itemId) {
-                R.id.navigation_column -> {
+                R.id.action_mode_note_delete -> {
                     GlobalScope.launch {
                         val db = NoteDatabase.getDatabase(context = context)
                         db.noteDao().deleteAll(adapter.selectedNotes)
                     }
                 }
-                R.id.navigation_home -> {
+                R.id.action_mode_note_share -> {
 
                 }
             }

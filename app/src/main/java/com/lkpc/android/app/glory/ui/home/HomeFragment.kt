@@ -7,6 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import com.google.android.material.tabs.TabLayoutMediator
 import com.google.android.youtube.player.YouTubeInitializationResult
 import com.google.android.youtube.player.YouTubePlayer
 import com.google.android.youtube.player.YouTubePlayerSupportFragmentX
@@ -16,6 +18,7 @@ import com.lkpc.android.app.glory.R
 import com.lkpc.android.app.glory.constants.WebUrls
 import kotlinx.android.synthetic.main.action_bar.*
 import kotlinx.android.synthetic.main.app_bar_main.*
+import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.home_item_donate_homepage.*
 import kotlinx.android.synthetic.main.home_item_pre_register.*
 import kotlinx.android.synthetic.main.home_item_youtube_channels.*
@@ -39,6 +42,15 @@ class HomeFragment : Fragment() {
         visit_reg.setOnClickListener {
             startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(WebUrls.VISIT_REG)))
         }
+
+        // setup view pager
+        val viewModel: HomeViewModel by viewModels()
+        viewModel.init(this)
+        home_view_pager.adapter = viewModel.adapter
+        viewModel.fetchAdContent()
+        TabLayoutMediator(tab_layout, home_view_pager) { _, _ ->
+            tab_layout.bringToFront()
+        }.attach()
 
         // setup youtube live area
         val yf = childFragmentManager.findFragmentById(R.id.youtube_fragment) as YouTubePlayerSupportFragmentX
