@@ -1,15 +1,14 @@
 package com.lkpc.android.app.glory.api_client
 
+import com.lkpc.android.app.glory.constants.WebUrls.Companion.YOUTUBE_IMG_BASE
 import okhttp3.ResponseBody
 import retrofit2.Callback
 import retrofit2.Retrofit
 
 class YoutubeImgClient {
-    private val BASE_URL = "https://img.youtube.com/vi/"
-
     private fun setupApi(): YoutubeImgApi {
         val retrofit = Retrofit.Builder()
-            .baseUrl(BASE_URL)
+            .baseUrl(YOUTUBE_IMG_BASE)
             .build()
 
         return retrofit.create(YoutubeImgApi::class.java)

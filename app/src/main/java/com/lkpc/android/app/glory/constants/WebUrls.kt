@@ -19,5 +19,8 @@ class WebUrls {
 
         // LKPC home
         const val LKPC_HOMEPAGE = "https://www.lkpc.org/"
+
+        // youtube img url
+        const val YOUTUBE_IMG_BASE = "https://img.youtube.com/vi/"
     }
 }

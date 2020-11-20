@@ -32,13 +32,13 @@ class NoteViewModel(application: Application): AndroidViewModel(application) {
 
         override fun onActionItemClicked(mode: ActionMode?, item: MenuItem?): Boolean {
             when(item!!.itemId) {
-                R.id.navigation_column -> {
+                R.id.action_mode_note_delete -> {
                     GlobalScope.launch {
                         val db = NoteDatabase.getDatabase(context = context)
                         db.noteDao().deleteAll(adapter.selectedNotes)
                     }
                 }
-                R.id.navigation_home -> {
+                R.id.action_mode_note_share -> {
 
                 }
             }
