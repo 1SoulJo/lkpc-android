@@ -49,6 +49,12 @@ class NewsFragment : Fragment() {
         }
         viewModel.getData().observe(activity as LifecycleOwner, observer)
 
+        // setup refresh
+        news_layout.setOnRefreshListener {
+            viewModel.addData(0)
+            news_layout.isRefreshing = false
+        }
+
         // scroll listener
         rv_news.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {

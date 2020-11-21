@@ -48,6 +48,12 @@ class MeditationFragment : Fragment() {
         }
         viewModel.getData().observe(activity as LifecycleOwner, observer)
 
+        // setup refresh
+        meditation_layout.setOnRefreshListener {
+            viewModel.addData(0)
+            meditation_layout.isRefreshing = false
+        }
+
         // scroll listener
         rv_meditation.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {

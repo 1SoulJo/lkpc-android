@@ -48,6 +48,12 @@ class SermonFragment : Fragment() {
         }
         viewModel.getData().observe(activity as LifecycleOwner, observer)
 
+        // setup refresh
+        sermon_layout.setOnRefreshListener {
+            viewModel.addData(0)
+            sermon_layout.isRefreshing = false
+        }
+
         // scroll listener
         rv_sermon.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
