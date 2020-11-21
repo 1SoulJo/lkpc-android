@@ -23,6 +23,10 @@
     <group
         android:id="@+id/draw_menu_group_2"
         android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_menu_calendar"
+            android:icon="@drawable/ic_cal"
+            android:title="@string/church_events" />
 
         <item
             android:id="@+id/nav_menu_online_giving"

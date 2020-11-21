@@ -13,6 +13,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.*
 import com.lkpc.android.app.glory.constants.Notification.Companion.CHANNEL_ID
 import com.lkpc.android.app.glory.constants.WebUrls
+import com.lkpc.android.app.glory.ui.calendar.CalendarActivity
 import com.lkpc.android.app.glory.ui.note.NoteListActivity
 import com.lkpc.android.app.glory.ui.qr_code.QrCodeGeneratorActivity
 import kotlinx.android.synthetic.main.activity_main.*
@@ -65,14 +66,17 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 R.id.nav_menu_my_note -> {
-                    val i = Intent(this, NoteListActivity::class.java)
-                    startActivity(i)
+                    startActivity(Intent(this, NoteListActivity::class.java))
                     true
                 }
 
                 R.id.nav_menu_qr_code -> {
-                    val i = Intent(this, QrCodeGeneratorActivity::class.java)
-                    startActivity(i)
+                    startActivity(Intent(this, QrCodeGeneratorActivity::class.java))
+                    true
+                }
+
+                R.id.nav_menu_calendar -> {
+                    startActivity(Intent(this, CalendarActivity::class.java))
                     true
                 }
 

@@ -24,6 +24,7 @@ abstract class NoteDatabase : RoomDatabase() {
                     "note_database"
                 ).fallbackToDestructiveMigration()
                     .build()
+
                 INSTANCE = instance
                 // return instance
                 instance
