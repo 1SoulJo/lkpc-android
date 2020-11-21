@@ -22,7 +22,7 @@
         android:title="@string/title_meditation"/>
 
     <item
-        android:id="@+id/navigation_notifications"
+        android:id="@+id/navigation_news"
         android:icon="@drawable/ic_notifications"
         android:checkable="false"
         android:title="@string/title_notifications" />
