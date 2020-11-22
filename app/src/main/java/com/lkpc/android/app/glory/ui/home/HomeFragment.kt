@@ -36,13 +36,6 @@ class HomeFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        requireActivity().toolbar_title.setText(R.string.title_home)
-
-        // setup visit registration button
-        visit_reg.setOnClickListener {
-            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(WebUrls.VISIT_REG)))
-        }
-
         // setup view pager
         val viewModel: HomeViewModel by viewModels()
         viewModel.init(this)
@@ -52,37 +45,62 @@ class HomeFragment : Fragment() {
             tab_layout.bringToFront()
         }.attach()
 
+        // setup grids
+        grid_center_layout_1.setOnClickListener {
+            // LPC Live
+            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(WebUrls.LKPC_LIVE_VIDEO)))
+        }
+        grid_center_layout_2.setOnClickListener {
+
+        }
+        grid_center_layout_3.setOnClickListener {
+            // Newcomer registration
+            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(WebUrls.NEWCOMER_REG)))
+        }
+        grid_center_layout_4.setOnClickListener {
+            // Bulletin
+            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(WebUrls.BULLETIN)))
+        }
+        grid_center_layout_5.setOnClickListener {
+            // Worship pre-registration
+            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(WebUrls.VISIT_REG)))
+        }
+        grid_center_layout_6.setOnClickListener {
+            // Online offering
+            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(WebUrls.ONLINE_OFFERING)))
+        }
+
         // setup youtube live area
-        val yf = childFragmentManager.findFragmentById(R.id.youtube_fragment) as YouTubePlayerSupportFragmentX
-        yf.initialize(
-            BuildConfig.YOUTUBE_API,
-            object : YouTubePlayer.OnInitializedListener {
-                override fun onInitializationSuccess(
-                    provider: YouTubePlayer.Provider,
-                    youTubePlayer: YouTubePlayer, b: Boolean) {
-
-                    // do any work here to cue video, play video, etc.
-                    youTubePlayer.cueVideo(WebUrls.LKPC_LIVE_ID)
-                }
-
-                override fun onInitializationFailure(
-                    provider: YouTubePlayer.Provider,
-                    youTubeInitializationResult: YouTubeInitializationResult
-                ) {
-                }
-            }
-        )
+//        val yf = childFragmentManager.findFragmentById(R.id.youtube_fragment) as YouTubePlayerSupportFragmentX
+//        yf.initialize(
+//            BuildConfig.YOUTUBE_API,
+//            object : YouTubePlayer.OnInitializedListener {
+//                override fun onInitializationSuccess(
+//                    provider: YouTubePlayer.Provider,
+//                    youTubePlayer: YouTubePlayer, b: Boolean) {
+//
+//                    // do any work here to cue video, play video, etc.
+//                    youTubePlayer.cueVideo(WebUrls.LKPC_LIVE_ID)
+//                }
+//
+//                override fun onInitializationFailure(
+//                    provider: YouTubePlayer.Provider,
+//                    youTubeInitializationResult: YouTubeInitializationResult
+//                ) {
+//                }
+//            }
+//        )
 
         // donate / homepage buttons
-        btn_donate.setOnClickListener {
-            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(WebUrls.ONLINE_DONATE)))
-        }
-        btn_homepage.setOnClickListener {
-            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(WebUrls.LKPC_HOMEPAGE)))
-        }
+//        btn_donate.setOnClickListener {
+//            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(WebUrls.ONLINE_DONATE)))
+//        }
+//        btn_homepage.setOnClickListener {
+//            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(WebUrls.LKPC_HOMEPAGE)))
+//        }
 
         // setup youtube channel links
-        setupYoutubeChannelLinks()
+//        setupYoutubeChannelLinks()
     }
 
     private fun setupYoutubeChannelLinks() {

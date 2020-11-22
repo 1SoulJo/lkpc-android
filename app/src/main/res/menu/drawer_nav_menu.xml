@@ -7,35 +7,50 @@
         android:id="@+id/draw_menu_group_1"
         android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_menu_online_service"
-            android:icon="@drawable/ic_sermon"
-            android:title="@string/online_service" />
+            android:id="@+id/nav_menu_qr_code"
+            android:icon="@drawable/qr_code"
+            android:title="@string/qr_code"
+            android:checkable="false" />
         <item
             android:id="@+id/nav_menu_my_note"
             android:icon="@drawable/ic_note_foreground"
-            android:title="@string/my_notes" />
-        <item
-            android:id="@+id/nav_menu_qr_code"
-            android:icon="@drawable/qr_code"
-            android:title="@string/qr_code" />
+            android:title="@string/my_notes"
+            android:checkable="false"  />
     </group>
 
     <group
         android:id="@+id/draw_menu_group_2"
         android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_menu_calendar"
+            android:id="@+id/nav_menu_online_meet"
+            android:icon="@drawable/ic_meet"
+            android:title="@string/online_meet"
+            android:checkable="false"  />
+        <item
+            android:id="@+id/nav_menu_church_events"
             android:icon="@drawable/ic_cal"
-            android:title="@string/church_events" />
+            android:title="@string/church_events"
+            android:checkable="false"  />
+        <item
+            android:id="@+id/nav_menu_dt_news"
+            android:icon="@drawable/ic_notifications"
+            android:title="@string/downtown_news"
+            android:checkable="false"  />
+    </group>
+
+    <group
+        android:id="@+id/draw_menu_group_3"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_menu_service_info"
+            android:icon="@drawable/ic_sermon"
+            android:title="@string/service_info"
+            android:checkable="false"  />
 
         <item
-            android:id="@+id/nav_menu_online_giving"
-            android:icon="@drawable/give"
-            android:title="@string/online_donate" />
-
-        <item
-            android:id="@+id/nav_menu_homepage"
+            android:id="@+id/nav_menu_nav_guide"
             android:icon="@drawable/ic_globe"
-            android:title="@string/homepage" />
+            android:title="@string/navigation"
+            android:checkable="false"  />
     </group>
 </menu>

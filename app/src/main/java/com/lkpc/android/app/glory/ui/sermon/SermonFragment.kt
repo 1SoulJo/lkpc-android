@@ -28,8 +28,6 @@ class SermonFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        requireActivity().toolbar_title.setText(R.string.title_sermon)
-
         rv_sermon.layoutManager = LinearLayoutManager(activity)
         rv_sermon.adapter = SermonAdapter()
 

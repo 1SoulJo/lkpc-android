@@ -28,8 +28,6 @@ class MeditationFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        requireActivity().toolbar_title.setText(R.string.title_meditation)
-
         rv_meditation.layoutManager = LinearLayoutManager(activity)
         rv_meditation.adapter = MeditationAdapter()
 

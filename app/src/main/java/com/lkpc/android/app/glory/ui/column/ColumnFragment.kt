@@ -26,8 +26,6 @@ class ColumnFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        requireActivity().toolbar_title.setText(R.string.title_column)
-
         rv_column.layoutManager = LinearLayoutManager(activity)
         rv_column.adapter = ColumnAdapter()
 

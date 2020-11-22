@@ -81,7 +81,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private var selectedFragment :Int = R.id.navigation_home
+    private var selectedFragment : Int = R.id.navigation_home
     private var activeFragment  : Fragment? = null
 
     private lateinit var appBarConfiguration: AppBarConfiguration
@@ -93,12 +93,14 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         supportActionBar!!.setDisplayShowTitleEnabled(false)
 
-        //retrieve current fragment from savedInstanceState
+        toolbar_title.setText(R.string.title_home)
+
+        // retrieve current fragment from savedInstanceState
         savedInstanceState?.let {
             selectedFragment = it.getInt(CURRENT_FRAGMENT, R.id.navigation_home)
         }
 
-        when (selectedFragment){
+        when (selectedFragment) {
             R.id.navigation_home -> activeFragment = homeFragment
             R.id.navigation_column -> activeFragment = columnFragment
             R.id.navigation_sermon -> activeFragment = sermonFragment
@@ -107,14 +109,16 @@ class MainActivity : AppCompatActivity() {
         }
 
         if (savedInstanceState == null) {
+            supportFragmentManager.beginTransaction().detach(nav_host_fragment).commitNow()
             //add all fragments but show only active fragment
-            supportFragmentManager.beginTransaction().
-            add(R.id.nav_host_fragment,homeFragment, TAG_HOME).hide(homeFragment).
-            add(R.id.nav_host_fragment, columnFragment, TAG_COLUMN).hide(columnFragment).
-            add(R.id.nav_host_fragment, sermonFragment, TAG_SERMON).hide(sermonFragment).
-            add(R.id.nav_host_fragment, meditationFragment , TAG_MEDITATION).hide(meditationFragment).
-            add(R.id.nav_host_fragment, newsFragment , TAG_NEWS).hide(newsFragment).
-            show(activeFragment!!).commit()
+            supportFragmentManager.beginTransaction()
+                .add(R.id.nav_host_fragment, homeFragment, TAG_HOME).hide(homeFragment)
+                .add(R.id.nav_host_fragment, columnFragment, TAG_COLUMN).hide(columnFragment)
+                .add(R.id.nav_host_fragment, sermonFragment, TAG_SERMON).hide(sermonFragment)
+                .add(R.id.nav_host_fragment, meditationFragment , TAG_MEDITATION).hide(meditationFragment)
+                .add(R.id.nav_host_fragment, newsFragment , TAG_NEWS).hide(newsFragment)
+                .show(activeFragment!!)
+                .commit()
         }
 
         setupNavigationView()
@@ -141,39 +145,40 @@ class MainActivity : AppCompatActivity() {
         appBarConfiguration = AppBarConfiguration(setOf(
             R.id.navigation_home, R.id.navigation_column, R.id.navigation_sermon,
             R.id.navigation_meditation, R.id.navigation_news,
-            R.id.nav_menu_online_service, R.id.nav_menu_my_note),
-            drawer_layout)
+            R.id.nav_menu_qr_code, R.id.nav_menu_my_note, R.id.nav_menu_online_meet,
+            R.id.nav_menu_church_events, R.id.nav_menu_dt_news, R.id.nav_menu_service_info,
+            R.id.nav_menu_nav_guide), drawer_layout)
         setupActionBarWithNavController(navController, appBarConfiguration)
         drawer_nav_view.setupWithNavController(navController)
         drawer_nav_view.setNavigationItemSelectedListener { item ->
+            drawer_layout.closeDrawer(GravityCompat.START)
+
             when (item.itemId) {
-                R.id.nav_menu_online_service -> {
-                    startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(WebUrls.LKPC_LIVE_VIDEO)))
-                    true
-                }
-
-                R.id.nav_menu_my_note -> {
-                    startActivity(Intent(this, NoteListActivity::class.java))
-                    true
-                }
-
                 R.id.nav_menu_qr_code -> {
                     startActivity(Intent(this, QrCodeGeneratorActivity::class.java))
                     true
                 }
-
-                R.id.nav_menu_calendar -> {
+                R.id.nav_menu_my_note -> {
+                    startActivity(Intent(this, NoteListActivity::class.java))
+                    true
+                }
+                R.id.nav_menu_online_meet -> {
+                    startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(WebUrls.ONLINE_MEET_REG)))
+                    true
+                }
+                R.id.nav_menu_church_events -> {
                     startActivity(Intent(this, CalendarActivity::class.java))
                     true
                 }
-
-                R.id.nav_menu_online_giving -> {
-                    startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(WebUrls.ONLINE_DONATE)))
+                R.id.nav_menu_dt_news -> {
                     true
                 }
-
-                R.id.nav_menu_homepage -> {
-                    startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(WebUrls.LKPC_HOMEPAGE)))
+                R.id.nav_menu_service_info -> {
+                    startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(WebUrls.SERVICE_INFO)))
+                    true
+                }
+                R.id.nav_menu_nav_guide -> {
+                    startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(WebUrls.NAV_GUIDE)))
                     true
                 }
                 else -> true
@@ -208,46 +213,53 @@ class MainActivity : AppCompatActivity() {
         selectedFragment = itemId
         when (itemId){
             R.id.navigation_home -> {
-                if (activeFragment is HomeFragment) return false
-                supportFragmentManager
-                    .beginTransaction().hide(activeFragment!!).show(homeFragment).commit()
+                if (activeFragment is HomeFragment) {
+                    return false
+                }
+                supportFragmentManager.beginTransaction().hide(activeFragment!!)
+                    .show(homeFragment)
+                    .commit()
                 activeFragment = homeFragment
+                toolbar_title.setText(R.string.title_home)
             }
             R.id.navigation_column  ->{
-                if(activeFragment is ColumnFragment) return false
-                supportFragmentManager.beginTransaction().
-                hide(activeFragment!!).
-                show(columnFragment).
-                commit()
-
+                if (activeFragment is ColumnFragment) {
+                    return false
+                }
+                supportFragmentManager.beginTransaction().hide(activeFragment!!)
+                    .show(columnFragment)
+                    .commit()
                 activeFragment = columnFragment
+                toolbar_title.setText(R.string.title_column)
             }
             R.id.navigation_sermon ->{
-                if(activeFragment is SermonFragment) return false
-                supportFragmentManager.beginTransaction().
-                hide(activeFragment!!).
-                show(sermonFragment).
-                commit()
-
+                if (activeFragment is SermonFragment) {
+                    return false
+                }
+                supportFragmentManager.beginTransaction().hide(activeFragment!!)
+                    .show(sermonFragment)
+                    .commit()
                 activeFragment = sermonFragment
+                toolbar_title.setText(R.string.title_sermon)
             }
             R.id.navigation_meditation ->{
-                if(activeFragment is MeditationFragment) return false
-                supportFragmentManager.beginTransaction().
-                hide(activeFragment!!).
-                show(meditationFragment).
-                commit()
-
+                if (activeFragment is MeditationFragment) {
+                    return false
+                }
+                supportFragmentManager.beginTransaction().hide(activeFragment!!)
+                    .show(meditationFragment)
+                    .commit()
                 activeFragment = meditationFragment
+                toolbar_title.setText(R.string.title_meditation)
             }
             R.id.navigation_news ->{
-                if(activeFragment is NewsFragment) return false
-                supportFragmentManager.beginTransaction().
-                hide(activeFragment!!).
-                show(newsFragment).
-                commit()
-
+                if (activeFragment is NewsFragment) {
+                    return false
+                }
+                supportFragmentManager.beginTransaction().hide(activeFragment!!)
+                    .show(newsFragment).commit()
                 activeFragment = newsFragment
+                toolbar_title.setText(R.string.title_notifications)
             }
         }
         return true

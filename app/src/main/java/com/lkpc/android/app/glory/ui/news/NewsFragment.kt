@@ -29,8 +29,6 @@ class NewsFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        requireActivity().toolbar_title.setText(R.string.title_notifications)
-
         rv_news.layoutManager = LinearLayoutManager(activity)
         rv_news.adapter = NewsAdapter()
 
