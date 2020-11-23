@@ -31,11 +31,6 @@
             android:icon="@drawable/ic_cal"
             android:title="@string/church_events"
             android:checkable="false"  />
-        <item
-            android:id="@+id/nav_menu_dt_news"
-            android:icon="@drawable/ic_notifications"
-            android:title="@string/downtown_news"
-            android:checkable="false"  />
     </group>
 
     <group

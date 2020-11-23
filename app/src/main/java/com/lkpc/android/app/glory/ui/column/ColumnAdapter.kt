@@ -55,12 +55,6 @@ class ColumnAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             val newFormat = SimpleDateFormat("yyyy-MM-dd", Locale.CANADA)
             holder.tvColumnDate.text = newFormat.format(dateFormat.parse(column.dateCreated!!)!!)
 
-//            holder.itemView.setOnClickListener {
-//                val i = Intent(holder.itemView.context, DetailActivity::class.java)
-//                i.putExtra("data", Gson().toJson(columns[position]))
-//                holder.itemView.context.startActivity(i)
-//            }
-
             val db = NoteDatabase.getDatabase(context = holder.itemView.context)
             db.noteDao().loadByContentId(column.id!!).observe(
                 holder.itemView.context as LifecycleOwner,

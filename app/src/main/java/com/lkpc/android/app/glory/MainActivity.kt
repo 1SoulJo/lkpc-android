@@ -14,6 +14,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.*
 import com.lkpc.android.app.glory.constants.Notification.Companion.CHANNEL_ID
 import com.lkpc.android.app.glory.constants.WebUrls
+import com.lkpc.android.app.glory.ui.basic_webview.BasicWebviewActivity
 import com.lkpc.android.app.glory.ui.calendar.CalendarActivity
 import com.lkpc.android.app.glory.ui.column.ColumnFragment
 import com.lkpc.android.app.glory.ui.home.HomeFragment
@@ -134,7 +135,7 @@ class MainActivity : AppCompatActivity() {
         if (drawer_layout.isOpen) {
             drawer_layout.closeDrawer(GravityCompat.START)
         } else {
-            super.onBackPressed();
+            super.onBackPressed()
         }
     }
 
@@ -146,7 +147,7 @@ class MainActivity : AppCompatActivity() {
             R.id.navigation_home, R.id.navigation_column, R.id.navigation_sermon,
             R.id.navigation_meditation, R.id.navigation_news,
             R.id.nav_menu_qr_code, R.id.nav_menu_my_note, R.id.nav_menu_online_meet,
-            R.id.nav_menu_church_events, R.id.nav_menu_dt_news, R.id.nav_menu_service_info,
+            R.id.nav_menu_church_events, R.id.nav_menu_service_info,
             R.id.nav_menu_nav_guide), drawer_layout)
         setupActionBarWithNavController(navController, appBarConfiguration)
         drawer_nav_view.setupWithNavController(navController)
@@ -163,22 +164,29 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
                 R.id.nav_menu_online_meet -> {
-                    startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(WebUrls.ONLINE_MEET_REG)))
+                    val i = Intent(this, BasicWebviewActivity::class.java)
+                    i.putExtra("title", R.string.online_meet)
+                    i.putExtra("url", WebUrls.ONLINE_MEET_REG)
+                    startActivity(i)
                     true
                 }
                 R.id.nav_menu_church_events -> {
                     startActivity(Intent(this, CalendarActivity::class.java))
                     true
                 }
-                R.id.nav_menu_dt_news -> {
-                    true
-                }
                 R.id.nav_menu_service_info -> {
-                    startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(WebUrls.SERVICE_INFO)))
+                    val i = Intent(this, BasicWebviewActivity::class.java)
+                    i.putExtra("type", BasicWebviewActivity.TYPE_SERVICE_INFO)
+                    i.putExtra("title", R.string.service_info)
+                    startActivity(i)
                     true
                 }
                 R.id.nav_menu_nav_guide -> {
-                    startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(WebUrls.NAV_GUIDE)))
+//                    startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(WebUrls.NAV_GUIDE)))
+                    val i = Intent(this, BasicWebviewActivity::class.java)
+                    i.putExtra("url", WebUrls.NAV_GUIDE)
+                    i.putExtra("title", R.string.navigation)
+                    startActivity(i)
                     true
                 }
                 else -> true

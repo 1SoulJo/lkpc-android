@@ -7,15 +7,24 @@ import retrofit2.http.Path
 
 
 interface ContentApi {
-    @GET("column/{startId}")
+    @GET("board/column/{startId}")
     fun loadColumns(@Path("startId") id: Int): Call<List<BaseContent>>
 
-    @GET("sermon/{startId}")
+    @GET("board/sermon/{startId}")
     fun loadSermons(@Path("startId") id: Int): Call<List<BaseContent>>
 
-    @GET("meditation/{startId}")
+    @GET("board/meditation/{startId}")
     fun loadMeditations(@Path("startId") id: Int): Call<List<BaseContent>>
 
-    @GET("news/{startId}")
+    @GET("board/news/{startId}")
     fun loadNews(@Path("startId") id: Int): Call<List<BaseContent>>
+
+    @GET("board/bulletin/{startId}")
+    fun loadBulletins(@Path("startId") id: Int): Call<List<BaseContent>>
+
+    @GET("page/service")
+    fun loadService(): Call<List<BaseContent>>
+
+    @GET("page/location")
+    fun loadLocation(): Call<List<BaseContent>>
 }

@@ -16,6 +16,9 @@ import com.lkpc.android.app.glory.BuildConfig
 import com.lkpc.android.app.glory.MainActivity
 import com.lkpc.android.app.glory.R
 import com.lkpc.android.app.glory.constants.WebUrls
+import com.lkpc.android.app.glory.ui.basic_webview.BasicWebviewActivity
+import com.lkpc.android.app.glory.ui.bulletin.BulletinActivity
+import com.lkpc.android.app.glory.ui.yt_channels.YoutubeChannelActivity
 import kotlinx.android.synthetic.main.action_bar.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.fragment_home.*
@@ -51,23 +54,35 @@ class HomeFragment : Fragment() {
             startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(WebUrls.LKPC_LIVE_VIDEO)))
         }
         grid_center_layout_2.setOnClickListener {
-
+            startActivity(Intent(requireContext(), YoutubeChannelActivity::class.java))
         }
         grid_center_layout_3.setOnClickListener {
             // Newcomer registration
-            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(WebUrls.NEWCOMER_REG)))
+            val i = Intent(requireContext(), BasicWebviewActivity::class.java)
+            i.putExtra("title", R.string.newcomer_reg_kr)
+            i.putExtra("url", WebUrls.NEWCOMER_REG)
+            startActivity(i)
         }
         grid_center_layout_4.setOnClickListener {
             // Bulletin
-            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(WebUrls.BULLETIN)))
+            val i = Intent(requireContext(), BulletinActivity::class.java)
+//            i.putExtra("title", R.string.bulletin_kr)
+//            i.putExtra("url", WebUrls.BULLETIN)
+            startActivity(i)
         }
         grid_center_layout_5.setOnClickListener {
             // Worship pre-registration
-            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(WebUrls.VISIT_REG)))
+            val i = Intent(requireContext(), BasicWebviewActivity::class.java)
+            i.putExtra("title", R.string.worship_pre_reg_kr)
+            i.putExtra("url", WebUrls.VISIT_REG)
+            startActivity(i)
         }
         grid_center_layout_6.setOnClickListener {
             // Online offering
-            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(WebUrls.ONLINE_OFFERING)))
+            val i = Intent(requireContext(), BasicWebviewActivity::class.java)
+            i.putExtra("title", R.string.online_offering_kr)
+            i.putExtra("url", WebUrls.ONLINE_OFFERING)
+            startActivity(i)
         }
 
         // setup youtube live area

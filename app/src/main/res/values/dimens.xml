@@ -13,7 +13,7 @@
     <dimen name="mtrl_toolbar_default_height" tools:override="true">46dp</dimen>
 
     <dimen name="youtube_channel_width">150dp</dimen>
-    <dimen name="youtube_channel_height">70dp</dimen>
+    <dimen name="youtube_channel_height">150dp</dimen>
     <dimen name="detail_view_title_width">240dp</dimen>
 
     <dimen name="more_menu_width">180dp</dimen>

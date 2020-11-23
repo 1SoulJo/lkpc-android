@@ -7,6 +7,7 @@
     <string name="title_sermon">주일설교</string>
     <string name="title_meditation">날마다빛으로</string>
     <string name="title_notifications">큰빛소식</string>
+    <string name="title_yt_channels">큰빛 유튜브 채널</string>
     <string name="lkpc_church">LKPC Church</string>
     <string name="list_item_title">List item title</string>
     <string name="loading_image">Loading image</string>
@@ -67,8 +68,8 @@
     <string name="navigation">오시는 길</string>
     <string name="lpc_live">큰빛 LIVE</string>
     <string name="live_worship">Live Worship</string>
-    <string name="lpc_youtube_channels_kr">큰빛 유튜브 채널 안내</string>
-    <string name="lpc_youtube_channels">LPC Youtube Channels</string>
+    <string name="lpc_youtube_channels_kr">유튜브 채널 안내</string>
+    <string name="lpc_youtube_channels">Youtube Channels</string>
     <string name="newcomer_reg_kr">새 교우 등록</string>
     <string name="newcomer_reg">Newcomer Registration</string>
     <string name="bulletin_kr">주보</string>
