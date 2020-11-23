@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "809194841673",
+    "firebase_url": "https://lpc-mobile-d6340.firebaseio.com",
+    "project_id": "lpc-mobile-d6340",
+    "storage_bucket": "lpc-mobile-d6340.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:809194841673:android:70a0d8d5183e6283eac198",
+        "android_client_info": {
+          "package_name": "com.lkpc.android.app.lightchurch"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "809194841673-skqc03tl9t4oss10d4720k5gc6o1010q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCuH-xkz_YM9V161HG4McLl5lrE2yh3GdU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "809194841673-skqc03tl9t4oss10d4720k5gc6o1010q.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "809194841673-p9ither9n9jf3vtrqg5ikromgd77p84t.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.lkpc.LightChurchiOS"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

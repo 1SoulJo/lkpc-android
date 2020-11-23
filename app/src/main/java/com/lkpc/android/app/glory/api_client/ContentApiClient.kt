@@ -2,6 +2,7 @@ package com.lkpc.android.app.glory.api_client
 
 import com.google.gson.GsonBuilder
 import com.lkpc.android.app.glory.constants.WebUrls
+import com.lkpc.android.app.glory.entity.AdContent
 import com.lkpc.android.app.glory.entity.BaseContent
 import retrofit2.Callback
 import retrofit2.Retrofit
@@ -47,7 +48,11 @@ class ContentApiClient {
         setupApi().loadService().enqueue(cb)
     }
 
-    fun loadLocation(cb: Callback<List<BaseContent>>) {
+    fun loadLocations(cb: Callback<List<BaseContent>>) {
         setupApi().loadLocation().enqueue(cb)
+    }
+
+    fun loadAdContents(cb: Callback<List<AdContent>>) {
+        setupApi().loadAdContents().enqueue(cb)
     }
 }

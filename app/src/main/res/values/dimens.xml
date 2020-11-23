@@ -30,4 +30,5 @@
     -->
     <dimen name="inner_frame_layout_padding">5dp</dimen>
     <dimen name="more_menu_margin_end">10dp</dimen>
+    <dimen name="ad_height">120dp</dimen>
 </resources>

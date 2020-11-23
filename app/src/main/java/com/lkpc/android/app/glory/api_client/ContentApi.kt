@@ -1,5 +1,6 @@
 package com.lkpc.android.app.glory.api_client
 
+import com.lkpc.android.app.glory.entity.AdContent
 import com.lkpc.android.app.glory.entity.BaseContent
 import retrofit2.Call
 import retrofit2.http.GET
@@ -27,4 +28,7 @@ interface ContentApi {
 
     @GET("page/location")
     fun loadLocation(): Call<List<BaseContent>>
+
+    @GET("link/main")
+    fun loadAdContents(): Call<List<AdContent>>
 }

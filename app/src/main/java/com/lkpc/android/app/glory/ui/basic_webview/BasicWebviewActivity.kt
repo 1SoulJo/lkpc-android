@@ -57,12 +57,13 @@ class BasicWebviewActivity : AppCompatActivity() {
         // web view setting
         webview.settings.javaScriptEnabled = true
         webview.settings.domStorageEnabled = true
+        webview.settings.builtInZoomControls = true
+        webview.settings.displayZoomControls = false
 
         // type
         val type = intent.getIntExtra("type", 0)
         if (type == TYPE_URL) {
             val url = intent.getStringExtra("url")!!
-            Log.d("Webview", url)
             webview.loadUrl(url)
         } else if (type == TYPE_SERVICE_INFO) {
             val apiClient = ContentApiClient()

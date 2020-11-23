@@ -41,7 +41,9 @@ class WebUrls {
         const val YOUTUBE_IMG_BASE = "https://img.youtube.com/vi/"
 
         // bulletin base
-//        const val BULLETIN_BASE = "https://www.lkpc.org/assets/board/files/"
         const val BULLETIN_BASE = "https://docs.google.com/gview?url=http://main.lkpc.org/assets/board/files/%s&embedded=true"
+
+        // img asset prefix
+        const val IMG_ASSET = "https://www.lkpc.org/assets/images/%s"
     }
 }

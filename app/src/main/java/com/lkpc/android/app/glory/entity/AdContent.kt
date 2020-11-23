@@ -1,7 +1,31 @@
 package com.lkpc.android.app.glory.entity
 
-import android.graphics.Bitmap
+import com.google.gson.annotations.Expose
+import com.google.gson.annotations.SerializedName
 
-class AdContent(val title: String, val url: String, val imgUrl: String, var bmp: Bitmap?) {
 
+class AdContent {
+    @SerializedName("_id")
+    @Expose
+    val id: String? = null
+
+    @SerializedName("category")
+    @Expose
+    val category: String? = null
+
+    @SerializedName("linkOrder")
+    @Expose
+    val linkOrder: Int? = null
+
+    @SerializedName("linkUrl")
+    @Expose
+    val linkUrl: String? = null
+
+    @SerializedName("linkImg")
+    @Expose
+    val linkImg: String? = null
+
+    @SerializedName("__v")
+    @Expose
+    val v: Int? = null
 }

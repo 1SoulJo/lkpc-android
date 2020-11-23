@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import com.google.android.material.tabs.TabLayoutMediator
 import com.google.android.youtube.player.YouTubeInitializationResult
 import com.google.android.youtube.player.YouTubePlayer
@@ -42,8 +43,10 @@ class HomeFragment : Fragment() {
         // setup view pager
         val viewModel: HomeViewModel by viewModels()
         viewModel.init(this)
+        viewModel.getData().observe(requireActivity(), { ads ->
+            viewModel.adapter.setData(ads.toMutableList())
+        })
         home_view_pager.adapter = viewModel.adapter
-        viewModel.fetchAdContent()
         TabLayoutMediator(tab_layout, home_view_pager) { _, _ ->
             tab_layout.bringToFront()
         }.attach()
@@ -66,8 +69,6 @@ class HomeFragment : Fragment() {
         grid_center_layout_4.setOnClickListener {
             // Bulletin
             val i = Intent(requireContext(), BulletinActivity::class.java)
-//            i.putExtra("title", R.string.bulletin_kr)
-//            i.putExtra("url", WebUrls.BULLETIN)
             startActivity(i)
         }
         grid_center_layout_5.setOnClickListener {
@@ -106,37 +107,5 @@ class HomeFragment : Fragment() {
 //            }
 //        )
 
-        // donate / homepage buttons
-//        btn_donate.setOnClickListener {
-//            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(WebUrls.ONLINE_DONATE)))
-//        }
-//        btn_homepage.setOnClickListener {
-//            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(WebUrls.LKPC_HOMEPAGE)))
-//        }
-
-        // setup youtube channel links
-//        setupYoutubeChannelLinks()
-    }
-
-    private fun setupYoutubeChannelLinks() {
-        channel1.setOnClickListener {
-            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(WebUrls.LKPC_CHANNEL)))
-        }
-
-        channel2.setOnClickListener {
-            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(WebUrls.EC_CHANNEL)))
-        }
-
-        channel3.setOnClickListener {
-            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(WebUrls.NHF_CHANNEL)))
-        }
-
-        channel4.setOnClickListener {
-            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(WebUrls.DT_CHANNEL)))
-        }
-
-        channel5.setOnClickListener {
-            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(WebUrls.YA_CHANNEL)))
-        }
     }
 }

@@ -5,15 +5,17 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.TextView
 import androidx.annotation.Nullable
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.text.HtmlCompat
+import com.google.android.exoplayer2.C
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.SimpleExoPlayer
+import com.google.android.exoplayer2.audio.AudioAttributes
+import com.google.android.exoplayer2.ui.PlayerControlView
 import com.google.android.exoplayer2.ui.PlayerNotificationManager
 import com.google.android.exoplayer2.ui.PlayerNotificationManager.BitmapCallback
 import com.google.android.youtube.player.YouTubeInitializationResult
@@ -54,7 +56,7 @@ class DetailActivity : AppCompatActivity() {
             this,
             CHANNEL_ID,
             SERMON_AUDIO_ID,
-            DescriptionAdapter(content.title!!)
+            DescriptionAdapter(getString(R.string.title_sermon), content.title!!)
         )
 
         fillContent(content)
@@ -136,15 +138,14 @@ class DetailActivity : AppCompatActivity() {
         // setup audio if available
         val audios = doc.getElementsByTag("audio")
         for (audio in audios) {
-            val src = audio.getElementsByTag("source")
-            if (src[0] != null) {
-                detail_audio.visibility = View.VISIBLE
+            val src = audio.getElementsByTag("source")[0]
+            if (src != null) {
                 val audioPlayer = SimpleExoPlayer.Builder(this).build()
-                val url = "$LKPC_HOMEPAGE${src[0].attr("src")}"
+                val url = "$LKPC_HOMEPAGE${src.attr("src")}"
                 val mediaItem: MediaItem = MediaItem.fromUri(Uri.parse(url))
                 audioPlayer.setMediaItem(mediaItem)
                 audioPlayer.prepare()
-                audioPlayer.addListener(object: Player.EventListener {
+                audioPlayer.addListener(object : Player.EventListener {
                     override fun onIsPlayingChanged(isPlaying: Boolean) {
                         super.onIsPlayingChanged(isPlaying)
                         if (isPlaying) {
@@ -152,8 +153,14 @@ class DetailActivity : AppCompatActivity() {
                         }
                     }
                 })
-                detail_audio.showTimeoutMs = -1
 
+                val audioAttributes: AudioAttributes = AudioAttributes.Builder()
+                    .setUsage(C.USAGE_MEDIA)
+                    .setContentType(C.CONTENT_TYPE_MUSIC)
+                    .build()
+                audioPlayer.setAudioAttributes(audioAttributes, true)
+
+                detail_audio.showTimeoutMs = -1
                 detail_audio.player = audioPlayer
             }
         }
@@ -165,21 +172,25 @@ class DetailActivity : AppCompatActivity() {
 
         // content body
         if (content.category == ContentType.SERMON) {
-            return
-        }
-        val contentBody = findViewById<TextView>(R.id.content_body)
-        contentBody.text = HtmlCompat.fromHtml(newDoc, HtmlCompat.FROM_HTML_MODE_LEGACY).toString()
-
-        // pdf
-        if ((content.files!! as List<String>).isNotEmpty()) {
-            Log.d("Detail", content.files!![0].toString())
+            // setup video/audio buttons
+            buttons_area.visibility = View.VISIBLE
+            btn_video.setOnClickListener {
+                detail_youtube_layout.visibility = View.VISIBLE
+                (detail_audio as PlayerControlView).hide()
+                (detail_audio.player as SimpleExoPlayer).pause()
+            }
+            btn_audio.setOnClickListener {
+                detail_youtube_layout.visibility = View.GONE
+                (detail_audio as PlayerControlView).show()
+            }
+        } else {
+            val contentBody = findViewById<TextView>(R.id.content_body)
+            contentBody.text = HtmlCompat.fromHtml(newDoc, HtmlCompat.FROM_HTML_MODE_LEGACY).toString()
         }
     }
 
     private fun setupYoutubeView(id: String) {
-        detail_youtube_layout.visibility = View.VISIBLE
-
-        val yf = supportFragmentManager.findFragmentById(R.id.detail_youtube_fragment) as YouTubePlayerSupportFragmentX
+        val yf = detail_youtube_fragment as YouTubePlayerSupportFragmentX
         yf.initialize(
             BuildConfig.YOUTUBE_API,
             object : YouTubePlayer.OnInitializedListener {
@@ -201,10 +212,10 @@ class DetailActivity : AppCompatActivity() {
         )
     }
 
-    private class DescriptionAdapter(val contentText: String) : PlayerNotificationManager.MediaDescriptionAdapter {
+    private class DescriptionAdapter(val title: String, val contentText: String) : PlayerNotificationManager.MediaDescriptionAdapter {
 
         override fun getCurrentContentTitle(player: Player): String {
-            return "주일 설교"
+            return title
         }
 
         @Nullable

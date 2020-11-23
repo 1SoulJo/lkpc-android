@@ -9,7 +9,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/banner_layout"
         android:layout_width="match_parent"
-        android:layout_height="160dp"
+        android:layout_height="@dimen/ad_height"
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.tabs.TabLayout

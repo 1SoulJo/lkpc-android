@@ -1,6 +1,7 @@
 package com.lkpc.android.app.glory.ui.bulletin
 
 import android.os.Bundle
+import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -19,6 +20,10 @@ class BulletinActivity : AppCompatActivity() {
         supportActionBar!!.setCustomView(R.layout.action_bar)
 
         ab_title.setText(R.string.bulletin_kr)
+        ab_btn_back.visibility = View.VISIBLE
+        ab_btn_back.setOnClickListener {
+            finish()
+        }
 
         rv_bulletin.layoutManager = LinearLayoutManager(this)
         rv_bulletin.adapter = BulletinAdapter()
