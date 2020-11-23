@@ -5,6 +5,7 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.TextView
 import androidx.annotation.Nullable
@@ -45,8 +46,6 @@ class DetailActivity : AppCompatActivity() {
         setContentView(R.layout.activity_detail)
         supportActionBar!!.setDisplayShowCustomEnabled(true)
         supportActionBar!!.setCustomView(R.layout.action_bar)
-
-        ab_btn_qr.visibility = View.GONE
 
         val data = intent.getStringExtra("data")
         val content = Gson().fromJson(data, BaseContent::class.java)
@@ -170,6 +169,11 @@ class DetailActivity : AppCompatActivity() {
         }
         val contentBody = findViewById<TextView>(R.id.content_body)
         contentBody.text = HtmlCompat.fromHtml(newDoc, HtmlCompat.FROM_HTML_MODE_LEGACY).toString()
+
+        // pdf
+        if ((content.files!! as List<String>).isNotEmpty()) {
+            Log.d("Detail", content.files!![0].toString())
+        }
     }
 
     private fun setupYoutubeView(id: String) {

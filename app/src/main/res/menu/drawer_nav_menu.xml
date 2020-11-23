@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group
+        android:id="@+id/draw_menu_group_1"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_menu_qr_code"
+            android:icon="@drawable/qr_code"
+            android:title="@string/qr_code"
+            android:checkable="false" />
+        <item
+            android:id="@+id/nav_menu_my_note"
+            android:icon="@drawable/ic_note_foreground"
+            android:title="@string/my_notes"
+            android:checkable="false"  />
+    </group>
+
+    <group
+        android:id="@+id/draw_menu_group_2"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_menu_online_meet"
+            android:icon="@drawable/ic_meet"
+            android:title="@string/online_meet"
+            android:checkable="false"  />
+        <item
+            android:id="@+id/nav_menu_church_events"
+            android:icon="@drawable/ic_cal"
+            android:title="@string/church_events"
+            android:checkable="false"  />
+    </group>
+
+    <group
+        android:id="@+id/draw_menu_group_3"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_menu_service_info"
+            android:icon="@drawable/ic_sermon"
+            android:title="@string/service_info"
+            android:checkable="false"  />
+
+        <item
+            android:id="@+id/nav_menu_nav_guide"
+            android:icon="@drawable/ic_globe"
+            android:title="@string/navigation"
+            android:checkable="false"  />
+    </group>
+</menu>

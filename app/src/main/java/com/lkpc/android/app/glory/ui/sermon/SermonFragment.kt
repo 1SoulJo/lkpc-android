@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.lkpc.android.app.glory.MainActivity
 import com.lkpc.android.app.glory.R
 import com.lkpc.android.app.glory.entity.BaseContent
+import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.fragment_sermon.*
 
 class SermonFragment : Fragment() {
@@ -26,10 +27,6 @@ class SermonFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-
-        // page title
-        val a = activity as MainActivity
-        a.setActionBarTitle(R.string.title_sermon)
 
         rv_sermon.layoutManager = LinearLayoutManager(activity)
         rv_sermon.adapter = SermonAdapter()
@@ -48,6 +45,12 @@ class SermonFragment : Fragment() {
             }
         }
         viewModel.getData().observe(activity as LifecycleOwner, observer)
+
+        // setup refresh
+        sermon_layout.setOnRefreshListener {
+            viewModel.addData(0)
+            sermon_layout.isRefreshing = false
+        }
 
         // scroll listener
         rv_sermon.addOnScrollListener(object : RecyclerView.OnScrollListener() {

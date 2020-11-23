@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:text="@string/online_service_live"
+        android:text="@string/online_service"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textColor="?android:attr/textColorPrimary"
         app:layout_constraintStart_toStartOf="parent"

@@ -1,6 +1,5 @@
 package com.lkpc.android.app.glory.ui.column
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,9 +10,9 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.lkpc.android.app.glory.MainActivity
 import com.lkpc.android.app.glory.R
 import com.lkpc.android.app.glory.entity.BaseContent
+import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.fragment_column.*
 
 class ColumnFragment : Fragment() {
@@ -26,10 +25,6 @@ class ColumnFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-
-        // page title
-        val a = activity as MainActivity
-        a.setActionBarTitle(R.string.title_column)
 
         rv_column.layoutManager = LinearLayoutManager(activity)
         rv_column.adapter = ColumnAdapter()
@@ -48,6 +43,12 @@ class ColumnFragment : Fragment() {
             }
         }
         viewModel.getData().observe(activity as LifecycleOwner, observer)
+
+        // setup refresh
+        column_layout.setOnRefreshListener {
+            viewModel.addData(0)
+            column_layout.isRefreshing = false
+        }
 
         // scroll listener
         rv_column.addOnScrollListener(object : RecyclerView.OnScrollListener() {

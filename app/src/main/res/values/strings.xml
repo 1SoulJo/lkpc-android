@@ -7,6 +7,7 @@
     <string name="title_sermon">주일설교</string>
     <string name="title_meditation">날마다빛으로</string>
     <string name="title_notifications">큰빛소식</string>
+    <string name="title_yt_channels">큰빛 유튜브 채널</string>
     <string name="lkpc_church">LKPC Church</string>
     <string name="list_item_title">List item title</string>
     <string name="loading_image">Loading image</string>
@@ -14,7 +15,7 @@
     <string name="note">Note</string>
     <string name="pre_registration">예배 사전 등록 안내</string>
     <string name="see_detail">자세히 보기</string>
-    <string name="online_service_live">큰빛 온라인 예배 Live</string>
+    <string name="online_service">큰빛 온라인 예배</string>
     <string name="youtube_live_image">YouTube Live Image</string>
     <string name="online_donate">온라인 헌금</string>
     <string name="giving_icon">Giving icon</string>
@@ -60,4 +61,21 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="more">더 보기</string>
+    <string name="church_events">교회 행사</string>
+    <string name="online_meet">온라인 심방 신청</string>
+    <string name="downtown_news">다운타운 소식</string>
+    <string name="service_info">예배 안내</string>
+    <string name="navigation">오시는 길</string>
+    <string name="lpc_live">큰빛 LIVE</string>
+    <string name="live_worship">Live Worship</string>
+    <string name="lpc_youtube_channels_kr">유튜브 채널 안내</string>
+    <string name="lpc_youtube_channels">Youtube Channels</string>
+    <string name="newcomer_reg_kr">새 교우 등록</string>
+    <string name="newcomer_reg">Newcomer Registration</string>
+    <string name="bulletin_kr">주보</string>
+    <string name="bulletin">Bulletin</string>
+    <string name="worship_pre_reg_kr">예배 사전 등록</string>
+    <string name="worship_pre_reg">Worship Pre-registration</string>
+    <string name="online_offering_kr">온라인 헌금</string>
+    <string name="online_offering">Online Offering</string>
 </resources>

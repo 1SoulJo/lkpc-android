@@ -20,12 +20,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.qr_code.QrCodeGeneratorActivity" android:windowSoftInputMode="adjustPan" />
+        <activity android:name=".ui.bulletin.BulletinActivity"></activity>
+        <activity android:name=".ui.basic_webview.BasicWebviewActivity" />
+        <activity android:name=".ui.yt_channels.YoutubeChannelActivity" />
+        <activity
+            android:name=".ui.qr_code.QrCodeGeneratorActivity"
+            android:windowSoftInputMode="adjustPan" />
         <activity android:name=".ui.qr_code.QrCodeScanActivity" />
         <activity android:name=".ui.note.NoteDetailActivity" />
-        <activity android:name=".ui.note.NoteEditActivity" android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".ui.note.NoteEditActivity"
+            android:windowSoftInputMode="adjustPan" />
         <activity android:name=".ui.note.NoteListActivity" />
-        <activity android:name=".ui.news.NewsActivity" android:label="@string/title_notifications" />
+        <activity android:name=".ui.calendar.CalendarActivity" />
+        <activity
+            android:name=".ui.news.NewsActivity"
+            android:label="@string/title_notifications" />
         <activity
             android:name=".ui.detail.DetailActivity"
             android:configChanges="keyboardHidden|orientation|screenSize" />
@@ -33,7 +43,8 @@
             android:name=".MainActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:hardwareAccelerated="true"
-            android:label="@string/app_name">
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -24,6 +24,7 @@ class NoteAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     var selectedNotes = ArrayList<Int>()
 
     private var actionMode = false
+    private lateinit var itemSelectListener : OnItemSelectListener
 
     class ViewHolder(view: View): RecyclerView.ViewHolder(view) {
         var layout: ConstraintLayout = view.note_list_item_layout
@@ -70,8 +71,9 @@ class NoteAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                             selectedNotes.remove(notes[position].id)
                         }
                     }
-
                     holder.checkBox.isChecked = holder.checkBox.isChecked.not()
+
+                    itemSelectListener.onItemSelected(selectedNotes.size)
                 } else {
                     val i = Intent(holder.itemView.context, NoteDetailActivity::class.java)
                     i.putExtra("noteId", notes[position].id)
@@ -103,6 +105,10 @@ class NoteAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         notifyDataSetChanged()
     }
 
+    fun setItemSelectListener(l: OnItemSelectListener?) {
+        this.itemSelectListener = l!!
+    }
+
     private fun getIconId(type: String): Int {
         return when (type) {
             ContentType.COLUMN -> R.drawable.ic_column
@@ -110,5 +116,9 @@ class NoteAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             ContentType.SERMON -> R.drawable.ic_sermon
             else -> 0
         }
+    }
+
+    interface OnItemSelectListener {
+        fun onItemSelected(count: Int)
     }
 }

@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.lkpc.android.app.glory.MainActivity
 import com.lkpc.android.app.glory.R
 import com.lkpc.android.app.glory.entity.BaseContent
+import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.fragment_meditation.*
 
 class MeditationFragment : Fragment() {
@@ -26,10 +27,6 @@ class MeditationFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-
-        // page title
-        val a = activity as MainActivity
-        a.setActionBarTitle(R.string.title_meditation)
 
         rv_meditation.layoutManager = LinearLayoutManager(activity)
         rv_meditation.adapter = MeditationAdapter()
@@ -49,6 +46,12 @@ class MeditationFragment : Fragment() {
         }
         viewModel.getData().observe(activity as LifecycleOwner, observer)
 
+        // setup refresh
+        meditation_layout.setOnRefreshListener {
+            viewModel.addData(0)
+            meditation_layout.isRefreshing = false
+        }
+
         // scroll listener
         rv_meditation.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
@@ -66,11 +69,5 @@ class MeditationFragment : Fragment() {
                 }
             }
         })
-    }
-
-    override fun onResume() {
-        super.onResume()
-
-        Log.d("Meditation", "onResume")
     }
 }

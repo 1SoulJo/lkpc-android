@@ -22,23 +22,30 @@ class NoteViewModel(application: Application): AndroidViewModel(application) {
             inflater.inflate(R.menu.action_mode_note_list, menu)
 
             adapter.setSelectionMode(true)
+            adapter.setItemSelectListener(object: NoteAdapter.OnItemSelectListener {
+                override fun onItemSelected(count: Int) {
+                    mode.title = "$count ${context.getString(R.string.selected)}"
+                }
+            })
             return true
         }
 
         override fun onPrepareActionMode(mode: ActionMode?, menu: Menu?): Boolean {
             mode!!.title = "0 ${context.getString(R.string.selected)}"
+            adapter.selectedNotes.clear()
             return true
         }
 
         override fun onActionItemClicked(mode: ActionMode?, item: MenuItem?): Boolean {
             when(item!!.itemId) {
-                R.id.navigation_column -> {
+                R.id.action_mode_note_delete -> {
                     GlobalScope.launch {
                         val db = NoteDatabase.getDatabase(context = context)
                         db.noteDao().deleteAll(adapter.selectedNotes)
+                        adapter.selectedNotes.clear()
                     }
                 }
-                R.id.navigation_home -> {
+                R.id.action_mode_note_share -> {
 
                 }
             }
