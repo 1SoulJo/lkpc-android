@@ -8,6 +8,7 @@ import android.media.RingtoneManager
 import android.net.Uri
 import android.os.Build
 import android.util.Log
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import com.google.android.gms.tasks.OnCompleteListener
@@ -43,6 +44,14 @@ class LpcMessagingService : FirebaseMessagingService() {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             setupChannels()
+        }
+
+        FirebaseMessaging.getInstance().subscribeToTopic("test").addOnSuccessListener {
+            Toast.makeText(
+                applicationContext,
+                "Success",
+                Toast.LENGTH_LONG
+            ).show()
         }
     }
 

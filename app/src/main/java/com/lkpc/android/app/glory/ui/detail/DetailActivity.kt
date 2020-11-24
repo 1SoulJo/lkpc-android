@@ -103,6 +103,11 @@ class DetailActivity : AppCompatActivity() {
         }
     }
 
+    override fun onPause() {
+        super.onPause()
+        detail_youtube_fragment.onPause()
+    }
+
     override fun onDestroy() {
         super.onDestroy()
 
@@ -162,6 +167,8 @@ class DetailActivity : AppCompatActivity() {
 
                 detail_audio.showTimeoutMs = -1
                 detail_audio.player = audioPlayer
+
+                btn_audio.visibility = View.VISIBLE
             }
         }
 
@@ -177,7 +184,9 @@ class DetailActivity : AppCompatActivity() {
             btn_video.setOnClickListener {
                 detail_youtube_layout.visibility = View.VISIBLE
                 (detail_audio as PlayerControlView).hide()
-                (detail_audio.player as SimpleExoPlayer).pause()
+                if (detail_audio.player != null) {
+                    (detail_audio.player as SimpleExoPlayer).pause()
+                }
             }
             btn_audio.setOnClickListener {
                 detail_youtube_layout.visibility = View.GONE
@@ -194,19 +203,15 @@ class DetailActivity : AppCompatActivity() {
         yf.initialize(
             BuildConfig.YOUTUBE_API,
             object : YouTubePlayer.OnInitializedListener {
-                override fun onInitializationSuccess(
-                    provider: YouTubePlayer.Provider,
-                    youTubePlayer: YouTubePlayer, b: Boolean
-                ) {
-
-                    // do any work here to cue video, play video, etc.
+                override fun onInitializationSuccess(provider: YouTubePlayer.Provider,
+                                                     youTubePlayer: YouTubePlayer, b: Boolean) {
                     youTubePlayer.cueVideo(id)
+                    btn_video.visibility = View.VISIBLE
                 }
 
                 override fun onInitializationFailure(
                     provider: YouTubePlayer.Provider,
-                    youTubeInitializationResult: YouTubeInitializationResult
-                ) {
+                    youTubeInitializationResult: YouTubeInitializationResult) {
                 }
             }
         )

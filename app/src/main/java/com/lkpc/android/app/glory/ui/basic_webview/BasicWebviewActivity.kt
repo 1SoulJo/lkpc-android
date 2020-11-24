@@ -1,16 +1,11 @@
 package com.lkpc.android.app.glory.ui.basic_webview
 
-import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.webkit.WebSettings
-import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
 import com.lkpc.android.app.glory.R
 import com.lkpc.android.app.glory.api_client.ContentApiClient
 import com.lkpc.android.app.glory.entity.BaseContent
-import com.lkpc.android.app.glory.repository.NewsRepository
 import kotlinx.android.synthetic.main.action_bar.*
 import kotlinx.android.synthetic.main.activity_basic_webview.*
 import retrofit2.Call
@@ -69,5 +64,15 @@ class BasicWebviewActivity : AppCompatActivity() {
             val apiClient = ContentApiClient()
             apiClient.loadServices(apiCallback)
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        webview.onResume()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        webview.onPause()
     }
 }

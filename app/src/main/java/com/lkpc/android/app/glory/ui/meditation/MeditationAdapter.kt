@@ -26,9 +26,9 @@ class MeditationAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     var meditations: List<BaseContent?> = mutableListOf()
 
     class ItemViewHolder(view: View): RecyclerView.ViewHolder(view) {
-        var tvMeditationTitle: TextView = view.meditation_title
-        var tvMeditationDate: TextView = view.meditation_date
-        var ivNote: ImageView = view.meditation_note
+        var title: TextView = view.meditation_title
+        var date: TextView = view.meditation_date
+        var note: ImageView = view.meditation_note
     }
 
     class LoadingViewHolder(view: View): RecyclerView.ViewHolder(view) {
@@ -49,11 +49,11 @@ class MeditationAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         if (holder is ItemViewHolder) {
             val meditation = meditations[position]!!
 
-            holder.tvMeditationTitle.text = meditation.title
+            holder.title.text = meditation.title
 
             val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm", Locale.CANADA)
             val newFormat = SimpleDateFormat("yyyy-MM-dd", Locale.CANADA)
-            holder.tvMeditationDate.text = newFormat.format(dateFormat.parse(meditation.dateCreated!!)!!)
+            holder.date.text = newFormat.format(dateFormat.parse(meditation.dateCreated!!)!!)
 
             val db = NoteDatabase.getDatabase(context = holder.itemView.context)
             db.noteDao().loadByContentId(meditation.id!!).observe(
@@ -63,10 +63,10 @@ class MeditationAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                     i.putExtra("data", Gson().toJson(meditations[position]))
 
                     if (note != null) {
-                        holder.ivNote.visibility = View.VISIBLE
+                        holder.note.visibility = View.VISIBLE
                         i.putExtra("noteId", note.id)
                     } else {
-                        holder.ivNote.visibility = View.GONE
+                        holder.note.visibility = View.GONE
                     }
 
                     holder.itemView.setOnClickListener {
