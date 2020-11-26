@@ -44,6 +44,10 @@ class BaseContent {
     @Expose
     var videoLinkAuthor: String? = null
 
+    @SerializedName("audioLink")
+    @Expose
+    var audioLink: String? = null
+
     @SerializedName("dateCreated")
     @Expose
     var dateCreated: String? = null

@@ -16,6 +16,7 @@ import com.google.firebase.messaging.FirebaseMessaging
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import com.lkpc.android.app.glory.R
+import com.lkpc.android.app.glory.constants.Notification
 import java.util.*
 
 
@@ -29,29 +30,11 @@ class LpcMessagingService : FirebaseMessagingService() {
     override fun onCreate() {
         super.onCreate()
 
-        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
-            if (!task.isSuccessful) {
-                Log.w(TAG, "Fetching FCM registration token failed", task.exception)
-                return@OnCompleteListener
-            }
-
-            val token = task.result
-            Log.d("LpcMessagingService", token!!)
-        })
-
         notificationManager =
             getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             setupChannels()
-        }
-
-        FirebaseMessaging.getInstance().subscribeToTopic("test").addOnSuccessListener {
-            Toast.makeText(
-                applicationContext,
-                "Success",
-                Toast.LENGTH_LONG
-            ).show()
         }
     }
 

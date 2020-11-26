@@ -45,5 +45,8 @@ class WebUrls {
 
         // img asset prefix
         const val IMG_ASSET = "https://www.lkpc.org/assets/images/%s"
+
+        // sermon audio prefix
+        const val SERMON_AUDIO_SRC = "https://www.lkpc.org/media/%s"
     }
 }

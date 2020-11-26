@@ -20,7 +20,6 @@ import com.lkpc.android.app.glory.entity.BaseContent
 import com.lkpc.android.app.glory.ui.detail.DetailActivity
 import kotlinx.android.synthetic.main.list_item_sermon.view.*
 import okhttp3.ResponseBody
-import org.jsoup.Jsoup
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -72,22 +71,21 @@ class SermonAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             val newFormat = SimpleDateFormat("yyyy-MM-dd", Locale.CANADA)
             holder.tvSermonDate.text = newFormat.format(dateFormat.parse(sermon.dateCreated!!)!!)
 
-            val doc = Jsoup.parse(sermon.boardContent)
-            val frames = doc.getElementsByTag("iframe")
-            if (frames.isNotEmpty()) {
-                val videoId = frames[0].attr("src").split("/").last()
+            if (sermon.videoLink != null) {
                 val client = YoutubeImgClient()
-                client.getThumbnail(videoId = videoId, cb = object: Callback<ResponseBody> {
-                    override fun onResponse(
-                        call: Call<ResponseBody>, response: Response<ResponseBody>) {
-                        if (response.isSuccessful) {
-                            updateThumbnail(holder, response)
+                client.getThumbnail(
+                    videoId = sermon.videoLink!!,
+                    cb = object: Callback<ResponseBody> {
+                        override fun onResponse(
+                            call: Call<ResponseBody>, response: Response<ResponseBody>) {
+                            if (response.isSuccessful) {
+                                updateThumbnail(holder, response)
+                            }
                         }
-                    }
 
-                    override fun onFailure(call: Call<ResponseBody>?, t: Throwable?) {
-                        t?.printStackTrace()
-                    }
+                        override fun onFailure(call: Call<ResponseBody>?, t: Throwable?) {
+                            t?.printStackTrace()
+                        }
                 })
             }
 

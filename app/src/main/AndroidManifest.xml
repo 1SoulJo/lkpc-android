@@ -21,22 +21,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.location.LocationActivity"></activity>
-        <!--
-         Set custom default icon. This is used when no icon is set for incoming notification messages.
-        See README(https://goo.gl/l4GJaQ) for more.
-        -->
+
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
             android:resource="@drawable/lpc_logo_symbol" />
-        <!--
- Set color used with incoming notification messages. This is used when no color is set for the incoming
-             notification message. See README(https://goo.gl/6BKBk7) for more.
-        -->
+
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/colorAccent" />
 
+        <activity android:name=".ui.location.LocationActivity" />
         <activity android:name=".ui.bulletin.BulletinActivity" />
         <activity android:name=".ui.basic_webview.BasicWebviewActivity" />
         <activity android:name=".ui.yt_channels.YoutubeChannelActivity" />
@@ -56,6 +50,7 @@
         <activity
             android:name=".ui.detail.DetailActivity"
             android:configChanges="keyboardHidden|orientation|screenSize" />
+
         <activity
             android:name=".MainActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"

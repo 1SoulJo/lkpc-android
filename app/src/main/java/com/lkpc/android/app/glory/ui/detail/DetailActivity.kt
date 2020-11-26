@@ -27,7 +27,7 @@ import com.lkpc.android.app.glory.R
 import com.lkpc.android.app.glory.constants.ContentType
 import com.lkpc.android.app.glory.constants.Notification.Companion.CHANNEL_ID
 import com.lkpc.android.app.glory.constants.Notification.Companion.SERMON_AUDIO_ID
-import com.lkpc.android.app.glory.constants.WebUrls.Companion.LKPC_HOMEPAGE
+import com.lkpc.android.app.glory.constants.WebUrls.Companion.SERMON_AUDIO_SRC
 import com.lkpc.android.app.glory.entity.BaseContent
 import com.lkpc.android.app.glory.ui.note.NoteDetailActivity
 import com.lkpc.android.app.glory.ui.note.NoteEditActivity
@@ -133,48 +133,42 @@ class DetailActivity : AppCompatActivity() {
         contentDate.text = newFormat.format(dateFormat.parse(content.dateCreated!!)!!)
 
         // setup youtube video is available
-        val doc = Jsoup.parse(content.boardContent)
-        val frames = doc.getElementsByTag("iframe")
-        if (frames.isNotEmpty()) {
-            val src = frames[0].attr("src").split("/")
-            setupYoutubeView(src.last())
+        if (content.videoLink != null) {
+            setupYoutubeView(content.videoLink!!)
         }
 
         // setup audio if available
-        val audios = doc.getElementsByTag("audio")
-        for (audio in audios) {
-            val src = audio.getElementsByTag("source")[0]
-            if (src != null) {
-                val audioPlayer = SimpleExoPlayer.Builder(this).build()
-                val url = "$LKPC_HOMEPAGE${src.attr("src")}"
-                val mediaItem: MediaItem = MediaItem.fromUri(Uri.parse(url))
-                audioPlayer.setMediaItem(mediaItem)
-                audioPlayer.prepare()
-                audioPlayer.addListener(object : Player.EventListener {
-                    override fun onIsPlayingChanged(isPlaying: Boolean) {
-                        super.onIsPlayingChanged(isPlaying)
-                        if (isPlaying) {
-                            playerNotificationManager.setPlayer(audioPlayer)
-                        }
+        if (content.audioLink != null) {
+            val audioPlayer = SimpleExoPlayer.Builder(this).build()
+            val url = SERMON_AUDIO_SRC.format(content.audioLink)
+            val mediaItem: MediaItem = MediaItem.fromUri(Uri.parse(url))
+            audioPlayer.setMediaItem(mediaItem)
+            audioPlayer.prepare()
+            audioPlayer.addListener(object : Player.EventListener {
+                override fun onIsPlayingChanged(isPlaying: Boolean) {
+                    super.onIsPlayingChanged(isPlaying)
+                    if (isPlaying) {
+                        playerNotificationManager.setPlayer(audioPlayer)
                     }
-                })
+                }
+            })
 
-                val audioAttributes: AudioAttributes = AudioAttributes.Builder()
-                    .setUsage(C.USAGE_MEDIA)
-                    .setContentType(C.CONTENT_TYPE_MUSIC)
-                    .build()
-                audioPlayer.setAudioAttributes(audioAttributes, true)
+            val audioAttributes: AudioAttributes = AudioAttributes.Builder()
+                .setUsage(C.USAGE_MEDIA)
+                .setContentType(C.CONTENT_TYPE_MUSIC)
+                .build()
+            audioPlayer.setAudioAttributes(audioAttributes, true)
 
-                detail_audio.showTimeoutMs = -1
-                detail_audio.player = audioPlayer
+            detail_audio.showTimeoutMs = -1
+            detail_audio.player = audioPlayer
 
-                btn_audio.visibility = View.VISIBLE
-            }
+            btn_audio.visibility = View.VISIBLE
         }
 
         // remove video and audio file
         val whitelist = Whitelist()
         whitelist.addTags("b", "em", "div", "p", "h1", "h2", "strong", "ol", "li", "ul", "u", "br")
+        val doc = Jsoup.parse(content.boardContent)
         val newDoc = Jsoup.clean(doc.toString(), whitelist)
 
         // content body
