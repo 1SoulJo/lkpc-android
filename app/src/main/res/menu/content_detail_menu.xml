@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:title="@string/open_note"
+        android:id="@+id/detail_menu_open_note" />
+    <item
+        android:title="@string/new_note"
+        android:id="@+id/detail_menu_new_note" />
+    <item
+        android:title="@string/share"
+        android:id="@+id/detail_menu_share" />
+</menu>

@@ -5,8 +5,9 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
-import android.widget.TextView
 import androidx.annotation.Nullable
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.text.HtmlCompat
@@ -31,8 +32,8 @@ import com.lkpc.android.app.glory.constants.WebUrls.Companion.SERMON_AUDIO_SRC
 import com.lkpc.android.app.glory.entity.BaseContent
 import com.lkpc.android.app.glory.ui.note.NoteDetailActivity
 import com.lkpc.android.app.glory.ui.note.NoteEditActivity
-import kotlinx.android.synthetic.main.action_bar.*
 import kotlinx.android.synthetic.main.activity_detail.*
+import kotlinx.android.synthetic.main.tool_bar.*
 import org.jsoup.Jsoup
 import org.jsoup.safety.Whitelist
 import java.text.SimpleDateFormat
@@ -43,14 +44,21 @@ class DetailActivity : AppCompatActivity() {
     private val _editNodeActivityResultCode = 1
     private lateinit var playerNotificationManager: PlayerNotificationManager
 
+    private var noteId : Int = -1
+    private lateinit var content : BaseContent
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
-        supportActionBar!!.setDisplayShowCustomEnabled(true)
-        supportActionBar!!.setCustomView(R.layout.action_bar)
+        setSupportActionBar(toolbar)
+
+        supportActionBar!!.setDisplayShowTitleEnabled(false)
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+
+        noteId = intent.getIntExtra("noteId", -1)
 
         val data = intent.getStringExtra("data")
-        val content = Gson().fromJson(data, BaseContent::class.java)
+        content = Gson().fromJson(data, BaseContent::class.java)
 
         playerNotificationManager = PlayerNotificationManager(
             this,
@@ -60,46 +68,14 @@ class DetailActivity : AppCompatActivity() {
         )
 
         fillContent(content)
-
-        // back button
-        ab_btn_back.visibility = View.VISIBLE
-        ab_btn_back.setOnClickListener { finish() }
-
-        // note button
-        if (intent.getBooleanExtra("noteBtn", true)) {
-            ab_btn_new_note.visibility = View.VISIBLE
-
-            val i: Intent
-            val noteId = intent.getIntExtra("noteId", -1)
-            if (noteId > -1) {
-                ab_btn_new_note_text.text = "노트보기"
-                i = Intent(this, NoteDetailActivity::class.java)
-                i.putExtra("noteId", noteId)
-                ab_btn_new_note.setOnClickListener {
-                    startActivity(i)
-                }
-            } else {
-                i = Intent(this, NoteEditActivity::class.java)
-                i.putExtra("type", content.category)
-                i.putExtra("title", content.title)
-                i.putExtra("contentId", content.id)
-                ab_btn_new_note.setOnClickListener {
-                    startActivityForResult(i, _editNodeActivityResultCode)
-                }
-            }
-        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
         if (requestCode == _editNodeActivityResultCode) {
-            ab_btn_new_note_text.text = getString(R.string.open_note)
-            val i = Intent(this, NoteDetailActivity::class.java)
-            i.putExtra("noteId", resultCode)
-            ab_btn_new_note.setOnClickListener {
-                startActivity(i)
-            }
+            noteId = resultCode
+            invalidateOptionsMenu()
         }
     }
 
@@ -118,19 +94,81 @@ class DetailActivity : AppCompatActivity() {
         }
     }
 
+    override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
+        val newNoteMenu = menu!!.findItem(R.id.detail_menu_new_note)
+        val openNoteMenu = menu.findItem(R.id.detail_menu_open_note)
+
+        if (noteId > -1) {
+            openNoteMenu.isVisible = true
+            newNoteMenu.isVisible = false
+        } else {
+            openNoteMenu.isVisible = false
+            newNoteMenu.isVisible = true
+        }
+
+        if (content.category == ContentType.SERMON) {
+            menu.findItem(R.id.detail_menu_share).isVisible = false
+        }
+
+        if (content.category == ContentType.NEWS) {
+            newNoteMenu.isVisible = false
+            openNoteMenu.isVisible = false
+        }
+
+        return super.onPrepareOptionsMenu(menu)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.content_detail_menu, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> {
+                finish()
+            }
+
+            R.id.detail_menu_new_note -> {
+                val i = Intent(this, NoteEditActivity::class.java)
+                i.putExtra("type", content.category)
+                i.putExtra("title", content.title)
+                i.putExtra("contentId", content.id)
+                startActivityForResult(i, _editNodeActivityResultCode)
+            }
+
+            R.id.detail_menu_open_note -> {
+                val i = Intent(this, NoteDetailActivity::class.java)
+                i.putExtra("noteId", noteId)
+                startActivity(i)
+            }
+
+            R.id.detail_menu_share -> {
+                val sendIntent: Intent = Intent().apply {
+                    action = Intent.ACTION_SEND
+                    putExtra(Intent.EXTRA_TEXT, "${content.title} \n ${content_body.text}")
+                    type = "text/plain"
+                }
+
+                val shareIntent = Intent.createChooser(sendIntent, null)
+                startActivity(shareIntent)
+            }
+        }
+
+        return super.onOptionsItemSelected(item)
+    }
+
     private fun fillContent(content: BaseContent) {
         // title
-        ab_title.text = content.title
+        toolbar_title.text = content.title
 
         // content title
-        val contentTitle = findViewById<TextView>(R.id.content_title)
-        contentTitle.text = content.title
+        content_title.text = content.title
 
         // date
-        val contentDate = findViewById<TextView>(R.id.content_date)
         val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm", Locale.CANADA)
         val newFormat = SimpleDateFormat("yyyy-MM-dd", Locale.CANADA)
-        contentDate.text = newFormat.format(dateFormat.parse(content.dateCreated!!)!!)
+        content_date.text = newFormat.format(dateFormat.parse(content.dateCreated!!)!!)
 
         // setup youtube video is available
         if (content.videoLink != null) {
@@ -187,8 +225,7 @@ class DetailActivity : AppCompatActivity() {
                 (detail_audio as PlayerControlView).show()
             }
         } else {
-            val contentBody = findViewById<TextView>(R.id.content_body)
-            contentBody.text = HtmlCompat.fromHtml(newDoc, HtmlCompat.FROM_HTML_MODE_LEGACY).toString()
+            content_body.text = HtmlCompat.fromHtml(newDoc, HtmlCompat.FROM_HTML_MODE_LEGACY).toString()
         }
     }
 

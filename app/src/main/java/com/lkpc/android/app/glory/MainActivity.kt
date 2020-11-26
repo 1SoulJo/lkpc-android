@@ -24,6 +24,7 @@ import com.lkpc.android.app.glory.ui.qr_code.QrCodeGeneratorActivity
 import com.lkpc.android.app.glory.ui.sermon.SermonFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
+import kotlinx.android.synthetic.main.tool_bar.*
 
 
 class MainActivity : AppCompatActivity() {

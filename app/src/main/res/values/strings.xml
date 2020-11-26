@@ -47,7 +47,7 @@
     <string name="title">Title</string>
     <string name="label_for_content">Label for content</string>
     <string name="edit">편집</string>
-    <string name="new_note">노트작성</string>
+    <string name="new_note">노트 작성</string>
     <string name="qr_code_generator">QR Code generator</string>
     <string name="generate_qr_code">QR Code 생성</string>
     <string name="phone_number">휴대폰 번호</string>

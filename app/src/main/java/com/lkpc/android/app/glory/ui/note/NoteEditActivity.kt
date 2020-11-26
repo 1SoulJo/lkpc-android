@@ -30,6 +30,7 @@ class NoteEditActivity : AppCompatActivity() {
         // back button
         ab_btn_back.visibility = View.VISIBLE
         ab_btn_back.setOnClickListener {
+            setResult(-1)
             finish()
         }
 

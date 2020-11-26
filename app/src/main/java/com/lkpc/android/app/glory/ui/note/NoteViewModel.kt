@@ -45,9 +45,6 @@ class NoteViewModel(application: Application): AndroidViewModel(application) {
                         adapter.selectedNotes.clear()
                     }
                 }
-                R.id.action_mode_note_share -> {
-
-                }
             }
             mode!!.finish()
 

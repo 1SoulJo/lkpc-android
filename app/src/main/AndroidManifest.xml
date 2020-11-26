@@ -38,17 +38,22 @@
             android:name=".ui.qr_code.QrCodeGeneratorActivity"
             android:windowSoftInputMode="adjustPan" />
         <activity android:name=".ui.qr_code.QrCodeScanActivity" />
-        <activity android:name=".ui.note.NoteDetailActivity" />
+        <activity
+            android:name=".ui.note.NoteDetailActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ui.note.NoteEditActivity"
             android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".ui.note.NoteListActivity" />
+        <activity
+            android:name=".ui.note.NoteListActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".ui.calendar.CalendarActivity" />
         <activity
             android:name=".ui.news.NewsActivity"
             android:label="@string/title_notifications" />
         <activity
             android:name=".ui.detail.DetailActivity"
+            android:theme="@style/AppTheme.NoActionBar"
             android:configChanges="keyboardHidden|orientation|screenSize" />
 
         <activity
