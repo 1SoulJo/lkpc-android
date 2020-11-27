@@ -65,8 +65,8 @@ class LpcMessagingService : FirebaseMessagingService() {
         val adminChannelName: CharSequence = getString(R.string.notification_channel_name)
         val adminChannelDescription = getString(R.string.notification_channel_description)
         val adminChannel = NotificationChannel(
-            "test_channel",
-            "for channel test",
+            Notification.CHANNEL_ID,
+            adminChannelName,
             NotificationManager.IMPORTANCE_LOW
         )
         adminChannel.description = adminChannelDescription
