@@ -8,24 +8,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import com.google.android.material.tabs.TabLayoutMediator
-import com.google.android.youtube.player.YouTubeInitializationResult
-import com.google.android.youtube.player.YouTubePlayer
-import com.google.android.youtube.player.YouTubePlayerSupportFragmentX
-import com.lkpc.android.app.glory.BuildConfig
-import com.lkpc.android.app.glory.MainActivity
 import com.lkpc.android.app.glory.R
 import com.lkpc.android.app.glory.constants.WebUrls
 import com.lkpc.android.app.glory.ui.basic_webview.BasicWebviewActivity
 import com.lkpc.android.app.glory.ui.bulletin.BulletinActivity
 import com.lkpc.android.app.glory.ui.yt_channels.YoutubeChannelActivity
-import kotlinx.android.synthetic.main.action_bar.*
-import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.fragment_home.*
-import kotlinx.android.synthetic.main.home_item_donate_homepage.*
-import kotlinx.android.synthetic.main.home_item_pre_register.*
-import kotlinx.android.synthetic.main.home_item_youtube_channels.*
 
 
 class HomeFragment : Fragment() {

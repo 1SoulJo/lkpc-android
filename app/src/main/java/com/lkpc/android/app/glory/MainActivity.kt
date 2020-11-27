@@ -16,6 +16,7 @@ import com.lkpc.android.app.glory.constants.Notification
 import com.lkpc.android.app.glory.constants.Notification.Companion.CHANNEL_ID
 import com.lkpc.android.app.glory.constants.WebUrls
 import com.lkpc.android.app.glory.ui.basic_webview.BasicWebviewActivity
+import com.lkpc.android.app.glory.ui.bulletin.BulletinActivity
 import com.lkpc.android.app.glory.ui.calendar.CalendarActivity
 import com.lkpc.android.app.glory.ui.column.ColumnFragment
 import com.lkpc.android.app.glory.ui.home.HomeFragment
@@ -177,6 +178,13 @@ class MainActivity : AppCompatActivity() {
                     startActivity(Intent(this, CalendarActivity::class.java))
                     true
                 }
+
+                R.id.nav_menu_downtown -> {
+                    val i = Intent(this, BulletinActivity::class.java)
+                    i.putExtra("isDowntown", true)
+                    startActivity(i)
+                    true
+                }
                 R.id.nav_menu_service_info -> {
                     val i = Intent(this, BasicWebviewActivity::class.java)
                     i.putExtra("type", BasicWebviewActivity.TYPE_SERVICE_INFO)
@@ -185,11 +193,7 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
                 R.id.nav_menu_nav_guide -> {
-//                    startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(WebUrls.NAV_GUIDE)))
                     val i = Intent(this, LocationActivity::class.java)
-//                    i.putExtra("url", WebUrls.NAV_GUIDE)
-//                    i.putExtra("type", BasicWebviewActivity.TYPE_NAV_GUIDE)
-//                    i.putExtra("title", R.string.navigation)
                     startActivity(i)
                     true
                 }

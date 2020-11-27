@@ -9,6 +9,7 @@ import android.transition.TransitionManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.lkpc.android.app.glory.R
@@ -73,6 +74,9 @@ class AdItemFragment(val content: AdContent) : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         if (img != null) {
             home_ad_item_img.setImageBitmap(img)
+
+            TransitionManager.beginDelayedTransition(
+                home_ad_item_layout as ViewGroup, Fade(Fade.IN))
             home_ad_item_img.visibility = View.VISIBLE
         }
         home_ad_item_layout.setOnClickListener {

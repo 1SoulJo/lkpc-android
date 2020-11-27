@@ -4,7 +4,9 @@ import com.google.gson.GsonBuilder
 import com.lkpc.android.app.glory.constants.WebUrls
 import com.lkpc.android.app.glory.entity.AdContent
 import com.lkpc.android.app.glory.entity.BaseContent
+import retrofit2.Call
 import retrofit2.Callback
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -44,6 +46,10 @@ class ContentApiClient {
         setupApi().loadBulletins(id=startId).enqueue(cb)
     }
 
+    fun loadDowntownBulletins(startId: Int, cb: Callback<List<BaseContent>>) {
+        setupApi().loadDowntownBulletins(id=startId).enqueue(cb)
+    }
+
     fun loadServices(cb: Callback<List<BaseContent>>) {
         setupApi().loadService().enqueue(cb)
     }
@@ -54,5 +60,15 @@ class ContentApiClient {
 
     fun loadAdContents(cb: Callback<List<AdContent>>) {
         setupApi().loadAdContents().enqueue(cb)
+    }
+
+    fun increaseViewCount(contentId: String) {
+        setupApi().increaseViewCount(contentId).enqueue(object: Callback<String> {
+            override fun onResponse(call: Call<String>, response: Response<String>) {
+            }
+
+            override fun onFailure(call: Call<String>, t: Throwable) {
+            }
+        })
     }
 }

@@ -19,7 +19,13 @@ class BulletinActivity : AppCompatActivity() {
         supportActionBar!!.setDisplayShowCustomEnabled(true)
         supportActionBar!!.setCustomView(R.layout.action_bar)
 
-        ab_title.setText(R.string.bulletin_kr)
+        val isDowntown = intent.getBooleanExtra("isDowntown", false)
+
+        if (isDowntown) {
+            ab_title.setText(R.string.downtown_bulletin_kr)
+        } else {
+            ab_title.setText(R.string.bulletin_kr)
+        }
         ab_btn_back.visibility = View.VISIBLE
         ab_btn_back.setOnClickListener {
             finish()
@@ -29,8 +35,13 @@ class BulletinActivity : AppCompatActivity() {
         rv_bulletin.adapter = BulletinAdapter()
 
         // data observation
-        val viewModel: BulletinViewModel by viewModels()
+        val viewModel : BulletinViewModel by viewModels { BulletinViewModelFactory(isDowntown) }
+
         val observer = Observer<List<BaseContent?>> { data ->
+            if (data.isNullOrEmpty()) {
+                bulletin_empty_text.visibility = View.VISIBLE
+                return@Observer
+            }
             if (rv_bulletin != null) {
                 val adapter = rv_bulletin.adapter as BulletinAdapter
                 if (adapter.isLoading) {

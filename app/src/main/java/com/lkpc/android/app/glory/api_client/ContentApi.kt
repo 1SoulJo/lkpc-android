@@ -4,6 +4,7 @@ import com.lkpc.android.app.glory.entity.AdContent
 import com.lkpc.android.app.glory.entity.BaseContent
 import retrofit2.Call
 import retrofit2.http.GET
+import retrofit2.http.POST
 import retrofit2.http.Path
 
 
@@ -23,6 +24,9 @@ interface ContentApi {
     @GET("board/bulletin/{startId}")
     fun loadBulletins(@Path("startId") id: Int): Call<List<BaseContent>>
 
+    @GET("board/bulletin-downtown/{startId}")
+    fun loadDowntownBulletins(@Path("startId") id: Int): Call<List<BaseContent>>
+
     @GET("page/service")
     fun loadService(): Call<List<BaseContent>>
 
@@ -31,4 +35,7 @@ interface ContentApi {
 
     @GET("link/main")
     fun loadAdContents(): Call<List<AdContent>>
+
+    @POST("board/{contentId}")
+    fun increaseViewCount(@Path("contentId") id: String): Call<String>
 }

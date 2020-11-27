@@ -15,7 +15,7 @@
             android:id="@+id/nav_menu_my_note"
             android:icon="@drawable/ic_note_foreground"
             android:title="@string/my_notes"
-            android:checkable="false"  />
+            android:checkable="false" />
     </group>
 
     <group
@@ -25,12 +25,18 @@
             android:id="@+id/nav_menu_online_meet"
             android:icon="@drawable/ic_meet"
             android:title="@string/online_meet"
-            android:checkable="false"  />
+            android:checkable="false" />
         <item
             android:id="@+id/nav_menu_church_events"
             android:icon="@drawable/ic_cal"
             android:title="@string/church_events"
-            android:checkable="false"  />
+            android:checkable="false" />
+
+        <item
+            android:id="@+id/nav_menu_downtown"
+            android:icon="@drawable/ic_cal"
+            android:title="다운타운 소식"
+            android:checkable="false" />
     </group>
 
     <group
@@ -40,12 +46,12 @@
             android:id="@+id/nav_menu_service_info"
             android:icon="@drawable/ic_sermon"
             android:title="@string/service_info"
-            android:checkable="false"  />
+            android:checkable="false" />
 
         <item
             android:id="@+id/nav_menu_nav_guide"
             android:icon="@drawable/ic_globe"
             android:title="@string/navigation"
-            android:checkable="false"  />
+            android:checkable="false" />
     </group>
 </menu>

@@ -25,6 +25,7 @@ import com.google.android.youtube.player.YouTubePlayerSupportFragmentX
 import com.google.gson.Gson
 import com.lkpc.android.app.glory.BuildConfig
 import com.lkpc.android.app.glory.R
+import com.lkpc.android.app.glory.api_client.ContentApiClient
 import com.lkpc.android.app.glory.constants.ContentType
 import com.lkpc.android.app.glory.constants.Notification.Companion.CHANNEL_ID
 import com.lkpc.android.app.glory.constants.Notification.Companion.SERMON_AUDIO_ID
@@ -68,6 +69,8 @@ class DetailActivity : AppCompatActivity() {
         )
 
         fillContent(content)
+
+        ContentApiClient().increaseViewCount(content.id!!)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
