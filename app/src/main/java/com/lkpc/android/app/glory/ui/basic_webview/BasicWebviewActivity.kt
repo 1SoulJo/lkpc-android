@@ -16,6 +16,7 @@ class BasicWebviewActivity : AppCompatActivity() {
     companion object {
         const val TYPE_URL = 0
         const val TYPE_SERVICE_INFO = 1
+        const val TYPE_NAV_GUIDE = 2
     }
 
     private val apiCallback = object : Callback<List<BaseContent>> {
@@ -57,12 +58,21 @@ class BasicWebviewActivity : AppCompatActivity() {
 
         // type
         val type = intent.getIntExtra("type", 0)
-        if (type == TYPE_URL) {
-            val url = intent.getStringExtra("url")!!
-            webview.loadUrl(url)
-        } else if (type == TYPE_SERVICE_INFO) {
-            val apiClient = ContentApiClient()
-            apiClient.loadServices(apiCallback)
+        when(type) {
+            TYPE_URL -> {
+                val url = intent.getStringExtra("url")!!
+                webview.loadUrl(url)
+            }
+
+            TYPE_SERVICE_INFO -> {
+                val apiClient = ContentApiClient()
+                apiClient.loadServices(apiCallback)
+            }
+
+            TYPE_NAV_GUIDE -> {
+                val apiClient = ContentApiClient()
+                apiClient.loadLocations(apiCallback)
+            }
         }
     }
 

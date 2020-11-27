@@ -5,4 +5,5 @@
     <color name="colorAccent">#03DAC5</color>
     <color name="listRowBackground">#FFFFFF</color>
     <color name="selectedDot">#FC5252</color>
+    <color name="menuText">#000000</color>
 </resources>

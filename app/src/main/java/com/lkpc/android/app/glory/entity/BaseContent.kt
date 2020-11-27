@@ -59,4 +59,8 @@ class BaseContent {
     @SerializedName("boardContent")
     @Expose
     var boardContent: String? = null
+
+    @SerializedName("chapter")
+    @Expose
+    var chapter: String? = null
 }

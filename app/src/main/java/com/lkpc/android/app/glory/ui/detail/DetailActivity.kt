@@ -165,9 +165,15 @@ class DetailActivity : AppCompatActivity() {
         // content title
         content_title.text = content.title
 
+        // chapter
+        if (content.category == ContentType.SERMON) {
+            content_chapter.visibility = View.VISIBLE
+            content_chapter.text = content.chapter
+        }
+
         // date
         val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm", Locale.CANADA)
-        val newFormat = SimpleDateFormat("yyyy-MM-dd", Locale.CANADA)
+        val newFormat = SimpleDateFormat("yyyy년 MM월 dd일", Locale.CANADA)
         content_date.text = newFormat.format(dateFormat.parse(content.dateCreated!!)!!)
 
         // setup youtube video is available
@@ -225,7 +231,8 @@ class DetailActivity : AppCompatActivity() {
                 (detail_audio as PlayerControlView).show()
             }
         } else {
-            content_body.text = HtmlCompat.fromHtml(newDoc, HtmlCompat.FROM_HTML_MODE_LEGACY).toString()
+            content_body.text =
+                HtmlCompat.fromHtml(newDoc, HtmlCompat.FROM_HTML_MODE_LEGACY).toString()
         }
     }
 

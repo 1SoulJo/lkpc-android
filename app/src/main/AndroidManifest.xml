@@ -30,7 +30,9 @@
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/colorAccent" />
 
-        <activity android:name=".ui.location.LocationActivity" />
+        <activity
+            android:name=".ui.location.LocationActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".ui.bulletin.BulletinActivity" />
         <activity android:name=".ui.basic_webview.BasicWebviewActivity" />
         <activity android:name=".ui.yt_channels.YoutubeChannelActivity" />

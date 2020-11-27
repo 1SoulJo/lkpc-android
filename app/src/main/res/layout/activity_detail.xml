@@ -35,6 +35,16 @@
                 android:theme="?attr/titleTextStyle" />
 
             <TextView
+                android:id="@+id/content_chapter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="start"
+                android:visibility="gone"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="?android:attr/textColorPrimary"/>
+
+            <TextView
                 android:id="@+id/content_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

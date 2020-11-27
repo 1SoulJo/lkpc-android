@@ -17,6 +17,7 @@ import com.lkpc.android.app.glory.ui.basic_webview.BasicWebviewActivity
 import com.lkpc.android.app.glory.ui.calendar.CalendarActivity
 import com.lkpc.android.app.glory.ui.column.ColumnFragment
 import com.lkpc.android.app.glory.ui.home.HomeFragment
+import com.lkpc.android.app.glory.ui.location.LocationActivity
 import com.lkpc.android.app.glory.ui.meditation.MeditationFragment
 import com.lkpc.android.app.glory.ui.news.NewsFragment
 import com.lkpc.android.app.glory.ui.note.NoteListActivity
@@ -183,9 +184,10 @@ class MainActivity : AppCompatActivity() {
                 }
                 R.id.nav_menu_nav_guide -> {
 //                    startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(WebUrls.NAV_GUIDE)))
-                    val i = Intent(this, BasicWebviewActivity::class.java)
-                    i.putExtra("url", WebUrls.NAV_GUIDE)
-                    i.putExtra("title", R.string.navigation)
+                    val i = Intent(this, LocationActivity::class.java)
+//                    i.putExtra("url", WebUrls.NAV_GUIDE)
+//                    i.putExtra("type", BasicWebviewActivity.TYPE_NAV_GUIDE)
+//                    i.putExtra("title", R.string.navigation)
                     startActivity(i)
                     true
                 }

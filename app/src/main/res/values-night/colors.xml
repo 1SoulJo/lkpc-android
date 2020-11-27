@@ -4,4 +4,5 @@
     <color name="colorPrimaryDark">#000000</color>
     <color name="colorAccent">#03DAC5</color>
     <color name="listRowBackground">#333333</color>
+    <color name="menuText">#FFFFFF</color>
 </resources>

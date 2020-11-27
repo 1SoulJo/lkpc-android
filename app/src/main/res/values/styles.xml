@@ -8,7 +8,6 @@
         <item name="actionBarSize">46dip</item>
         <item name="actionModeStyle">@style/actionModeStyle</item>
         <item name="android:actionMenuTextAppearance">@style/TextAppearance.AppCompat.Medium</item>
-        <item name="android:actionMenuTextColor">@android:color/white</item>
         <item name="actionModeCloseButtonStyle">@style/closeButtonStyle</item>
     </style>
 
@@ -21,6 +20,7 @@
     <!-- ActionBar styles -->
     <style name="ToolbarStyle" parent="ThemeOverlay.MaterialComponents.Toolbar.Primary">
         <item name="colorOnPrimary">@android:color/white</item>
+        <item name="android:textColor">@color/menuText</item>
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
