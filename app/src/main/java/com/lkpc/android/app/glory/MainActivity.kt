@@ -11,6 +11,8 @@ import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.navigation.ui.*
+import com.google.firebase.messaging.FirebaseMessaging
+import com.lkpc.android.app.glory.constants.Notification
 import com.lkpc.android.app.glory.constants.Notification.Companion.CHANNEL_ID
 import com.lkpc.android.app.glory.constants.WebUrls
 import com.lkpc.android.app.glory.ui.basic_webview.BasicWebviewActivity
@@ -217,6 +219,8 @@ class MainActivity : AppCompatActivity() {
             val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
             notificationManager.createNotificationChannel(channel)
         }
+
+        FirebaseMessaging.getInstance().subscribeToTopic(Notification.TOPIC_ALL)
     }
 
     private fun setFragment(itemId: Int): Boolean {
