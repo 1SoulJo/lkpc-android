@@ -86,4 +86,5 @@
     <string name="notification_channel_name">default notification</string>
     <string name="notification_channel_description">default notification description</string>
     <string name="no_data_kr">데이터가 존재하지 않습니다</string>
+    <string name="downtown_news">다운타운 소식</string>
 </resources>

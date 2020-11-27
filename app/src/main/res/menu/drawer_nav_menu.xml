@@ -34,8 +34,8 @@
 
         <item
             android:id="@+id/nav_menu_downtown"
-            android:icon="@drawable/ic_cal"
-            android:title="다운타운 소식"
+            android:icon="@drawable/ic_downtown"
+            android:title="@string/downtown_news"
             android:checkable="false" />
     </group>
 
