@@ -25,6 +25,7 @@ import com.google.android.youtube.player.YouTubePlayerSupportFragmentX
 import com.google.gson.Gson
 import com.lkpc.android.app.glory.BuildConfig
 import com.lkpc.android.app.glory.R
+import com.lkpc.android.app.glory.api_client.ContentApi
 import com.lkpc.android.app.glory.api_client.ContentApiClient
 import com.lkpc.android.app.glory.constants.ContentType
 import com.lkpc.android.app.glory.constants.Notification.Companion.CHANNEL_ID
@@ -37,6 +38,9 @@ import kotlinx.android.synthetic.main.activity_detail.*
 import kotlinx.android.synthetic.main.tool_bar.*
 import org.jsoup.Jsoup
 import org.jsoup.safety.Whitelist
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -52,30 +56,40 @@ class DetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
         setSupportActionBar(toolbar)
-
         supportActionBar!!.setDisplayShowTitleEnabled(false)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
         noteId = intent.getIntExtra("noteId", -1)
 
-        val data = intent.getStringExtra("data")
-        content = Gson().fromJson(data, BaseContent::class.java)
+        val contentId = intent.getStringExtra("singleContentId")
+        if (contentId.isNullOrEmpty()) {
+            val data = intent.getStringExtra("data")
+            content = Gson().fromJson(data, BaseContent::class.java)
 
-        playerNotificationManager = PlayerNotificationManager(
-            this,
-            CHANNEL_ID,
-            SERMON_AUDIO_ID,
-            DescriptionAdapter(getString(R.string.title_sermon), content.title!!)
-        )
+            // fill main content area
+            fillContent(content)
+            invalidateOptionsMenu()
 
-        fillContent(content)
+            ContentApiClient().increaseViewCount(content.id!!)
+        } else {
+            ContentApiClient().loadSingleContent(contentId, object: Callback<BaseContent> {
+                override fun onResponse(call: Call<BaseContent>, response: Response<BaseContent>) {
+                    content = response.body()!!
+                    fillContent(content)
+                    invalidateOptionsMenu()
 
-        ContentApiClient().increaseViewCount(content.id!!)
+                    ContentApiClient().increaseViewCount(content.id!!)
+                }
+
+                override fun onFailure(call: Call<BaseContent>, t: Throwable) { }
+            })
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
+        // returning from NoteEditActivity
         if (requestCode == _editNodeActivityResultCode) {
             noteId = resultCode
             invalidateOptionsMenu()
@@ -109,13 +123,15 @@ class DetailActivity : AppCompatActivity() {
             newNoteMenu.isVisible = true
         }
 
-        if (content.category == ContentType.SERMON) {
-            menu.findItem(R.id.detail_menu_share).isVisible = false
-        }
+        if (this::content.isInitialized) {
+            if (content.category == ContentType.SERMON) {
+                menu.findItem(R.id.detail_menu_share).isVisible = false
+            }
 
-        if (content.category == ContentType.NEWS) {
-            newNoteMenu.isVisible = false
-            openNoteMenu.isVisible = false
+            if (content.category == ContentType.NEWS) {
+                newNoteMenu.isVisible = false
+                openNoteMenu.isVisible = false
+            }
         }
 
         return super.onPrepareOptionsMenu(menu)
@@ -186,6 +202,10 @@ class DetailActivity : AppCompatActivity() {
 
         // setup audio if available
         if (content.audioLink != null) {
+            playerNotificationManager = PlayerNotificationManager(
+                this, CHANNEL_ID, SERMON_AUDIO_ID,
+                DescriptionAdapter(getString(R.string.title_sermon), content.title!!))
+
             val audioPlayer = SimpleExoPlayer.Builder(this).build()
             val url = SERMON_AUDIO_SRC.format(content.audioLink)
             val mediaItem: MediaItem = MediaItem.fromUri(Uri.parse(url))
@@ -258,7 +278,8 @@ class DetailActivity : AppCompatActivity() {
         )
     }
 
-    private class DescriptionAdapter(val title: String, val contentText: String) : PlayerNotificationManager.MediaDescriptionAdapter {
+    private class DescriptionAdapter(val title: String, val contentText: String) :
+        PlayerNotificationManager.MediaDescriptionAdapter {
 
         override fun getCurrentContentTitle(player: Player): String {
             return title

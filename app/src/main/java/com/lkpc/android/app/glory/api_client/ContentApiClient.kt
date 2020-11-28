@@ -19,7 +19,7 @@ class ContentApiClient {
             .create()
 
         val retrofit = Retrofit.Builder()
-            .baseUrl(WebUrls.BASE_URL)
+            .baseUrl(WebUrls.API_BASE_URL)
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
 
@@ -62,13 +62,14 @@ class ContentApiClient {
         setupApi().loadAdContents().enqueue(cb)
     }
 
+    fun loadSingleContent(contentId: String, cb: Callback<BaseContent>) {
+        setupApi().loadSingleContent(id=contentId).enqueue(cb)
+    }
+
     fun increaseViewCount(contentId: String) {
         setupApi().increaseViewCount(contentId).enqueue(object: Callback<String> {
-            override fun onResponse(call: Call<String>, response: Response<String>) {
-            }
-
-            override fun onFailure(call: Call<String>, t: Throwable) {
-            }
+            override fun onResponse(call: Call<String>, response: Response<String>) { }
+            override fun onFailure(call: Call<String>, t: Throwable) { }
         })
     }
 }

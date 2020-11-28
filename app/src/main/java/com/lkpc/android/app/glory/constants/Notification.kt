@@ -5,6 +5,6 @@ class Notification {
         const val CHANNEL_ID = "default notifications"
         const val SERMON_AUDIO_ID = 1
 
-        const val TOPIC_ALL = "all"
+        const val TOPIC_ALL = "hansol"
     }
 }

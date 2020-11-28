@@ -9,7 +9,6 @@ import android.transition.TransitionManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.lkpc.android.app.glory.R
@@ -18,7 +17,6 @@ import com.lkpc.android.app.glory.constants.WebUrls
 import com.lkpc.android.app.glory.entity.AdContent
 import com.lkpc.android.app.glory.ui.basic_webview.BasicWebviewActivity
 import kotlinx.android.synthetic.main.home_ad_item.*
-import kotlinx.android.synthetic.main.home_ad_item.view.*
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback

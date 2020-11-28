@@ -36,6 +36,9 @@ interface ContentApi {
     @GET("link/main")
     fun loadAdContents(): Call<List<AdContent>>
 
+    @GET("board/{contentId}")
+    fun loadSingleContent(@Path("contentId") id: String): Call<BaseContent>
+
     @POST("board/{contentId}")
     fun increaseViewCount(@Path("contentId") id: String): Call<String>
 }

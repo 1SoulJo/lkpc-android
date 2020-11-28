@@ -5,6 +5,7 @@ import android.app.NotificationManager
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
@@ -19,6 +20,7 @@ import com.lkpc.android.app.glory.ui.basic_webview.BasicWebviewActivity
 import com.lkpc.android.app.glory.ui.bulletin.BulletinActivity
 import com.lkpc.android.app.glory.ui.calendar.CalendarActivity
 import com.lkpc.android.app.glory.ui.column.ColumnFragment
+import com.lkpc.android.app.glory.ui.detail.DetailActivity
 import com.lkpc.android.app.glory.ui.home.HomeFragment
 import com.lkpc.android.app.glory.ui.location.LocationActivity
 import com.lkpc.android.app.glory.ui.meditation.MeditationFragment
@@ -99,6 +101,15 @@ class MainActivity : AppCompatActivity() {
         supportActionBar!!.setDisplayShowTitleEnabled(false)
 
         toolbar_title.setText(R.string.title_home)
+
+        // handle bundle data
+        val data = intent.getStringExtra("contents")
+        if (data != null) {
+            // this means activity started from notification while app was in background state
+            val i = Intent(this, DetailActivity::class.java)
+            i.putExtra("singleContentId", data)
+            startActivity(i)
+        }
 
         // retrieve current fragment from savedInstanceState
         savedInstanceState?.let {
