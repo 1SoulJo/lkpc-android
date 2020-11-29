@@ -21,8 +21,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.fellow_news.FellowNewsActivity"></activity>
-        <activity android:name=".ui.cell_church.CellChurchActivity" />
 
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
@@ -31,12 +29,15 @@
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/colorAccent" />
 
+        <activity android:name=".ui.fellow_news.FellowNewsActivity" />
+        <activity android:name=".ui.cell_church.CellChurchActivity" />
         <activity
             android:name=".ui.location.LocationActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".ui.bulletin.BulletinActivity" />
         <activity android:name=".ui.basic_webview.BasicWebviewActivity" />
-        <activity android:name=".ui.yt_channels.YoutubeChannelActivity" />
+        <activity android:name=".ui.yt_channels.YoutubeChannelActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.qr_code.QrCodeGeneratorActivity"
             android:windowSoftInputMode="adjustPan" />
@@ -62,6 +63,7 @@
             android:name=".MainActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:hardwareAccelerated="true"
+            android:screenOrientation="portrait"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>

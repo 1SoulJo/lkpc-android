@@ -25,6 +25,10 @@ class AdContent {
     @Expose
     val linkImg: String? = null
 
+    @SerializedName("forMobile")
+    @Expose
+    var forMobile: String? = null
+
     @SerializedName("__v")
     @Expose
     val v: Int? = null

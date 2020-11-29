@@ -57,8 +57,7 @@ class BasicWebviewActivity : AppCompatActivity() {
         webview.settings.displayZoomControls = false
 
         // type
-        val type = intent.getIntExtra("type", 0)
-        when(type) {
+        when(intent.getIntExtra("type", 0)) {
             TYPE_URL -> {
                 val url = intent.getStringExtra("url")!!
                 webview.loadUrl(url)

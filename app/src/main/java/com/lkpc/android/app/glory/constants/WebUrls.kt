@@ -30,8 +30,8 @@ class WebUrls {
         // online donate
         const val ONLINE_OFFERING = "https://tithe.ly/give_new/www/#/tithely/give-one-time/1277349"
 
-        // LKPC home
-        const val LKPC_HOMEPAGE = "https://www.lkpc.org/"
+        // LPC home
+        const val LPC_HOMEPAGE = "https://lkpc.org"
 
         // youtube img url
         const val YOUTUBE_IMG_BASE = "https://img.youtube.com/vi/"

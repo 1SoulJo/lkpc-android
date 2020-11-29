@@ -216,7 +216,7 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
                 R.id.nav_menu_homepage -> {
-                    startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(WebUrls.LKPC_HOMEPAGE)))
+                    startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(WebUrls.LPC_HOMEPAGE)))
                     true
                 }
                 R.id.nav_menu_nav_guide -> {

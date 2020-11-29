@@ -35,7 +35,7 @@ class HomeSlidePagerAdapter(f: Fragment) : FragmentStateAdapter(f) {
     }
 
     fun setData(ads : MutableList<AdContent>) {
-        adContents = ads
+        adContents = ads.filter { it.forMobile == "t" }.toMutableList()
         for (ad in adContents) {
             val f = AdItemFragment(ad)
             val client = BasicRequestClient()
@@ -80,7 +80,7 @@ class AdItemFragment(val content: AdContent) : Fragment() {
         home_ad_item_layout.setOnClickListener {
             val i = Intent(view.context, BasicWebviewActivity::class.java)
             i.putExtra("title", R.string.banner_title)
-            i.putExtra("url", WebUrls.LKPC_HOMEPAGE + content.linkUrl)
+            i.putExtra("url", WebUrls.LPC_HOMEPAGE + content.linkUrl)
             view.context.startActivity(i)
         }
     }
