@@ -9,7 +9,7 @@ class WebUrls {
         const val API_BASE_URL = "$LKPC_BASE_URL/node/api/"
 
         // youtube links
-        const val LKPC_LIVE_VIDEO = "https://youtu.be/11d9FBX9t-I"
+        const val LKPC_LIVE_VIDEO = "https://www.youtube.com/channel/UCe5baq_bVJrXTIhyjXw5HtA/live"
         const val LKPC_CHANNEL = "https://www.youtube.com/channel/UCe5baq_bVJrXTIhyjXw5HtA"
         const val EC_CHANNEL = "https://www.youtube.com/channel/UCMEZLf7qIDm-9C5bJ_pE1HQ"
         const val NHF_CHANNEL = "https://www.youtube.com/channel/UCr1uydfKVRVUqVKkJG9H4dQ"
