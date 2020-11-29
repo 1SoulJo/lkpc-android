@@ -241,7 +241,7 @@
                 app:layout_constraintBottom_toTopOf="@id/grid5_text"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:tint="#4CA665" />
+                app:tint="#36804A" />
 
             <TextView
                 android:id="@+id/grid5_text"
