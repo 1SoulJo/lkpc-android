@@ -11,6 +11,7 @@ import android.view.View
 import androidx.annotation.Nullable
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.text.HtmlCompat
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.exoplayer2.C
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.Player
@@ -124,11 +125,14 @@ class DetailActivity : AppCompatActivity() {
         }
 
         if (this::content.isInitialized) {
-            if (content.category == ContentType.SERMON) {
+            if (content.category == ContentType.SERMON
+                || content.category == ContentType.CELL_CHURCH) {
                 menu.findItem(R.id.detail_menu_share).isVisible = false
             }
 
-            if (content.category == ContentType.NEWS) {
+            if (content.category == ContentType.NEWS
+                || content.category == ContentType.CELL_CHURCH
+                || content.category == ContentType.FELLOW_NEWS) {
                 newNoteMenu.isVisible = false
                 openNoteMenu.isVisible = false
             }
@@ -180,6 +184,12 @@ class DetailActivity : AppCompatActivity() {
     private fun fillContent(content: BaseContent) {
         // title
         toolbar_title.text = content.title
+
+        // file area
+        if (content.files!!.isNotEmpty()) {
+            rv_files.layoutManager = LinearLayoutManager(this)
+            rv_files.adapter = FileAdapter(content.files!!)
+        }
 
         // content title
         content_title.text = content.title

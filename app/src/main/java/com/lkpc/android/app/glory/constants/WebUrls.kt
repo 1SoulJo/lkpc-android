@@ -44,5 +44,8 @@ class WebUrls {
 
         // sermon audio prefix
         const val SERMON_AUDIO_SRC = "$LKPC_BASE_URL/media/%s"
+
+        // file asset prefix
+        const val FILE_ASSET = "$LKPC_BASE_URL/assets/board/files/%s"
     }
 }

@@ -30,6 +30,8 @@
         android:layout_margin="0dp"
         android:background="?android:attr/windowBackground"
         android:padding="0dp"
+        app:itemIconTint="@color/nav_icon_color"
+        app:itemTextColor="@color/nav_icon_color"
         app:itemIconSize="25dp"
         app:labelVisibilityMode="labeled"
         app:itemTextAppearanceActive="@style/BottomNavigationView.Active"

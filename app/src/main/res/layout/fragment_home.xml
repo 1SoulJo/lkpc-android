@@ -62,14 +62,11 @@
                 android:id="@+id/grid1_icon"
                 android:layout_width="36dp"
                 android:layout_height="36dp"
-                android:layout_marginBottom="32dp"
                 android:src="@drawable/home_live"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/grid1_text"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.503"
-                app:tint="@android:color/holo_red_light" />
+                app:tint="#B9C69C3B" />
 
             <TextView
                 android:id="@+id/grid1_text"
@@ -80,7 +77,8 @@
                 android:textColor="?android:attr/textColorPrimary"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/grid1_icon" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -108,13 +106,11 @@
                 android:id="@+id/grid2_icon"
                 android:layout_width="36dp"
                 android:layout_height="36dp"
-                android:layout_marginBottom="32dp"
                 android:src="@drawable/home_youtube"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/grid2_text"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:tint="@android:color/holo_red_light" />
+                app:tint="#C13434" />
 
             <TextView
                 android:id="@+id/grid2_text"
@@ -125,7 +121,8 @@
                 android:textColor="?android:attr/textColorPrimary"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/grid2_icon" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -153,13 +150,11 @@
                 android:id="@+id/grid3_icon"
                 android:layout_width="36dp"
                 android:layout_height="36dp"
-                android:layout_marginBottom="32dp"
                 android:src="@drawable/home_group"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/grid3_text"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:tint="@android:color/holo_blue_light" />
+                app:tint="#1A5E77" />
 
             <TextView
                 android:id="@+id/grid3_text"
@@ -170,7 +165,8 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/grid3_icon" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -198,13 +194,11 @@
                 android:id="@+id/grid4_icon"
                 android:layout_width="36dp"
                 android:layout_height="36dp"
-                android:layout_marginBottom="32dp"
                 android:src="@drawable/home_bulletin"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/grid4_text"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:tint="@android:color/holo_blue_bright" />
+                app:tint="#4F9FAB" />
 
             <TextView
                 android:id="@+id/grid4_text"
@@ -215,7 +209,8 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/grid4_icon" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -242,13 +237,11 @@
                 android:id="@+id/grid5_icon"
                 android:layout_width="36dp"
                 android:layout_height="36dp"
-                android:layout_marginBottom="32dp"
                 android:src="@drawable/home_handpen"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/grid5_text"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:tint="@android:color/holo_orange_dark" />
+                app:tint="#4CA665" />
 
             <TextView
                 android:id="@+id/grid5_text"
@@ -259,7 +252,8 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/grid5_icon" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -287,13 +281,11 @@
                 android:id="@+id/grid6_icon"
                 android:layout_width="36dp"
                 android:layout_height="36dp"
-                android:layout_marginBottom="32dp"
-                android:src="@drawable/ic_hand"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:src="@drawable/ic_heart_on_hand"
+                app:layout_constraintBottom_toTopOf="@id/grid6_text"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:tint="@android:color/holo_orange_light" />
+                app:tint="#8C833A" />
 
             <TextView
                 android:id="@+id/grid6_text"
@@ -304,7 +296,8 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/grid6_icon" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
 
             <TextView
                 android:layout_width="wrap_content"

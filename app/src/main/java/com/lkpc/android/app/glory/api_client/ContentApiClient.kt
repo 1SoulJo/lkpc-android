@@ -72,4 +72,12 @@ class ContentApiClient {
             override fun onFailure(call: Call<String>, t: Throwable) { }
         })
     }
+
+    fun loadCellChurch(startId: Int, cb: Callback<List<BaseContent>>) {
+        setupApi().loadCellChurch(id=startId).enqueue(cb)
+    }
+
+    fun loadFellowNews(startId: Int, cb: Callback<List<BaseContent>>) {
+        setupApi().loadFellowNews(id=startId).enqueue(cb)
+    }
 }

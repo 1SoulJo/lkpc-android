@@ -6,8 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.lkpc.android.app.glory.R
 import com.lkpc.android.app.glory.entity.Location
@@ -26,7 +26,7 @@ class LocationAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         var note: TextView = view.note
         var time: TextView = view.time
         var img: ImageView = view.img_map
-        var btnMap : ImageView = view.btn_map
+        var btnMap : LinearLayout = view.map_btn_layout
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {

@@ -3,9 +3,9 @@ package com.lkpc.android.app.glory
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Intent
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
@@ -19,8 +19,10 @@ import com.lkpc.android.app.glory.constants.WebUrls
 import com.lkpc.android.app.glory.ui.basic_webview.BasicWebviewActivity
 import com.lkpc.android.app.glory.ui.bulletin.BulletinActivity
 import com.lkpc.android.app.glory.ui.calendar.CalendarActivity
+import com.lkpc.android.app.glory.ui.cell_church.CellChurchActivity
 import com.lkpc.android.app.glory.ui.column.ColumnFragment
 import com.lkpc.android.app.glory.ui.detail.DetailActivity
+import com.lkpc.android.app.glory.ui.fellow_news.FellowNewsActivity
 import com.lkpc.android.app.glory.ui.home.HomeFragment
 import com.lkpc.android.app.glory.ui.location.LocationActivity
 import com.lkpc.android.app.glory.ui.meditation.MeditationFragment
@@ -100,7 +102,7 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         supportActionBar!!.setDisplayShowTitleEnabled(false)
 
-        toolbar_title.setText(R.string.title_home)
+        toolbar_title.setText(R.string.lpc)
 
         // handle bundle data
         val data = intent.getStringExtra("contents")
@@ -185,6 +187,16 @@ class MainActivity : AppCompatActivity() {
                     startActivity(i)
                     true
                 }
+                R.id.nav_menu_cell_church -> {
+                    val i = Intent(this, CellChurchActivity::class.java)
+                    startActivity(i)
+                    true
+                }
+                R.id.nav_menu_fellow_news -> {
+                    val i = Intent(this, FellowNewsActivity::class.java)
+                    startActivity(i)
+                    true
+                }
                 R.id.nav_menu_church_events -> {
                     startActivity(Intent(this, CalendarActivity::class.java))
                     true
@@ -201,6 +213,10 @@ class MainActivity : AppCompatActivity() {
                     i.putExtra("type", BasicWebviewActivity.TYPE_SERVICE_INFO)
                     i.putExtra("title", R.string.service_info)
                     startActivity(i)
+                    true
+                }
+                R.id.nav_menu_homepage -> {
+                    startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(WebUrls.LKPC_HOMEPAGE)))
                     true
                 }
                 R.id.nav_menu_nav_guide -> {
@@ -226,16 +242,15 @@ class MainActivity : AppCompatActivity() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val name = getString(R.string.channel_name)
             val descriptionText = getString(R.string.channel_description)
-            val importance = NotificationManager.IMPORTANCE_LOW
+            val importance = NotificationManager.IMPORTANCE_HIGH
             val channel = NotificationChannel(CHANNEL_ID, name, importance)
             channel.description = descriptionText
-            channel.enableVibration(false)
-            channel.setSound(null, null)
             val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
             notificationManager.createNotificationChannel(channel)
         }
 
         FirebaseMessaging.getInstance().subscribeToTopic(Notification.TOPIC_ALL)
+        FirebaseMessaging.getInstance().subscribeToTopic(Notification.TOPIC_TEST_ANDROID)
     }
 
     private fun setFragment(itemId: Int): Boolean {
@@ -249,7 +264,7 @@ class MainActivity : AppCompatActivity() {
                     .show(homeFragment)
                     .commit()
                 activeFragment = homeFragment
-                toolbar_title.setText(R.string.title_home)
+                toolbar_title.setText(R.string.lpc)
             }
             R.id.navigation_column  ->{
                 if (activeFragment is ColumnFragment) {

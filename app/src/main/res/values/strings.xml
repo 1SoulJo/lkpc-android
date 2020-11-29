@@ -1,13 +1,12 @@
 <resources>
-    <string name="channel_name">default notification</string>
+    <string name="channel_name">default channel</string>
     <string name="channel_description">default channel</string>
     <string name="app_name">Light Church</string>
-    <string name="title_home">큰빛교회</string>
+    <string name="title_home">홈</string>
     <string name="title_column">목회칼럼</string>
     <string name="title_sermon">주일 설교</string>
     <string name="title_meditation">날마다빛으로</string>
     <string name="title_notifications">큰빛소식</string>
-    <string name="title_yt_channels">큰빛 유튜브 채널</string>
     <string name="lkpc_church">LKPC Church</string>
     <string name="list_item_title">List item title</string>
     <string name="loading_image">Loading image</string>
@@ -21,7 +20,8 @@
     <string name="giving_icon">Giving icon</string>
     <string name="homepage">홈페이지</string>
     <string name="youtube_channel_guide">큰빛 YouTube 채널 안내</string>
-    <string name="lkpc">큰빛교회</string>
+    <string name="lpc">큰빛교회</string>
+    <string name="toronto_lpc">토론토 큰빛교회</string>
     <string name="channel_image">Channel image</string>
     <string name="edu">교육부</string>
     <string name="pre_registration_banner">Pre-registration banner</string>
@@ -68,9 +68,9 @@
     <string name="navigation">오시는 길</string>
     <string name="lpc_live">큰빛 LIVE</string>
     <string name="live_worship">Live Worship</string>
-    <string name="lpc_youtube_channels_kr">유튜브 채널 안내</string>
+    <string name="lpc_youtube_channels_kr">큰빛 유튜브 채널</string>
     <string name="lpc_youtube_channels">Youtube Channels</string>
-    <string name="newcomer_reg_kr">새 교우 등록</string>
+    <string name="newcomer_reg_kr">새교우 가등록</string>
     <string name="newcomer_reg">Newcomer Registration</string>
     <string name="bulletin_kr">주보</string>
     <string name="bulletin">Bulletin</string>
@@ -86,4 +86,6 @@
     <string name="notification_channel_name">default notification</string>
     <string name="notification_channel_description">default notification description</string>
     <string name="no_data_kr">데이터가 존재하지 않습니다</string>
+    <string name="cell_church">가정교회</string>
+    <string name="fellow_news">교우 동정</string>
 </resources>

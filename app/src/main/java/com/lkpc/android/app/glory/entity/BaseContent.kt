@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName
 class BaseContent {
     @SerializedName("files")
     @Expose
-    var files: List<Any>? = null
+    var files: List<String>? = null
 
     @SerializedName("comments")
     @Expose

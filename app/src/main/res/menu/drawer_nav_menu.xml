@@ -13,7 +13,7 @@
             android:checkable="false" />
         <item
             android:id="@+id/nav_menu_my_note"
-            android:icon="@drawable/ic_note_foreground"
+            android:icon="@drawable/ic_note_list"
             android:title="@string/my_notes"
             android:checkable="false" />
     </group>
@@ -23,19 +23,18 @@
         android:checkableBehavior="single">
         <item
             android:id="@+id/nav_menu_online_meet"
-            android:icon="@drawable/ic_meet"
+            android:icon="@drawable/ic_meeting"
             android:title="@string/online_meet"
             android:checkable="false" />
         <item
-            android:id="@+id/nav_menu_church_events"
-            android:icon="@drawable/ic_cal"
-            android:title="@string/church_events"
+            android:id="@+id/nav_menu_cell_church"
+            android:icon="@drawable/ic_family"
+            android:title="@string/cell_church"
             android:checkable="false" />
-
         <item
-            android:id="@+id/nav_menu_downtown"
-            android:icon="@drawable/ic_downtown"
-            android:title="@string/downtown_news"
+            android:id="@+id/nav_menu_fellow_news"
+            android:icon="@drawable/ic_meet"
+            android:title="@string/fellow_news"
             android:checkable="false" />
     </group>
 
@@ -43,14 +42,36 @@
         android:id="@+id/draw_menu_group_3"
         android:checkableBehavior="single">
         <item
+            android:id="@+id/nav_menu_church_events"
+            android:icon="@drawable/ic_cal"
+            android:title="@string/church_events"
+            android:checkable="false" />
+        <item
+            android:id="@+id/nav_menu_downtown"
+            android:icon="@drawable/ic_downtown"
+            android:title="@string/downtown_bulletin_kr"
+            android:checkable="false" />
+    </group>
+
+    <group
+        android:id="@+id/draw_menu_group_4"
+        android:checkableBehavior="single">
+
+        <item
             android:id="@+id/nav_menu_service_info"
             android:icon="@drawable/ic_sermon"
             android:title="@string/service_info"
             android:checkable="false" />
 
         <item
-            android:id="@+id/nav_menu_nav_guide"
+            android:id="@+id/nav_menu_homepage"
             android:icon="@drawable/ic_globe"
+            android:title="@string/homepage"
+            android:checkable="false" />
+
+        <item
+            android:id="@+id/nav_menu_nav_guide"
+            android:icon="@drawable/ic_location"
             android:title="@string/navigation"
             android:checkable="false" />
     </group>

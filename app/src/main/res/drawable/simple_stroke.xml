@@ -4,6 +4,6 @@
     android:shape="rectangle">
 
     <stroke
-        android:width="0.5dp"
-        android:color="#eeeeee" />
+        android:width="1dp"
+        android:color="@color/home_borderline" />
 </shape>

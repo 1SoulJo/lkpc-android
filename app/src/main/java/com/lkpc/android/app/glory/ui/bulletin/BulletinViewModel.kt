@@ -8,7 +8,7 @@ import com.lkpc.android.app.glory.repository.BulletinRepository
 import com.lkpc.android.app.glory.repository.DowntownBulletinRepository
 
 
-class BulletinViewModel(val isDowntown: Boolean) : ViewModel() {
+class BulletinViewModel(private val isDowntown: Boolean) : ViewModel() {
 
     init {
         initData()

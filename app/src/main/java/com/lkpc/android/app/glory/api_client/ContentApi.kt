@@ -41,4 +41,10 @@ interface ContentApi {
 
     @POST("board/{contentId}")
     fun increaseViewCount(@Path("contentId") id: String): Call<String>
+
+    @GET("board/cell-church/{startId}")
+    fun loadCellChurch(@Path("startId") id: Int): Call<List<BaseContent>>
+
+    @GET("board/fellow-news/{startId}")
+    fun loadFellowNews(@Path("startId") id: Int): Call<List<BaseContent>>
 }

@@ -18,7 +18,7 @@ class YoutubeChannelActivity : AppCompatActivity() {
         supportActionBar!!.setCustomView(R.layout.action_bar)
 
         // setup action bar
-        ab_title.text = getString(R.string.title_yt_channels)
+        ab_title.text = getString(R.string.lpc_youtube_channels_kr)
         ab_btn_back.visibility = View.VISIBLE
         ab_btn_back.setOnClickListener {
             finish()

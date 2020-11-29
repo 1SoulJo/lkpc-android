@@ -6,4 +6,5 @@
     <color name="listRowBackground">#FFFFFF</color>
     <color name="selectedDot">#FFFFFF</color>
     <color name="menuText">#000000</color>
+    <color name="home_borderline">#EEEEEE</color>
 </resources>
