@@ -71,9 +71,10 @@
 
             <TextView
                 android:id="@+id/grid1_text"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/lpc_live"
+                android:gravity="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:textColor="?android:attr/textColorPrimary"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -82,9 +83,10 @@
                 app:layout_constraintBottom_toBottomOf="parent"/>
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/live_worship"
+                android:gravity="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -115,8 +117,9 @@
 
             <TextView
                 android:id="@+id/grid2_text"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:text="@string/lpc_youtube_channels_kr"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:textColor="?android:attr/textColorPrimary"
@@ -126,9 +129,10 @@
                 app:layout_constraintBottom_toBottomOf="parent"/>
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/lpc_youtube_channels"
+                android:gravity="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -159,8 +163,9 @@
 
             <TextView
                 android:id="@+id/grid3_text"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:text="@string/newcomer_reg_kr"
                 android:textColor="?android:attr/textColorPrimary"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
@@ -170,8 +175,9 @@
                 app:layout_constraintBottom_toBottomOf="parent"/>
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:text="@string/newcomer_reg"
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -203,9 +209,10 @@
 
             <TextView
                 android:id="@+id/grid4_text"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/bulletin_kr"
+                android:gravity="center"
                 android:textColor="?android:attr/textColorPrimary"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -214,9 +221,10 @@
                 app:layout_constraintBottom_toBottomOf="parent"/>
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/bulletin"
+                android:gravity="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -246,9 +254,10 @@
 
             <TextView
                 android:id="@+id/grid5_text"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/worship_pre_reg_kr"
+                android:gravity="center"
                 android:textColor="?android:attr/textColorPrimary"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -257,9 +266,10 @@
                 app:layout_constraintBottom_toBottomOf="parent"/>
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/worship_pre_reg"
+                android:gravity="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -290,9 +300,10 @@
 
             <TextView
                 android:id="@+id/grid6_text"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/online_offering_kr"
+                android:gravity="center"
                 android:textColor="?android:attr/textColorPrimary"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -301,9 +312,10 @@
                 app:layout_constraintBottom_toBottomOf="parent"/>
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/online_offering"
+                android:gravity="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
