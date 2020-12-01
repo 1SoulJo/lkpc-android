@@ -6,12 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.google.gson.Gson
 import com.lkpc.android.app.glory.R
 import com.lkpc.android.app.glory.constants.WebUrls
 import com.lkpc.android.app.glory.entity.BaseContent
 import com.lkpc.android.app.glory.ui.basic_webview.BasicWebviewActivity
-import com.lkpc.android.app.glory.ui.detail.DetailActivity
 import kotlinx.android.synthetic.main.list_item_bulletin.view.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -56,7 +54,7 @@ class BulletinAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
             holder.itemView.setOnClickListener {
                 val i = Intent(holder.itemView.context, BasicWebviewActivity::class.java)
-                i.putExtra("url", WebUrls.BULLETIN_BASE.format(bulletin.files!![0].toString()))
+                i.putExtra("url", WebUrls.PDF_BASE.format(bulletin.files!![0].toString()))
                 holder.itemView.context.startActivity(i)
             }
         }

@@ -10,8 +10,10 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
 import com.lkpc.android.app.glory.R
+import com.lkpc.android.app.glory.constants.WebUrls
 import com.lkpc.android.app.glory.data.NoteDatabase
 import com.lkpc.android.app.glory.entity.BaseContent
+import com.lkpc.android.app.glory.ui.basic_webview.BasicWebviewActivity
 import com.lkpc.android.app.glory.ui.detail.DetailActivity
 import kotlinx.android.synthetic.main.list_item_meditation.view.*
 import java.text.SimpleDateFormat
@@ -70,7 +72,16 @@ class MeditationAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                     }
 
                     holder.itemView.setOnClickListener {
-                        holder.itemView.context.startActivity(i)
+                        if (meditation.files.isNullOrEmpty()) {
+                            holder.itemView.context.startActivity(i)
+                        } else {
+                            val pdfIntent =
+                            Intent(holder.itemView.context, BasicWebviewActivity::class.java)
+                            pdfIntent.putExtra("url",
+                                WebUrls.PDF_BASE.format(meditation.files!![0]))
+                            pdfIntent.putExtra("strTitle", meditation.title)
+                            holder.itemView.context.startActivity(pdfIntent)
+                        }
                     }
                 }
             )

@@ -44,7 +44,11 @@ class BasicWebviewActivity : AppCompatActivity() {
         supportActionBar!!.setCustomView(R.layout.action_bar)
 
         // title
-        ab_title.setText(intent.getIntExtra("title", R.string.lpc))
+        if (intent.getStringExtra("strTitle") != null) {
+            ab_title.text = intent.getStringExtra("strTitle")
+        } else {
+            ab_title.setText(intent.getIntExtra("title", R.string.lpc))
+        }
 
         // back button
         ab_btn_back.visibility = View.VISIBLE
