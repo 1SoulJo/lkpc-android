@@ -36,6 +36,9 @@ class WebUrls {
         // youtube img url
         const val YOUTUBE_IMG_BASE = "https://img.youtube.com/vi/"
 
+        // event api base
+        const val EVENT_API_BASE = "http://calendar.lkpc.org/"
+
         // pdf base
         const val PDF_BASE = "https://docs.google.com/gview?url=http://main.lkpc.org/assets/board/files/%s&embedded=true"
 

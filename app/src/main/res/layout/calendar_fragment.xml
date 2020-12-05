@@ -4,5 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.calendar.CalendarFragment">
-
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_calendar"
+        android:background="#eee"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 </FrameLayout>

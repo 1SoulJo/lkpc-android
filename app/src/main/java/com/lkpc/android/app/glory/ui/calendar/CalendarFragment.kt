@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.lkpc.android.app.glory.R
 import kotlinx.android.synthetic.main.calendar_fragment.*
 
@@ -27,7 +28,9 @@ class CalendarFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(CalendarViewModel::class.java)
-        // TODO: Use the ViewModel
+
+        rv_calendar.layoutManager = LinearLayoutManager(requireContext())
+        rv_calendar.adapter = viewModel.adapter
     }
 
 }
