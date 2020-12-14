@@ -10,5 +10,10 @@ class SharedPreference {
 
         const val NOTIFICATION_TOPIC_GENERAL = "PREF_SUB_TOPIC_GENERAL"
         const val NOTIFICATION_TOPIC_URGENT = "PREF_SUB_TOPIC_URGENT"
+        const val NOTIFICATION_TOPIC_TEST = "PREF_SUB_TOPIC_TEST"
+
+        const val ADMIN_MODE = "PREF_ADMIN_MODE"
+
+        const val QR_SCANNER = "PREF_QR_SCANNER"
     }
 }
