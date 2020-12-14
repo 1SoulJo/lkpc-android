@@ -196,6 +196,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:textIsSelectable="true"
+                android:autoLink="web"
+                android:linksClickable="true"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:textColor="?android:attr/textColorPrimary" />
         </LinearLayout>

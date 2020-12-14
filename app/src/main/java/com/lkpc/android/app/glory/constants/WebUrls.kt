@@ -13,7 +13,7 @@ class WebUrls {
         const val LKPC_CHANNEL = "https://www.youtube.com/channel/UCe5baq_bVJrXTIhyjXw5HtA"
         const val EC_CHANNEL = "https://www.youtube.com/channel/UCMEZLf7qIDm-9C5bJ_pE1HQ"
         const val NHF_CHANNEL = "https://www.youtube.com/channel/UCr1uydfKVRVUqVKkJG9H4dQ"
-            const val DT_CHANNEL = "https://www.youtube.com/channel/UCanX-s_RVmdmSLrYBq0F2_w"
+        const val DT_CHANNEL = "https://www.youtube.com/channel/UCanX-s_RVmdmSLrYBq0F2_w"
         const val YA_CHANNEL = "https://www.youtube.com/channel/UC6dGYIfIarjdeOW4A3FBvPA"
 
         // newcomer registration

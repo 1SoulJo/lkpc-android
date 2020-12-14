@@ -75,4 +75,15 @@
             android:title="@string/navigation"
             android:checkable="false" />
     </group>
+
+    <group
+        android:id="@+id/draw_menu_group_5"
+        android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/nav_menu_settings"
+            android:icon="@drawable/exo_ic_settings"
+            android:title="@string/settings"
+            android:checkable="false" />
+    </group>
 </menu>

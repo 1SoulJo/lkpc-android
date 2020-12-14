@@ -7,5 +7,8 @@ class SharedPreference {
         const val QR_KEY_NAME = "QR_KEY_NAME"
         const val QR_KEY_PHONE = "QR_KEY_PHONE"
         const val QR_KEY_IMAGE = "QR_KEY_IMAGE"
+
+        const val NOTIFICATION_TOPIC_GENERAL = "PREF_SUB_TOPIC_GENERAL"
+        const val NOTIFICATION_TOPIC_URGENT = "PREF_SUB_TOPIC_URGENT"
     }
 }

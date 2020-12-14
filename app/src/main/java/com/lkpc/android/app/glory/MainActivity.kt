@@ -12,9 +12,11 @@ import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.navigation.ui.*
+import androidx.preference.PreferenceManager
 import com.google.firebase.messaging.FirebaseMessaging
 import com.lkpc.android.app.glory.constants.Notification
 import com.lkpc.android.app.glory.constants.Notification.Companion.CHANNEL_ID
+import com.lkpc.android.app.glory.constants.SharedPreference
 import com.lkpc.android.app.glory.constants.WebUrls
 import com.lkpc.android.app.glory.ui.basic_webview.BasicWebviewActivity
 import com.lkpc.android.app.glory.ui.bulletin.BulletinActivity
@@ -30,6 +32,7 @@ import com.lkpc.android.app.glory.ui.news.NewsFragment
 import com.lkpc.android.app.glory.ui.note.NoteListActivity
 import com.lkpc.android.app.glory.ui.qr_code.QrCodeGeneratorActivity
 import com.lkpc.android.app.glory.ui.sermon.SermonFragment
+import com.lkpc.android.app.glory.ui.settings.SettingsActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.tool_bar.*
@@ -224,6 +227,11 @@ class MainActivity : AppCompatActivity() {
                     startActivity(i)
                     true
                 }
+                R.id.nav_menu_settings -> {
+                    val i = Intent(this, SettingsActivity::class.java)
+                    startActivity(i)
+                    true
+                }
                 else -> true
             }
         }
@@ -249,8 +257,15 @@ class MainActivity : AppCompatActivity() {
             notificationManager.createNotificationChannel(channel)
         }
 
-        FirebaseMessaging.getInstance().subscribeToTopic(Notification.TOPIC_ALL)
-        FirebaseMessaging.getInstance().subscribeToTopic(Notification.TOPIC_TEST_ANDROID)
+        val sp = PreferenceManager.getDefaultSharedPreferences(this)
+        val general = sp.getBoolean(SharedPreference.NOTIFICATION_TOPIC_GENERAL, true)
+        if (general) {
+            FirebaseMessaging.getInstance().subscribeToTopic(Notification.TOPIC_GENERAL)
+        }
+        val urgent = sp.getBoolean(SharedPreference.NOTIFICATION_TOPIC_URGENT, true)
+        if (urgent) {
+            FirebaseMessaging.getInstance().subscribeToTopic(Notification.TOPIC_URGENT)
+        }
     }
 
     private fun setFragment(itemId: Int): Boolean {

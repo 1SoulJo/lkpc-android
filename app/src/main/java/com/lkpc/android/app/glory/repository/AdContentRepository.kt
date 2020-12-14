@@ -27,13 +27,13 @@ object AdContentRepository : Callback<List<AdContent>> {
     ) {
         if (response.isSuccessful) {
             if (data.value == null) {
-                data.value = response.body()
+                data.value = response.body()!!.sortedBy { it.linkOrder }
             } else {
                 val list = (data.value as List<AdContent>).toMutableList()
                 if (list.isNotEmpty()) list.removeLastOrNull()
 
                 list += response.body() as List<AdContent>
-                data.value = list
+                data.value = list.sortedBy { it.linkOrder }
             }
         }
     }
