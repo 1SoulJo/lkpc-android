@@ -69,6 +69,14 @@ class SettingsFragment : PreferenceFragmentCompat(), Preference.OnPreferenceChan
                 }
             }
 
+            SharedPreference.NOTIFICATION_TOPIC_TEST -> {
+                if (newValue as Boolean) {
+                    FirebaseMessaging.getInstance().subscribeToTopic(Notification.TOPIC_TEST)
+                } else {
+                    FirebaseMessaging.getInstance().unsubscribeFromTopic(Notification.TOPIC_TEST)
+                }
+            }
+
             SharedPreference.ADMIN_MODE -> {
                 if (newValue as Boolean) {
                     showPasswordAlert()
@@ -111,6 +119,7 @@ class SettingsFragment : PreferenceFragmentCompat(), Preference.OnPreferenceChan
             if (BuildConfig.QR_PASS.equals(input.text.toString(), false)) {
                 testPref.isVisible = true
                 qrPref.isVisible = true
+                sp.edit().putString(SharedPreference.QR_KEY_PASSWORD, input.text.toString()).apply()
             }
         }
         builder.setNegativeButton("Cancel") { dialog, _ -> dialog.cancel() }

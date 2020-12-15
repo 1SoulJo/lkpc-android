@@ -8,6 +8,6 @@ class Notification {
         const val TOPIC_ALL = "all"
         const val TOPIC_GENERAL = "general"
         const val TOPIC_URGENT = "urgent"
-        const val TOPIC_TEST_ANDROID = "test_android"
+        const val TOPIC_TEST = "test"
     }
 }

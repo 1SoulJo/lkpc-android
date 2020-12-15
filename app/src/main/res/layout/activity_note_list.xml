@@ -28,7 +28,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:srcCompat="@drawable/ic_note_write"
-            android:contentDescription="@string/empty_note_image" />
+            android:contentDescription="@string/empty_note_image"
+            app:tint="@android:color/darker_gray" />
 
         <TextView
             android:id="@+id/empty_text"

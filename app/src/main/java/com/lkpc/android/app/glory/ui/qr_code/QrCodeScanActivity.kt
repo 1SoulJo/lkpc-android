@@ -1,6 +1,9 @@
 package com.lkpc.android.app.glory.ui.qr_code
 
 import android.Manifest
+import android.R.id.message
+import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
@@ -16,12 +19,15 @@ import com.google.android.gms.vision.Detector
 import com.google.android.gms.vision.Detector.Detections
 import com.google.android.gms.vision.barcode.Barcode
 import com.google.android.gms.vision.barcode.BarcodeDetector
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import com.lkpc.android.app.glory.R
 import com.lkpc.android.app.glory.entity.QrInfo
 import kotlinx.android.synthetic.main.action_bar.*
 import kotlinx.android.synthetic.main.activity_qr_code.*
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
+import java.io.FileNotFoundException
 import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
@@ -29,8 +35,9 @@ import java.util.*
 
 class QrCodeScanActivity : AppCompatActivity() {
     val requestCameraPermission = 201
+    private val filename = "qrCodeScanList"
 
-    lateinit var barcodeDetector: BarcodeDetector
+    private lateinit var barcodeDetector: BarcodeDetector
     lateinit var cameraSource: CameraSource
 
     lateinit var dialog: AlertDialog
@@ -55,8 +62,23 @@ class QrCodeScanActivity : AppCompatActivity() {
         }
 
         btn_qr_code_send_mail.setOnClickListener {
+            val email = Intent(Intent.ACTION_SEND)
+            email.putExtra(Intent.EXTRA_SUBJECT, "QR Code 데이터")
 
+            var content = ""
+            for (qrInfo in (rv_qr_list.adapter as QrCodeAdapter).qrInfoList) {
+                content += "${qrInfo.info},${qrInfo.date}\n\r"
+            }
+
+            email.putExtra(Intent.EXTRA_TEXT, content)
+
+            //need this to prompts email client only
+            email.type = "message/rfc822"
+
+            startActivity(Intent.createChooser(email, "Choose an Email client :"))
         }
+
+        readFile()
     }
 
     override fun onResume() {
@@ -93,9 +115,7 @@ class QrCodeScanActivity : AppCompatActivity() {
             }
 
             override fun surfaceChanged(
-                holder: SurfaceHolder, format: Int, width: Int, height: Int
-            ) {
-            }
+                holder: SurfaceHolder, format: Int, width: Int, height: Int) { }
 
             override fun surfaceDestroyed(holder: SurfaceHolder) {
                 cameraSource.stop()
@@ -103,7 +123,7 @@ class QrCodeScanActivity : AppCompatActivity() {
         })
 
         barcodeDetector.setProcessor(object : Detector.Processor<Barcode> {
-            override fun release() { }
+            override fun release() {}
 
             override fun receiveDetections(detections: Detections<Barcode>) {
                 if (this@QrCodeScanActivity::dialog.isInitialized && dialog.isShowing) {
@@ -134,9 +154,10 @@ class QrCodeScanActivity : AppCompatActivity() {
         builder.setPositiveButton("저장") { dialog, _ ->
             val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CANADA)
             (rv_qr_list.adapter as QrCodeAdapter).addInfo(
-                QrInfo(info, sdf.format(Date())))
+                QrInfo(info, sdf.format(Date()))
+            )
             rv_qr_list.smoothScrollToPosition(0)
-
+            writeFile()
             dialog.dismiss()
         }
 
@@ -155,6 +176,7 @@ class QrCodeScanActivity : AppCompatActivity() {
             (rv_qr_list.adapter as QrCodeAdapter).clearList()
             rv_qr_list.smoothScrollToPosition(0)
 
+            writeFile()
             dialog.dismiss()
         }
 
@@ -163,5 +185,33 @@ class QrCodeScanActivity : AppCompatActivity() {
         }
 
         dialog = builder.show()
+    }
+
+    private fun writeFile() {
+        val gson = Gson()
+        val fileContents = gson.toJson((rv_qr_list.adapter as QrCodeAdapter).qrInfoList)
+        Log.d("QrCode", fileContents)
+        openFileOutput(filename, Context.MODE_PRIVATE).use {
+            it.write(fileContents.toByteArray())
+        }
+    }
+
+    private fun readFile() {
+        try {
+            openFileInput(filename).bufferedReader().useLines { lines ->
+                val gson = Gson()
+                for (line in lines) {
+                    val myType = object : TypeToken<ArrayList<QrInfo>>() {}.type
+                    val info = gson.fromJson<ArrayList<QrInfo>>(line, myType)
+                    if (info.isNotEmpty()) {
+                        (rv_qr_list.adapter as QrCodeAdapter).qrInfoList = info
+                        (rv_qr_list.adapter as QrCodeAdapter).notifyDataSetChanged()
+                    }
+                }
+                rv_qr_list.smoothScrollToPosition(0)
+            }
+        } catch (e: FileNotFoundException) {
+            e.printStackTrace()
+        }
     }
 }

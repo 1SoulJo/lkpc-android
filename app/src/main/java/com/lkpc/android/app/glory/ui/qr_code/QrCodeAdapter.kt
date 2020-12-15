@@ -16,7 +16,7 @@ class QrCodeAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         val date: TextView = view.qr_date
     }
 
-    var qrInfoList: MutableList<QrInfo> = mutableListOf()
+    var qrInfoList: ArrayList<QrInfo> = arrayListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return ViewHolder(

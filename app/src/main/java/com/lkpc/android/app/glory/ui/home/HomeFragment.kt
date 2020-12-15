@@ -3,11 +3,13 @@ package com.lkpc.android.app.glory.ui.home
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
 import com.lkpc.android.app.glory.R
 import com.lkpc.android.app.glory.constants.WebUrls
@@ -36,6 +38,7 @@ class HomeFragment : Fragment() {
             viewModel.adapter.setData(ads.toMutableList())
         })
         home_view_pager.adapter = viewModel.adapter
+        home_view_pager.autoScroll(3000)
         TabLayoutMediator(tab_layout, home_view_pager) { _, _ ->
             tab_layout.bringToFront()
         }.attach()
@@ -74,27 +77,30 @@ class HomeFragment : Fragment() {
             i.putExtra("url", WebUrls.ONLINE_OFFERING)
             startActivity(i)
         }
+    }
 
-        // setup youtube live area
-//        val yf = childFragmentManager.findFragmentById(R.id.youtube_fragment) as YouTubePlayerSupportFragmentX
-//        yf.initialize(
-//            BuildConfig.YOUTUBE_API,
-//            object : YouTubePlayer.OnInitializedListener {
-//                override fun onInitializationSuccess(
-//                    provider: YouTubePlayer.Provider,
-//                    youTubePlayer: YouTubePlayer, b: Boolean) {
-//
-//                    // do any work here to cue video, play video, etc.
-//                    youTubePlayer.cueVideo(WebUrls.LKPC_LIVE_ID)
-//                }
-//
-//                override fun onInitializationFailure(
-//                    provider: YouTubePlayer.Provider,
-//                    youTubeInitializationResult: YouTubeInitializationResult
-//                ) {
-//                }
-//            }
-//        )
+    private fun ViewPager2.autoScroll(interval: Long) {
+        val handler = Handler(requireActivity().mainLooper)
+        var scrollPosition = 0
 
+        val runnable = object : Runnable {
+            override fun run() {
+                val count = adapter?.itemCount ?: 0
+                if (count > 0) {
+                    setCurrentItem(scrollPosition++ % count, true)
+                }
+
+                handler.postDelayed(this, interval)
+            }
+        }
+
+        registerOnPageChangeCallback(object: ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                scrollPosition = position + 1
+                super.onPageSelected(position)
+            }
+        })
+
+        handler.post(runnable)
     }
 }
