@@ -7,7 +7,7 @@ apply plugin: 'com.google.gms.google-services'
 android {
     signingConfigs {
         release {
-            storeFile file('upload-keystore.jks')
+            storeFile file('upload-keystore-121820.jks')
             storePassword 'temp0826!!'
             keyAlias 'upload'
             keyPassword 'temp0826!!'

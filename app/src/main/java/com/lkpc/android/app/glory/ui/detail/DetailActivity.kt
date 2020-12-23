@@ -5,6 +5,7 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -26,7 +27,6 @@ import com.google.android.youtube.player.YouTubePlayerSupportFragmentX
 import com.google.gson.Gson
 import com.lkpc.android.app.glory.BuildConfig
 import com.lkpc.android.app.glory.R
-import com.lkpc.android.app.glory.api_client.ContentApi
 import com.lkpc.android.app.glory.api_client.ContentApiClient
 import com.lkpc.android.app.glory.constants.ContentType
 import com.lkpc.android.app.glory.constants.Notification.Companion.CHANNEL_ID
@@ -283,6 +283,7 @@ class DetailActivity : AppCompatActivity() {
                 override fun onInitializationFailure(
                     provider: YouTubePlayer.Provider,
                     youTubeInitializationResult: YouTubeInitializationResult) {
+                    Log.d("DetailActivity", youTubeInitializationResult.toString())
                 }
             }
         )
